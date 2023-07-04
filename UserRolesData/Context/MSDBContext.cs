@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UserRolesModels;
-namespace MSData.Context
+namespace UserRolesData.Context
 {
     public class MSDBContext : IdentityDbContext
     {
+        public MSDBContext(DbContextOptions<MSDBContext> options) : base(options)
+        {
+        }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Colour> Colours { get; set; }
