@@ -16,9 +16,11 @@ namespace UserRolesModels
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
+        public int ColourId { get; set; }
 
         public Manufacturer Manufacturer { get; set; }
         public Category Category { get; set; }
+        public Colour Colour { get; set; }
         public ICollection<CustomerInvoiceItem> CustomerInvoiceItems { get; set; }
         public ICollection<CustomerOrderItem> CustomerOrderItems { get; set; }        
         public ICollection<SupplierOrderItem> SupplierOrderItems { get; set; }

@@ -12,5 +12,7 @@ namespace UserRolesModels
         [Key]
         public int ColourId { get; set; }
         public string ColourName { get; set; }
+
+        public ICollection<Product> Products { get; set; }
     }
 }
