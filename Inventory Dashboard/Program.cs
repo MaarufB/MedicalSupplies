@@ -17,7 +17,8 @@ namespace Inventory_Dashboard
             builder.Services.AddScoped<IInventoryRepo, InventoryRepo>();
 
             builder.Services.AddAuthorization();
-            builder.Services.AddRazorPages();
+
+            builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
@@ -34,9 +35,20 @@ namespace Inventory_Dashboard
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthorization();            
 
-            app.MapRazorPages();
+
+            app.MapControllers(); 
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                
+            });
+
 
             app.Run();
         }
