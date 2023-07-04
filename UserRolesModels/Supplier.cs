@@ -19,5 +19,7 @@ namespace UserRolesModels
         public ICollection<SupplierAddress> SupplierAddresses { get; set; }
         public ICollection<SupplierNumber> SupplierNumbers { get; set; }
         public ICollection<SupplierOrder> SupplierOrders { get; set; }
+
+        public ICollection<Product> Products { get; set; }
     }
 }

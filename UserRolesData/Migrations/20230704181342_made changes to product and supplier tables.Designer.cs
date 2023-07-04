@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserRolesData.Context;
 
@@ -11,9 +12,10 @@ using UserRolesData.Context;
 namespace UserRolesData.Migrations
 {
     [DbContext(typeof(MSDBContext))]
-    partial class MSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230704181342_made changes to product and supplier tables")]
+    partial class madechangestoproductandsuppliertables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
