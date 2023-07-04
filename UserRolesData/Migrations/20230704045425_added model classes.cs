@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UserRolesData.Migrations
 {
-    public partial class newclassesadded : Migration
+    public partial class addedmodelclasses : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -605,6 +605,32 @@ namespace UserRolesData.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CustomerFacilities",
+                columns: table => new
+                {
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    FacilityId = table.Column<int>(type: "int", nullable: false),
+                    DateAdmitted = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateDischarged = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerFacilities", x => new { x.CustomerId, x.FacilityId });
+                    table.ForeignKey(
+                        name: "FK_CustomerFacilities_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CustomerFacilities_Facilities_FacilityId",
+                        column: x => x.FacilityId,
+                        principalTable: "Facilities",
+                        principalColumn: "FacilityId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CustomerNumbers",
                 columns: table => new
                 {
@@ -700,7 +726,8 @@ namespace UserRolesData.Migrations
                     DateWritten = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DoctorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DoctorContact = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacilityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -710,6 +737,12 @@ namespace UserRolesData.Migrations
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Prescriptions_Facilities_FacilityId",
+                        column: x => x.FacilityId,
+                        principalTable: "Facilities",
+                        principalColumn: "FacilityId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -826,15 +859,14 @@ namespace UserRolesData.Migrations
                     InvoiceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PaymentStatusId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentStatusId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TaxRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TaxAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     GrandTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CustomerInvoiceNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentStatusId1 = table.Column<int>(type: "int", nullable: false)
+                    CustomerInvoiceNo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -846,8 +878,8 @@ namespace UserRolesData.Migrations
                         principalColumn: "CustomerOrderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CustomerInvoices_PaymentStatuses_PaymentStatusId1",
-                        column: x => x.PaymentStatusId1,
+                        name: "FK_CustomerInvoices_PaymentStatuses_PaymentStatusId",
+                        column: x => x.PaymentStatusId,
                         principalTable: "PaymentStatuses",
                         principalColumn: "PaymentStatusId",
                         onDelete: ReferentialAction.Cascade);
@@ -881,39 +913,6 @@ namespace UserRolesData.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CustomerFacilities",
-                columns: table => new
-                {
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    FacilityId = table.Column<int>(type: "int", nullable: false),
-                    PrescriptionId = table.Column<int>(type: "int", nullable: false),
-                    DateAdmitted = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateDischarged = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CustomerFacilities", x => new { x.CustomerId, x.FacilityId, x.PrescriptionId });
-                    table.ForeignKey(
-                        name: "FK_CustomerFacilities_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CustomerFacilities_Facilities_FacilityId",
-                        column: x => x.FacilityId,
-                        principalTable: "Facilities",
-                        principalColumn: "FacilityId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CustomerFacilities_Prescriptions_PrescriptionId",
-                        column: x => x.PrescriptionId,
-                        principalTable: "Prescriptions",
-                        principalColumn: "PrescriptionId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -1034,11 +1033,6 @@ namespace UserRolesData.Migrations
                 column: "FacilityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerFacilities_PrescriptionId",
-                table: "CustomerFacilities",
-                column: "PrescriptionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CustomerInvoiceItems_CustomerInvoiceId",
                 table: "CustomerInvoiceItems",
                 column: "CustomerInvoiceId");
@@ -1054,9 +1048,9 @@ namespace UserRolesData.Migrations
                 column: "CustomerOrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerInvoices_PaymentStatusId1",
+                name: "IX_CustomerInvoices_PaymentStatusId",
                 table: "CustomerInvoices",
-                column: "PaymentStatusId1");
+                column: "PaymentStatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CustomerNumbers_CustomerId",
@@ -1157,6 +1151,11 @@ namespace UserRolesData.Migrations
                 name: "IX_Prescriptions_CustomerId",
                 table: "Prescriptions",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prescriptions_FacilityId",
+                table: "Prescriptions",
+                column: "FacilityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -1283,6 +1282,9 @@ namespace UserRolesData.Migrations
                 name: "ManufacturerNumbers");
 
             migrationBuilder.DropTable(
+                name: "Prescriptions");
+
+            migrationBuilder.DropTable(
                 name: "SupplierAddresses");
 
             migrationBuilder.DropTable(
@@ -1301,19 +1303,16 @@ namespace UserRolesData.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Prescriptions");
-
-            migrationBuilder.DropTable(
                 name: "CustomerInvoices");
-
-            migrationBuilder.DropTable(
-                name: "Facilities");
 
             migrationBuilder.DropTable(
                 name: "InsuranceTypes");
 
             migrationBuilder.DropTable(
                 name: "Locations");
+
+            migrationBuilder.DropTable(
+                name: "Facilities");
 
             migrationBuilder.DropTable(
                 name: "Countries");

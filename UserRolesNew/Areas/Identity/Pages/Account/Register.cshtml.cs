@@ -165,6 +165,10 @@ namespace UserRolesNew.Areas.Identity.Pages.Account
                     await _userManager.AddToRoleAsync(user, Enums.Roles.Basic.ToString());
 
 
+
+                    //we might need to comment the following out
+
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
@@ -175,6 +179,13 @@ namespace UserRolesNew.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
+
+
+
+
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

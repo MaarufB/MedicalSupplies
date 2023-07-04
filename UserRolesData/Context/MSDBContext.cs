@@ -50,13 +50,13 @@ namespace MSData.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CustomerFacility>()
-                .HasKey(c => new { c.CustomerId, c.FacilityId, c.PrescriptionId });
+        .HasKey(cf => new { cf.CustomerId, cf.FacilityId });
 
             modelBuilder.Entity<CustomerFacility>()
-        .HasOne(cf => cf.Customer)
-        .WithMany(c => c.CustomerFacilities)
-        .HasForeignKey(cf => cf.CustomerId)
-        .OnDelete(DeleteBehavior.Cascade);
+                .HasOne(cf => cf.Customer)
+                .WithMany(c => c.CustomerFacilities)
+                .HasForeignKey(cf => cf.CustomerId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CustomerFacility>()
                 .HasOne(cf => cf.Facility)
@@ -64,16 +64,10 @@ namespace MSData.Context
                 .HasForeignKey(cf => cf.FacilityId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<CustomerFacility>()
-                .HasOne(cf => cf.Prescription)
-                .WithMany(p => p.CustomerFacilities)
-                .HasForeignKey(cf => cf.PrescriptionId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-
-
             base.OnModelCreating(modelBuilder);
         }
+
+
 
     }
 }

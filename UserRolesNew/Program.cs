@@ -4,6 +4,8 @@ using UserRolesNew.Data;
 using UserRolesNew.Models;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
+
 
 namespace UserRolesNew
 {
@@ -19,19 +21,25 @@ namespace UserRolesNew
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-              .AddEntityFrameworkStores<ApplicationDbContext>()
-              .AddSignInManager<SignInManager<ApplicationUser>>();
+            //builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            //  .AddEntityFrameworkStores<ApplicationDbContext>()
+            //  .AddSignInManager<SignInManager<ApplicationUser>>();
 
-
+            builder.Services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+               .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
 
 
             builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
+            //builder.Services.AddTransient<IEmailSender, SmtpEmailSender>();
+
 
             var app = builder.Build();
+
+            //app.Services.AddTransient<IEmailSender, SmtpEmailSender>();
 
 
 

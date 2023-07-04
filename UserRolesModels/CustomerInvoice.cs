@@ -16,7 +16,7 @@ namespace UserRolesModels
         public DateTime InvoiceDate { get; set; }
         public DateTime DueDate { get; set; }
         public decimal TotalAmount { get; set; }
-        public string PaymentStatusId { get; set; }
+        public int PaymentStatusId { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public decimal TaxRate { get; set; }

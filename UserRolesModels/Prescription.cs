@@ -16,9 +16,12 @@ namespace UserRolesModels
         public string DoctorName { get; set; }
         public string DoctorContact { get; set; }
         public string Comments { get; set; }
+        public int FacilityId { get; set; }
+
+        public Facility Facility { get; set; }
 
         public Customer Customer { get; set; }
-        public ICollection<CustomerFacility> CustomerFacilities { get; set; }
+        //public ICollection<CustomerFacility> CustomerFacilities { get; set; }
         
     }
 }

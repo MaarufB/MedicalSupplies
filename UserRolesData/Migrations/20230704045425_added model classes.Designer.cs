@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace UserRolesData.Migrations
 {
     [DbContext(typeof(MSDBContext))]
-    [Migration("20230701052924_after adding model classes")]
-    partial class afteraddingmodelclasses
+    [Migration("20230704045425_added model classes")]
+    partial class addedmodelclasses
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -350,16 +350,10 @@ namespace UserRolesData.Migrations
             modelBuilder.Entity("UserRolesModels.CustomerFacility", b =>
                 {
                     b.Property<int>("CustomerId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
+                        .HasColumnType("int");
 
                     b.Property<int>("FacilityId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(2);
-
-                    b.Property<int>("PrescriptionId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(3);
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateAdmitted")
                         .HasColumnType("datetime2");
@@ -367,11 +361,9 @@ namespace UserRolesData.Migrations
                     b.Property<DateTime>("DateDischarged")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("CustomerId", "FacilityId", "PrescriptionId");
+                    b.HasKey("CustomerId", "FacilityId");
 
                     b.HasIndex("FacilityId");
-
-                    b.HasIndex("PrescriptionId");
 
                     b.ToTable("CustomerFacilities");
                 });
@@ -406,11 +398,7 @@ namespace UserRolesData.Migrations
                     b.Property<DateTime>("InvoiceDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentStatusId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PaymentStatusId1")
+                    b.Property<int>("PaymentStatusId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TaxAmount")
@@ -429,7 +417,7 @@ namespace UserRolesData.Migrations
 
                     b.HasIndex("CustomerOrderId");
 
-                    b.HasIndex("PaymentStatusId1");
+                    b.HasIndex("PaymentStatusId");
 
                     b.ToTable("CustomerInvoices");
                 });
@@ -955,9 +943,14 @@ namespace UserRolesData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FacilityId")
+                        .HasColumnType("int");
+
                     b.HasKey("PrescriptionId");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("FacilityId");
 
                     b.ToTable("Prescriptions");
                 });
@@ -1379,17 +1372,9 @@ namespace UserRolesData.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("UserRolesModels.Prescription", "Prescription")
-                        .WithMany("CustomerFacilities")
-                        .HasForeignKey("PrescriptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Customer");
 
                     b.Navigation("Facility");
-
-                    b.Navigation("Prescription");
                 });
 
             modelBuilder.Entity("UserRolesModels.CustomerInvoice", b =>
@@ -1402,7 +1387,7 @@ namespace UserRolesData.Migrations
 
                     b.HasOne("UserRolesModels.PaymentStatus", "PaymentStatus")
                         .WithMany("CustomerInvoices")
-                        .HasForeignKey("PaymentStatusId1")
+                        .HasForeignKey("PaymentStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1609,7 +1594,15 @@ namespace UserRolesData.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("UserRolesModels.Facility", "Facility")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("FacilityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Customer");
+
+                    b.Navigation("Facility");
                 });
 
             modelBuilder.Entity("UserRolesModels.Product", b =>
@@ -1786,6 +1779,8 @@ namespace UserRolesData.Migrations
                     b.Navigation("FacilityAddresses");
 
                     b.Navigation("FacilityNumbers");
+
+                    b.Navigation("Prescriptions");
                 });
 
             modelBuilder.Entity("UserRolesModels.InsuranceType", b =>
@@ -1819,11 +1814,6 @@ namespace UserRolesData.Migrations
                     b.Navigation("CustomerInvoices");
 
                     b.Navigation("SupplierInvoices");
-                });
-
-            modelBuilder.Entity("UserRolesModels.Prescription", b =>
-                {
-                    b.Navigation("CustomerFacilities");
                 });
 
             modelBuilder.Entity("UserRolesModels.Product", b =>

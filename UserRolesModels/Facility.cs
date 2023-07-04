@@ -18,5 +18,6 @@ namespace UserRolesModels
         public ICollection<CustomerFacility> CustomerFacilities { get; set; }
         public ICollection<FacilityAddress> FacilityAddresses { get; set; }
         public ICollection<FacilityNumber> FacilityNumbers { get; set; }
+        public ICollection<Prescription> Prescriptions { get; set; }
     }
 }
