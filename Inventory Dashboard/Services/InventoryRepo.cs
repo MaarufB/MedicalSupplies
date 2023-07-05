@@ -16,7 +16,7 @@ namespace Inventory_Dashboard.Services
         }
         public async Task<List<Inventory>> GetAllInventory()
         {
-            var inventoryList = await _context.Inventories.ToListAsync();
+            var inventoryList = await _context.Inventories.Include(i => i.Product).ToListAsync();
             return inventoryList;
         }
     }

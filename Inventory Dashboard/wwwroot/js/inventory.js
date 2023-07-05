@@ -4,17 +4,17 @@
         url: '/api/InventoryAPI',
         method: 'GET',
         success: function (data) {
-            // Handle the successful response
+            console.log(data);
             displayInventory(data);
         },
         error: function () {
-            // Handle the error
+            
             console.log('Error occurred while fetching inventory data.');
         }
     });
 
     function displayInventory(inventory) {
-        // Clear the existing data in the div
+       
         $('#inventory-list').empty();
 
         // Loop through the inventory items and create HTML elements to display them
@@ -26,7 +26,7 @@
             itemDiv.addClass('inventory-item');
 
             // Add the item details to the div
-            itemDiv.append('<p>Product Name: ' + item.productName + '</p>');
+            itemDiv.append('<p>Product Name: ' + item.product.productName + '</p>');
             itemDiv.append('<p>Quantity in Stock: ' + item.quantityInStock + '</p>');
             // Add more details as needed
 
