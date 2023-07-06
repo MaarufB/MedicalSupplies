@@ -5,9 +5,9 @@ namespace UserRolesData.Context
 {
     public class MSDBContext : IdentityDbContext
     {
-        public MSDBContext(DbContextOptions<MSDBContext> options) : base(options)
-        {
-        }
+        //public MSDBContext(DbContextOptions<MSDBContext> options) : base(options)
+        //{
+        //}
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Colour> Colours { get; set; }
@@ -43,6 +43,8 @@ namespace UserRolesData.Context
         public DbSet<SupplierNumber> SupplierNumbers { get; set; }
         public DbSet<SupplierOrder> SupplierOrders { get; set; }
         public DbSet<SupplierOrderItem> SupplierOrderItems { get; set; }
+
+        public DbSet<TicketStatus> TicketStatuses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -28,14 +28,17 @@ namespace UserRolesModels
 
         public string SupplierInvoiceNumber { get; set; }
 
+        public int TicketStatusId { get; set; }
+
 
         public PaymentStatus PaymentStatus { get; set; }
         public SupplierOrder SupplierOrder { get; set; }
+        public TicketStatus TicketStatus { get; set; }
 
 
-        
 
-        
+
+
         public ICollection<SupplierInvoiceItem> SupplierInvoiceItems { get; set; }
     }
 }

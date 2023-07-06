@@ -25,8 +25,12 @@ namespace UserRolesModels
         public decimal GrandTotal { get; set; }
         public string CustomerInvoiceNo { get; set; }
 
+        public int TicketStatusId { get; set; }
+
         public CustomerOrder CustomerOrder { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
+
+        public TicketStatus TicketStatus { get; set; }
         public ICollection<CustomerInvoiceItem> CustomerInvoiceItems { get; set; }
     }
 }

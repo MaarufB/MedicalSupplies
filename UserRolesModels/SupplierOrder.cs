@@ -22,8 +22,12 @@ namespace UserRolesModels
         public decimal TaxAmount { get; set; }
         public decimal GrandTotal { get; set; }
 
+        public int TicketStatusId { get; set; }
+
         public Supplier Supplier { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
+
+        public TicketStatus TicketStatus { get; set; }
         public ICollection<SupplierOrderItem> SupplierOrderItems { get; set; }
     }
 }
