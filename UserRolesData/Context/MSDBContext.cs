@@ -5,9 +5,9 @@ namespace UserRolesData.Context
 {
     public class MSDBContext : IdentityDbContext
     {
-        //public MSDBContext(DbContextOptions<MSDBContext> options) : base(options)
-        //{
-        //}
+        public MSDBContext(DbContextOptions<MSDBContext> options) : base(options)
+        {
+        }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Colour> Colours { get; set; }

@@ -21,13 +21,13 @@ namespace UserRolesNew
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            //builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-            //  .AddEntityFrameworkStores<ApplicationDbContext>()
-            //  .AddSignInManager<SignInManager<ApplicationUser>>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+              .AddEntityFrameworkStores<ApplicationDbContext>()
+              .AddSignInManager<SignInManager<ApplicationUser>>();
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>()
-                .AddRoles<IdentityRole>()
-               .AddEntityFrameworkStores<ApplicationDbContext>();
+            //builder.Services.AddDefaultIdentity<ApplicationUser>()
+            //    .AddRoles<IdentityRole>()
+            //   .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
 
