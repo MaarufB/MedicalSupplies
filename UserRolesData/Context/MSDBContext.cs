@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using UserRolesData.Contracts;
+using UserRolesData.Model;
 using UserRolesModels;
+
+
+
 namespace UserRolesData.Context
 {
-    public class MSDBContext : IdentityDbContext
+    public class MSDBContext : IdentityDbContext<ApplicationUser>
     {
         public MSDBContext(DbContextOptions<MSDBContext> options) : base(options)
         {

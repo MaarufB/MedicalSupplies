@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UserRolesData.Contracts;
 
-namespace UserRolesNew.Models
+namespace UserRolesData.Model
 {
-    public class ApplicationUser : IdentityUser, IApplicationUser
+    public class ApplicationUser:IdentityUser,IApplicationUser
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
