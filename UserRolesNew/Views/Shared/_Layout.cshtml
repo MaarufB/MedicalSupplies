@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿
+<style>
+    .nav-link {
+        
+        cursor: pointer;
+        text-decoration: none;
+        margin-left: 10px;
+    }
+</style>
+
+
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,18 +25,38 @@
 <body>
     <header class="header">
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-md-6">
                     <h1>XYZ Medicals</h1>
                 </div>
-                <div class="col-md-6 text-end">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    @await Html.PartialAsync("_LoginPartial")
+                <div class="col-md-6 d-flex justify-content-end">
+                    <a href="/" class="nav-link text-dark">Home</a>
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Logout">Logout</a></span>
+                        @*<span><a class="nav-link text-dark" asp-area="Identity" asp-page="/Areas/Identity/Pages/_ManageNav/Index">Hi, @User.Identity.Name</a></span>*@
+                        <span><a class="nav-link text-dark" href="/Identity/Account/Manage/Index">Hi, @User.Identity.Name</a></span>
+
+                    }
+
+                    else
+                    {
+                        <span><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a></span>
+                        <span><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a></span>
+                    }
+
+
+               @*     <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>*@
                 </div>
             </div>
         </div>
     </header>
+
+
+
 
     <div class="container">
         <main role="main" class="pb-3">
