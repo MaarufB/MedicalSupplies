@@ -1,4 +1,7 @@
-﻿@{
+﻿@using UserRolesNew.Models;
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
     {
         Layout = parentLayout.ToString();
@@ -9,21 +12,28 @@
     }
 }
 
-<h1>Manage your account</h1>
+<body style="background-color : #E1F5FE">
 
-<div>
-    <h2>Change your account settings</h2>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
-        </div>
-        <div class="col-md-9">
-            @RenderBody()
+    <h4 style="padding:20px">Manage</h4>
+
+    <div>
+        @*<h2>Change your account settings</h2>*@
+
+        <div class="row">
+            <div class="col-md-3">
+                <partial name="_ManageNav" />
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    @RenderSection("Scripts", required: false)
-}
+    @section Scripts {
+        @RenderSection("Scripts", required: false)
+    }
+
+
+</body>
+
+

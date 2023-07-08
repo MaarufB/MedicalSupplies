@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using UserRolesData.Contracts;
+using UserRolesData.Model;
 using UserRolesModels;
+
+
+
 namespace UserRolesData.Context
 {
-    public class MSDBContext : IdentityDbContext
+    public class MSDBContext : IdentityDbContext<ApplicationUser>
     {
         public MSDBContext(DbContextOptions<MSDBContext> options) : base(options)
         {
@@ -43,6 +49,8 @@ namespace UserRolesData.Context
         public DbSet<SupplierNumber> SupplierNumbers { get; set; }
         public DbSet<SupplierOrder> SupplierOrders { get; set; }
         public DbSet<SupplierOrderItem> SupplierOrderItems { get; set; }
+
+        public DbSet<TicketStatus> TicketStatuses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

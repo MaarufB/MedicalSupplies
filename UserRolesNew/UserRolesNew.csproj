@@ -24,4 +24,8 @@
     <ProjectReference Include="..\UserRolesModels\UserRolesModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\Home\" />
+  </ItemGroup>
+
 </Project>

@@ -1,36 +1,34 @@
 ﻿$(document).ready(function () {
-    // Make an AJAX request to fetch the inventory data
     $.ajax({
         url: '/api/InventoryAPI',
-        method: 'GET',
-        success: function (data) {
-            // Handle the successful response
+        method: 'GET'
+    })
+        .done(function (data) {
+            console.log(data);
             displayInventory(data);
-        },
-        error: function () {
-            // Handle the error
-            console.log('Error occurred while fetching inventory data.');
-        }
-    });
+        })
+        .fail(function () {
+            console.log('Error');
+        });
 
     function displayInventory(inventory) {
-        // Clear the existing data in the div
         $('#inventory-list').empty();
 
-        // Loop through the inventory items and create HTML elements to display them
+        
         for (var i = 0; i < inventory.length; i++) {
             var item = inventory[i];
 
-            // Create a div to display the inventory item
+            
             var itemDiv = $('<div>');
             itemDiv.addClass('inventory-item');
 
-            // Add the item details to the div
-            itemDiv.append('<p>Product Name: ' + item.productName + '</p>');
-            itemDiv.append('<p>Quantity in Stock: ' + item.quantityInStock + '</p>');
-            // Add more details as needed
+            
+            itemDiv.append('<span>Product: ' + item.product.productName + '</span>');
+            itemDiv.append('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+            itemDiv.append('<span>Quantity: ' + item.quantityInStock + '</span>');
+          
 
-            // Add the item div to the main div
+            
             $('#inventory-list').append(itemDiv);
         }
     }

@@ -1,41 +1,110 @@
 ﻿@page
 @model EmailModel
 @{
-    ViewData["Title"] = "Manage Email";
+    //ViewData["Title"] = "Manage Email";
     ViewData["ActivePage"] = ManageNavPages.Email;
 }
 
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #E1F5FE;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .header {
+        background-color: #E1F5FE;
+        color: #FFFFFF;
+        padding: 15px;
+    }
+
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        height: calc(100vh - 300px); 
+        margin-bottom: 50px;
+    }
+
+    .login-box {
+        background-color: #D1EAFD;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .login-title {
+        margin-bottom: 20px;
+        color: #333333;
+        font-weight: 500;
+    }
+
+    .form-floating {
+        margin-bottom: 15px;
+    }
+
+    .form-control.form-control-sm {
+        background-color: #FFFFFF;
+        border-color: #C0C0C0;
+        color: #333333;
+    }
+
+        .form-control.form-control-sm:focus {
+            background-color: #FFFFFF;
+            border-color: #8D6E63;
+            box-shadow: 0 0 0 0.2rem rgba(141, 110, 99, 0.25);
+        }
+
+    .form-label {
+        color: #333333;
+        font-weight: 500;
+    }
+
+    .login-submit {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+</style>
+
 <h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="email-form" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            @if (Model.IsEmailConfirmed)
-            {
-                <div class="form-floating input-group">
-                    <input asp-for="Email" class="form-control" disabled />
-                        <div class="input-group-append">
-                            <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+<div class="center-container">
+    <div class="col-md-4">
+        <section>
+            <div class="login-box">
+                <form id="email-form" method="post">
+                    <h3 class="login-title">Change Email</h3>
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    @if (Model.IsEmailConfirmed)
+                    {
+                        <div class="form-floating input-group">
+                            <input asp-for="Email" class="form-control form-control-sm" disabled />
+                            <div class="input-group-append">
+                                <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                            </div>
+                            <label asp-for="Email" class="form-label"></label>
                         </div>
-                    <label asp-for="Email" class="form-label"></label>
-                </div>
-            }
-            else
-            {
-                <div class="form-floating">
-                    <input asp-for="Email" class="form-control" disabled />
-                    <label asp-for="Email" class="form-label"></label>
-                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
-                </div>
-            }
-            <div class="form-floating">
-                <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" />
-                <label asp-for="Input.NewEmail" class="form-label"></label>
-                <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+                    }
+                    else
+                    {
+                        <div class="form-floating">
+                            <input asp-for="Email" class="form-control form-control-sm" disabled />
+                            <label asp-for="Email" class="form-label"></label>
+                            <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link" style="text-decoration: none;">Send verification email</button>
+                        </div>
+                    }
+                    <div class="form-floating">
+                        <input asp-for="Input.NewEmail" class="form-control form-control-sm" autocomplete="email" aria-required="true" />
+                        <label asp-for="Input.NewEmail" class="form-label"></label>
+                        <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+                    </div>
+                    <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class=" btn btn-primary login-submit">Change</button>
+                </form>
             </div>
-            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Change email</button>
-        </form>
+        </section>
     </div>
 </div>
 

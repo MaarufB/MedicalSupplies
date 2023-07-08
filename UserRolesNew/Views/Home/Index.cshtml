@@ -1,8 +1,44 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<style>
+    body {
+        background-color: #E1F5FE;
+    }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    .header {
+        background-color: #E1F5FE;
+        color: #FFFFFF;
+        padding: 15px;
+    }
+
+    .column {
+        background-color: #FFFFFF;
+        border: 1px solid #B0BEC5;
+        padding: 20px;
+    }
+
+        .column:nth-child(1),
+        .column:nth-child(3) {
+            background-color: #BBDEFB;
+        }
+</style>
+
+
+<div class="row">
+   @* <div class="col-md-12 header">
+        <h2>Header</h2>
+        <p>Header content goes here.</p>
+    </div>*@
+</div>
+<div class="row">
+    <div class="col-md-2 column">
+        <h3>Column 1</h3>
+        <p>lorem</p>
+    </div>
+    <div class="col-md-8 column">
+        <h3>Column 2</h3>
+        <p>lorem</p>
+    </div>
+    <div class="col-md-2 column">
+        <h3>Column 3</h3>
+        <p>lorem</p>
+    </div>
 </div>

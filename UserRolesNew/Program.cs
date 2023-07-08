@@ -4,7 +4,7 @@ using UserRolesNew.Data;
 using UserRolesNew.Models;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity.UI;
 
 
 namespace UserRolesNew
@@ -25,9 +25,29 @@ namespace UserRolesNew
             //  .AddEntityFrameworkStores<ApplicationDbContext>()
             //  .AddSignInManager<SignInManager<ApplicationUser>>();
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>()
-                .AddRoles<IdentityRole>()
-               .AddEntityFrameworkStores<ApplicationDbContext>();
+            //builder.Services.AddDefaultIdentity<ApplicationUser>()
+            //    .AddRoles<IdentityRole>()
+            //   .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //builder.Services.AddDefaultIdentity<ApplicationUser>()
+            //.AddRoles<IdentityRole>()
+            //.AddEntityFrameworkStores<ApplicationDbContext>()
+            //.AddDefaultTokenProviders()
+            //.AddSignInManager<SignInManager<ApplicationUser>>();
+
+            
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddDefaultUI()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders()
+            .AddSignInManager<SignInManager<ApplicationUser>>();
+
+            builder.Services.AddScoped<SignInManager<ApplicationUser>>();
+
+
+
+
 
 
 
