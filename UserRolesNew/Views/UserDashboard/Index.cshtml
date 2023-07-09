@@ -1,4 +1,5 @@
-﻿@model UserRolesNew.ViewModels.Dashboard.DashboardVm
+﻿@using UserRolesNew.Helpers
+@model UserRolesNew.ViewModels.Dashboard.DashboardVm
 
 
 
@@ -122,6 +123,40 @@
         font-size: 19px;
     }
 
+
+
+
+
+
+    .panel {
+        background-color: #D1EAFD;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 10px;
+        height: 300px;
+        
+    }
+
+        .panel h4 {
+            margin-top: 0;
+            
+        }
+
+    .panel-content {
+        /* Additional styling for panel content */
+    }
+
+
+   
+
+
+
+
+
+
+
+
 </style>
 
 
@@ -171,7 +206,281 @@
         @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
         everything else remain the same*@
 
-        create customer and supplier dashboards here
+       
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel">
+
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="flex-grow: 1; text-align: center;">Customer Invoices</span>
+                        <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
+                    </div>
+                    
+                    
+                    
+                    <!-- Customer Invoices Panel Content -->
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Due Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1234</td>
+                                <td>01/01/2023</td>
+                                <td>$100.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+                               
+                            </tr>
+                            <tr>
+                                <td>2345</td>
+                                <td>02/01/2023</td>
+                                <td>$200.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
+                                
+                            </tr>
+                            <tr>
+                                <td>4567</td>
+                                <td>03/01/2023</td>
+                                <td>$150.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
+                                
+                            </tr>
+                            <tr>
+                                <td>5678</td>
+                                <td>04/01/2023</td>
+                                <td>$300.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
+                            </tr>
+                        </tbody>
+
+                    </table>
+              
+
+
+
+
+
+
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="flex-grow: 1; text-align: center;">Customer Orders</span>
+                        <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
+                    </div>
+                    <!-- Customer Orders Panel Content -->
+
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Due Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1234</td>
+                                <td>01/01/2023</td>
+                                <td>$100.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
+
+                            </tr>
+                            <tr>
+                                <td>2345</td>
+                                <td>02/01/2023</td>
+                                <td>$200.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
+
+                            </tr>
+                            <tr>
+                                <td>4567</td>
+                                <td>03/01/2023</td>
+                                <td>$150.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+
+                            </tr>
+                            <tr>
+                                <td>5678</td>
+                                <td>04/01/2023</td>
+                                <td>$300.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
+                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="flex-grow: 1; text-align: center;">Supplier Invoices</span>
+                        <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
+                    </div>
+                    <!-- Supplier Invoices Panel Content -->
+
+
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Due Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1234</td>
+                                <td>01/01/2023</td>
+                                <td>$100.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+
+                            </tr>
+                            <tr>
+                                <td>2345</td>
+                                <td>02/01/2023</td>
+                                <td>$200.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
+
+                            </tr>
+                            <tr>
+                                <td>4567</td>
+                                <td>03/01/2023</td>
+                                <td>$150.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+
+                            </tr>
+                            <tr>
+                                <td>5678</td>
+                                <td>04/01/2023</td>
+                                <td>$300.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="flex-grow: 1; text-align: center;">Supplier Orders</span>
+                        <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
+                    </div>
+                    <!-- Supplier Orders Panel Content -->
+
+
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Due Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1234</td>
+                                <td>01/01/2023</td>
+                                <td>$100.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">under review</td>
+                                @*<h6 style="background-color: @StatusHelper.GetStatusColor(invoice.TicketStatus)">@invoice.TicketStatus</h6>*@
+
+
+                            </tr>
+                            <tr>
+                                <td>2345</td>
+                                <td>02/01/2023</td>
+                                <td>$200.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
+
+                            </tr>
+                            <tr>
+                                <td>4567</td>
+                                <td>03/01/2023</td>
+                                <td>$150.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
+
+                            </tr>
+                            <tr>
+                                <td>5678</td>
+                                <td>04/01/2023</td>
+                                <td>$300.00</td>
+                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
 
         @*/END/*@
 
@@ -194,7 +503,7 @@
 
 
         <div class="right-menu">
-            <p>Dashboard</p>
+            <a asp-action="index" asp-controller="UserDashboard" style="text-decoration: none;"><p>Dashboard</p></a>
             <p>Reports</p>
             <p>Inventory</p>
         </div>

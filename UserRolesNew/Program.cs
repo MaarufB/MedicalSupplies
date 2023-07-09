@@ -99,10 +99,28 @@ namespace UserRolesNew
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.MapControllerRoute(
-            //    name: "default",
-            //    pattern: "{controller=Home}/{action=Index}/{id?}");
-            
+
+            //the following is the newly added code to redirect to login page on start. All other methods did not get this result
+
+
+            //app.MapWhen(context => !context.Request.Path.StartsWithSegments("/Identity", StringComparison.OrdinalIgnoreCase) &&
+            //                        !context.Request.Path.StartsWithSegments("/Home/Login", StringComparison.OrdinalIgnoreCase) &&
+            //                        !context.Request.Path.StartsWithSegments("/Account/Login", StringComparison.OrdinalIgnoreCase),
+            //     appBuilder =>
+            //     {
+            //         appBuilder.Use(async (context, next) =>
+            //         {
+            //             context.Response.Redirect("/Identity/Account/Login");
+            //             await next.Invoke();
+            //         });
+            //     });
+
+
+            //end
+
+
+
+
             app.MapRazorPages();
             app.MapControllers();
 
