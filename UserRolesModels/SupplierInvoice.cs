@@ -35,10 +35,6 @@ namespace UserRolesModels
         public SupplierOrder SupplierOrder { get; set; }
         public TicketStatus TicketStatus { get; set; }
 
-
-
-
-
         public ICollection<SupplierInvoiceItem> SupplierInvoiceItems { get; set; }
     }
 }

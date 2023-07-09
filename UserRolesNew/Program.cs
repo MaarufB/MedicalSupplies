@@ -55,6 +55,10 @@ namespace UserRolesNew
             builder.Services.AddScoped<SignInManager<ApplicationUser>>();
 
             builder.Services.AddScoped<IProductRepo, Productrepo>();
+            builder.Services.AddScoped<ICustomerInvoiceRepo, CustomerInvoiceRepo>();
+            builder.Services.AddScoped<ICustomerOrderRepo, CustomerOrderRepo>();
+            builder.Services.AddScoped<ISupplierInvoiceRepo, SupplierInvoiceRepo>();
+            builder.Services.AddScoped<ISupplierOrderRepo, SupplierOrderRepo>();
 
 
 
