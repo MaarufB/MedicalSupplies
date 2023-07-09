@@ -7,5 +7,7 @@
         public decimal TotalAmount { get; set; }
         public string SupplierInvoiceNumber { get; set; }
         public string SupplierName { get; set; }
+
+        public string TicketStatus { get; set; }
     }
 }

@@ -7,5 +7,7 @@
         public decimal CustomerOrderTotal { get; set; }
         public string OrderStatus { get; set; }
         public string CustomerName { get; set; }
+
+        public string TicketStatus { get; set; }
     }
 }

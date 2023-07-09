@@ -4,14 +4,14 @@ using UserRolesNew.ViewModels.Dashboard;
 
 namespace UserRolesNew.Controllers
 {
-    public class UserDashboardController : Controller
+    public class AdminDashboardController : Controller
     {
         private readonly ICustomerInvoiceRepo _customerInvoiceRepo;
         private readonly ICustomerOrderRepo _customerOrderRepo;
         private readonly ISupplierInvoiceRepo _supplierInvoiceRepo;
         private readonly ISupplierOrderRepo _supplierOrderRepo;
 
-        public UserDashboardController(ICustomerInvoiceRepo customerInvoiceRepo, 
+        public AdminDashboardController(ICustomerInvoiceRepo customerInvoiceRepo,
                                         ICustomerOrderRepo customerOrderRepo,
                                         ISupplierInvoiceRepo supplierInvoiceRepo,
                                         ISupplierOrderRepo supplierOrderRepo)
@@ -27,21 +27,21 @@ namespace UserRolesNew.Controllers
             {
                 CustomerOrders = _customerOrderRepo.GetAllCustomerOrders()
 
-                                                 .Select(c => new CustomerOrderVm 
-                                                 { 
-                                                        CustomerOrderId = c.CustomerOrderId,
-                                                        Date = c.Date,
-                                                        CustomerOrderTotal = c.CustomerOrderTotal,
-                                                        CustomerName = c.Customer.FirstName,
-                                                        TicketStatus = c.TicketStatus.Status
+                                                 .Select(c => new CustomerOrderVm
+                                                 {
+                                                     CustomerOrderId = c.CustomerOrderId,
+                                                     Date = c.Date,
+                                                     CustomerOrderTotal = c.CustomerOrderTotal,
+                                                     CustomerName = c.Customer.FirstName,
+                                                     TicketStatus = c.TicketStatus.Status
                                                  }
                                                         ).ToList(),
 
 
-                
+
                 CustomerInvoices = _customerInvoiceRepo.GetAllCustomerInvoices()
-                
-                                                .Select(i=> new CustomerInvoiceVm
+
+                                                .Select(i => new CustomerInvoiceVm
                                                 {
                                                     CustomerInvoiceId = i.CustomerInvoiceId,
                                                     InvoiceDate = i.InvoiceDate,
@@ -51,14 +51,14 @@ namespace UserRolesNew.Controllers
                                                     TicketStatus = i.TicketStatus.Status
                                                 }
                                                         ).ToList(),
-                
-                
+
+
                 SupplierOrders = _supplierOrderRepo.GetAllSupplierOrders()
-                
-                                                .Select(o=> new SupplierOrderVm
+
+                                                .Select(o => new SupplierOrderVm
                                                 {
                                                     SupplierOrderId = o.SupplierOrderId,
-                                                    Date= o.Date,
+                                                    Date = o.Date,
                                                     SupplierOrderTotal = o.SupplierOrderTotal,
                                                     SupplierName = o.Supplier.SupplierName,
                                                     TicketStatus = o.TicketStatus.Status
@@ -67,14 +67,14 @@ namespace UserRolesNew.Controllers
 
                 SupplierInvoices = _supplierInvoiceRepo.GetAllSupplierInvoices()
 
-                                                .Select(i=> new SupplierInvoiceVm
+                                                .Select(i => new SupplierInvoiceVm
                                                 {
                                                     SupplierInvoiceId = i.SupplierInvoiceId,
                                                     InvoiceDate = i.InvoiceDate,
-                                                    TotalAmount= i.TotalAmount,
+                                                    TotalAmount = i.TotalAmount,
                                                     SupplierInvoiceNumber = i.SupplierInvoiceNumber,
                                                     SupplierName = i.SupplierOrder.Supplier.SupplierName,
-                                                    TicketStatus = i.TicketStatus.Status
+                                                    TicketStatus= i.TicketStatus.Status
                                                 }
                                                         ).ToList()
             };
