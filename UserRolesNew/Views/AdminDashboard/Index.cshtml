@@ -1,5 +1,104 @@
 ﻿@using UserRolesNew.Helpers
+@using UserRolesNew.ViewModels.Dashboard;
 @model UserRolesNew.ViewModels.Dashboard.DashboardVm
+
+
+
+
+
+
+
+@{
+    // Generating a collection of data for the Customer Invoices table - Temporary
+    var customerInvoices = new List<CustomerInvoiceVm>();
+    for (int i = 1; i <= 4; i++)
+    {
+        var invoice = new CustomerInvoiceVm
+                {
+                    CustomerInvoiceId = i,
+                    InvoiceDate = DateTime.Now.AddDays(i),
+                    TotalAmount = 100 + (i * 50),
+                    TicketStatus = i % 2 == 0 ? "Approved" : "Under Review"
+                };
+        customerInvoices.Add(invoice);
+    }
+
+    // Generate a collection of data for the Customer Orders table
+    var customerOrders = new List<CustomerOrderVm>();
+    for (int i = 1; i <= 4; i++)
+    {
+        var order = new CustomerOrderVm
+                {
+                    CustomerOrderId = i,
+                    Date = DateTime.Now.AddDays(i),
+                    CustomerOrderTotal = 200 + (i * 75),
+                    TicketStatus = i % 2 == 0 ? "Rejected" : "Under Review"
+                };
+        customerOrders.Add(order);
+    }
+
+    // Generate a collection of data for the Supplier Invoices table
+    var supplierInvoices = new List<SupplierInvoiceVm>();
+    for (int i = 1; i <= 4; i++)
+    {
+        var invoice = new SupplierInvoiceVm
+                {
+                    SupplierInvoiceId = i,
+                    InvoiceDate = DateTime.Now.AddDays(i),
+                    TotalAmount = 150 + (i * 25),
+                    TicketStatus = i % 2 == 0 ? "Approved" : "Under Review"
+                };
+        supplierInvoices.Add(invoice);
+    }
+
+    // Generate a collection of data for the Supplier Orders table
+    var supplierOrders = new List<SupplierOrderVm>();
+    for (int i = 1; i <= 4; i++)
+    {
+        var order = new SupplierOrderVm
+                {
+                    SupplierOrderId = i,
+                    Date = DateTime.Now.AddDays(i),
+                    SupplierOrderTotal = 300 + (i * 100),
+                    TicketStatus = i % 2 == 0 ? "Approved" : "Under Review"
+                };
+        supplierOrders.Add(order);
+    }
+
+    // Define a helper function to get the status color based on the status value
+    string GetStatusColor(string status)
+    {
+        // Add your logic here to return the appropriate color based on the status
+        // For example:
+        if (status == "Approved")
+            return "#4CAF50";
+        else if (status == "Under Review")
+            return "#FFC107";
+        else if (status == "Rejected")
+            return "#F44336";
+        else
+            return "";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -15,11 +114,11 @@
     }
 
     /*.column {
-            background-color: #FFFFFF;
-            border: 1px solid #B0BEC5;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }*/
+                background-color: #FFFFFF;
+                border: 1px solid #B0BEC5;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }*/
 
 
 
@@ -135,27 +234,19 @@
         padding: 10px;
         margin-bottom: 10px;
         height: 300px;
-        
     }
 
         .panel h4 {
             margin-top: 0;
-            
         }
 
     .panel-content {
         /* Additional styling for panel content */
     }
 
-
-   
-
-
-
-
-
-
-
+    .table{
+        font-size:13px;
+    }
 
 </style>
 
@@ -174,7 +265,7 @@
 
         <div class="left-menu">
 
-            
+
             <a asp-action="index" asp-controller="Product" style="text-decoration: none;"><p>Products</p></a>
             <p>Suppliers</p>
             <p>Manufacturers</p>
@@ -206,7 +297,7 @@
         @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
         everything else remain the same*@
 
-       
+
 
         <div class="row">
             <div class="col-md-6">
@@ -216,9 +307,9 @@
                         <span style="flex-grow: 1; text-align: center;">Customer Invoices</span>
                         <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
                     </div>
-                    
-                    
-                    
+
+
+
                     <!-- Customer Invoices Panel Content -->
 
                     <table class="table">
@@ -232,38 +323,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1234</td>
-                                <td>01/01/2023</td>
-                                <td>$100.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-                               
-                            </tr>
-                            <tr>
-                                <td>2345</td>
-                                <td>02/01/2023</td>
-                                <td>$200.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>4567</td>
-                                <td>03/01/2023</td>
-                                <td>$150.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>5678</td>
-                                <td>04/01/2023</td>
-                                <td>$300.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
-                            </tr>
+                            @foreach (var invoice in customerInvoices)
+                            {
+                                <tr>
+                                    <td>@invoice.CustomerInvoiceId</td>
+                                    <td>@invoice.InvoiceDate.ToString("MM/dd/yyyy")</td>
+                                    <td>@invoice.TotalAmount.ToString("C")</td>
+                                    <td style="background-color: @(GetStatusColor(invoice.TicketStatus))">@invoice.TicketStatus</td>
+                                    <td>
+                                        @if (invoice.TicketStatus == "Under Review")
+                                        {
+                                        <td>@Html.Partial("_ApproveButton", Model)</td>
+                                        }
+                                        else
+                                        {
+                                        <td></td>
+                                        }
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
 
                     </table>
-              
 
 
 
@@ -271,7 +352,8 @@
 
 
 
-                    
+
+
 
 
 
@@ -307,34 +389,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1234</td>
-                                <td>01/01/2023</td>
-                                <td>$100.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
-
-                            </tr>
-                            <tr>
-                                <td>2345</td>
-                                <td>02/01/2023</td>
-                                <td>$200.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
-
-                            </tr>
-                            <tr>
-                                <td>4567</td>
-                                <td>03/01/2023</td>
-                                <td>$150.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-
-                            </tr>
-                            <tr>
-                                <td>5678</td>
-                                <td>04/01/2023</td>
-                                <td>$300.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
-                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
-                            </tr>
+                            @foreach (var order in customerOrders)
+                            {
+                                <tr>
+                                    <td>@order.CustomerOrderId</td>
+                                    <td>@order.Date.ToString("MM/dd/yyyy")</td>
+                                    <td>@order.CustomerOrderTotal.ToString("C")</td>
+                                    <td style="background-color: @(GetStatusColor(order.TicketStatus))">@order.TicketStatus</td>
+                                </tr>
+                            }
                         </tbody>
 
                     </table>
@@ -371,34 +434,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1234</td>
-                                <td>01/01/2023</td>
-                                <td>$100.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-
-                            </tr>
-                            <tr>
-                                <td>2345</td>
-                                <td>02/01/2023</td>
-                                <td>$200.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
-
-                            </tr>
-                            <tr>
-                                <td>4567</td>
-                                <td>03/01/2023</td>
-                                <td>$150.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-
-                            </tr>
-                            <tr>
-                                <td>5678</td>
-                                <td>04/01/2023</td>
-                                <td>$300.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
-                            </tr>
+                            @foreach (var invoice in supplierInvoices)
+                            {
+                                <tr>
+                                    <td>@invoice.SupplierInvoiceId</td>
+                                    <td>@invoice.InvoiceDate.ToString("MM/dd/yyyy")</td>
+                                    <td>@invoice.TotalAmount.ToString("C")</td>
+                                    <td style="background-color: @(GetStatusColor(invoice.TicketStatus))">@invoice.TicketStatus</td>
+                                </tr>
+                            }
                         </tbody>
 
                     </table>
@@ -433,36 +477,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1234</td>
-                                <td>01/01/2023</td>
-                                <td>$100.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">under review</td>
-                                @*<h6 style="background-color: @StatusHelper.GetStatusColor(invoice.TicketStatus)">@invoice.TicketStatus</h6>*@
-
-
-                            </tr>
-                            <tr>
-                                <td>2345</td>
-                                <td>02/01/2023</td>
-                                <td>$200.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
-
-                            </tr>
-                            <tr>
-                                <td>4567</td>
-                                <td>03/01/2023</td>
-                                <td>$150.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
-
-                            </tr>
-                            <tr>
-                                <td>5678</td>
-                                <td>04/01/2023</td>
-                                <td>$300.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
-                            </tr>
+                            @foreach (var order in supplierOrders)
+                            {
+                                <tr>
+                                    <td>@order.SupplierOrderId</td>
+                                    <td>@order.Date.ToString("MM/dd/yyyy")</td>
+                                    <td>@order.SupplierOrderTotal.ToString("C")</td>
+                                    <td style="background-color: @(GetStatusColor(order.TicketStatus))">@order.TicketStatus</td>
+                                </tr>
+                            }
                         </tbody>
 
                     </table>

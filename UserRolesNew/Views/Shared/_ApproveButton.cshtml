@@ -1,0 +1,10 @@
+﻿@model UserRolesNew.ViewModels.Dashboard.DashboardVm
+
+@if (User.IsInRole("Admin"))
+{
+    <button class="btn-approve-admin">Approve</button>
+}
+else if (User.IsInRole("RegularUser"))
+{
+    // No button for regular users
+}

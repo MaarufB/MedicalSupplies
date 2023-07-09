@@ -7,5 +7,7 @@
         public decimal SupplierOrderTotal { get; set; }
         public string OrderStatus { get; set; }
         public string SupplierName { get; set; }
+
+        public string TicketStatus { get; set; }
     }
 }
