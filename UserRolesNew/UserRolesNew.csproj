@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModels\Inventory\" />
     <Folder Include="wwwroot\css\Home\" />
   </ItemGroup>
 

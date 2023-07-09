@@ -5,7 +5,8 @@ using UserRolesNew.Models;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI;
-
+using UserRolesNew.Services;
+using UserRolesData.Context;
 
 namespace UserRolesNew
 {
@@ -19,6 +20,14 @@ namespace UserRolesNew
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+
+            builder.Services.AddDbContext<MSDBContext>(options =>
+                options.UseSqlServer(connectionString));
+
+
+
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             //builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -45,6 +54,12 @@ namespace UserRolesNew
 
             builder.Services.AddScoped<SignInManager<ApplicationUser>>();
 
+            builder.Services.AddScoped<IProductRepo, Productrepo>();
+            builder.Services.AddScoped<ICustomerInvoiceRepo, CustomerInvoiceRepo>();
+            builder.Services.AddScoped<ICustomerOrderRepo, CustomerOrderRepo>();
+            builder.Services.AddScoped<ISupplierInvoiceRepo, SupplierInvoiceRepo>();
+            builder.Services.AddScoped<ISupplierOrderRepo, SupplierOrderRepo>();
+
 
 
 
@@ -60,19 +75,6 @@ namespace UserRolesNew
             var app = builder.Build();
 
             //app.Services.AddTransient<IEmailSender, SmtpEmailSender>();
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -97,10 +99,51 @@ namespace UserRolesNew
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            //the following is the newly added code to redirect to login page on start. All other methods did not get this result
+
+
+            //app.MapWhen(context => !context.Request.Path.StartsWithSegments("/Identity", StringComparison.OrdinalIgnoreCase) &&
+            //                        !context.Request.Path.StartsWithSegments("/Home/Login", StringComparison.OrdinalIgnoreCase) &&
+            //                        !context.Request.Path.StartsWithSegments("/Account/Login", StringComparison.OrdinalIgnoreCase),
+            //     appBuilder =>
+            //     {
+            //         appBuilder.Use(async (context, next) =>
+            //         {
+            //             context.Response.Redirect("/Identity/Account/Login");
+            //             await next.Invoke();
+            //         });
+            //     });
+
+
+            //end
+
+
+
+
             app.MapRazorPages();
+            app.MapControllers();
+
+
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                    name: "identity",
+                    areaName: "Identity",
+                    pattern: "{area=Identity}/{controller=Account}/{action=Login}/{id?}");
+
+                endpoints.MapRazorPages();
+            });
+
+
+
+
+
 
 
 

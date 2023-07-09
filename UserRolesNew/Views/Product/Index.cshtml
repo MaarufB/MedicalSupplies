@@ -1,5 +1,4 @@
-﻿
-
+﻿@model List<UserRolesNew.ViewModels.Product.ProductVm>
 
 
 <style>
@@ -9,17 +8,16 @@
 
     .header {
         background-color: #E1F5FE;
-
         color: #FFFFFF;
         padding: 15px;
     }
 
     /*.column {
-        background-color: #FFFFFF;
-        border: 1px solid #B0BEC5;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }*/
+            background-color: #FFFFFF;
+            border: 1px solid #B0BEC5;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }*/
 
 
 
@@ -39,8 +37,6 @@
             /*background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1) 100%, transparent);*/
             background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 95%, rgba(255, 255, 255, 1) 95%, rgba(255, 255, 255, 0));
             z-index: -1;
-
-
         }
 
 
@@ -70,10 +66,8 @@
 
     .mdc-text-field {
         width: 200px;
-        
         display: flex;
         align-items: center;
-        
     }
 
     .mdc-text-field__input {
@@ -107,42 +101,41 @@
         margin-top: 20px;
     }
 
-    .left-menu{
-        padding-top:40px;
-        padding-left:40px;
-        font-size:19px;
-    }
-  
-    .date{
-        font-size:25px;
-    }
-    .time{
-        font-size:19px;
-    }
-
-    .right-menu{
+    .left-menu {
         padding-top: 40px;
         padding-left: 40px;
         font-size: 19px;
     }
 
+    .date {
+        font-size: 25px;
+    }
 
+    .time {
+        font-size: 19px;
+    }
+
+    .right-menu {
+        padding-top: 40px;
+        padding-left: 40px;
+        font-size: 19px;
+    }
 
 </style>
 
 
 <div class="row">
-   @* <div class="col-md-12 header">
-        <h2>Header</h2>
-        <p>Header content goes here.</p>
+    @* <div class="col-md-12 header">
+    <h2>Header</h2>
+    <p>Header content goes here.</p>
     </div>*@
 </div>
 <div class="row">
     <div class="col-md-2 column">
         <h3>XYZ Medicals</h3>
         <h5>Abc Ave, PA</h5>
-        
-        
+
+
         <div class="left-menu">
 
             
@@ -153,9 +146,9 @@
             <p>Doctors</p>
 
         </div>
-        
-        
-        </div>
+
+
+    </div>
     <div class="col-md-8 column">
         <div class="search-box">
             <div class="mdc-text-field">
@@ -174,26 +167,11 @@
 
 
 
-        @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here. 
-            everything else remain the same*@
+        @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
+        everything else remain the same*@
 
         <div class="row">
-            @for (int row = 0; row < 3; row++)
-            {
-                <div class="row">
-                    @for (int col = 0; col < 3; col++)
-                    {
-                        <div class="col-md-4">
-                            <div class="card card-mini">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product @(row * 3 + col + 1)</h5>
-                                    <p class="card-text">Description @(row * 3 + col + 1) </p>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            }
+            Products to be displayed here
         </div>
 
         @*/END/*@
@@ -208,7 +186,7 @@
 
 
     <div class="col-md-2 column">
-        
+
         <div id="date-time" class="date-time">
             <p class="date"></p>
             <p class="time"></p>
@@ -217,7 +195,6 @@
 
 
         <div class="right-menu">
-            
             <a asp-action="index" asp-controller="UserDashboard" style="text-decoration: none;"><p>Dashboard</p></a>
             <p>Reports</p>
             <p>Inventory</p>
