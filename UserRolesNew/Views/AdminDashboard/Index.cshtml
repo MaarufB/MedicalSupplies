@@ -18,7 +18,7 @@
                     CustomerInvoiceId = i,
                     InvoiceDate = DateTime.Now.AddDays(i),
                     TotalAmount = 100 + (i * 50),
-                    TicketStatus = i % 2 == 0 ? "Approved" : "Under Review"
+                    TicketStatus = i % 2 == 0 ? "Approved" : "Review"
                 };
         customerInvoices.Add(invoice);
     }
@@ -32,7 +32,7 @@
                     CustomerOrderId = i,
                     Date = DateTime.Now.AddDays(i),
                     CustomerOrderTotal = 200 + (i * 75),
-                    TicketStatus = i % 2 == 0 ? "Rejected" : "Under Review"
+                    TicketStatus = i % 2 == 0 ? "Rejected" : "Review"
                 };
         customerOrders.Add(order);
     }
@@ -46,7 +46,7 @@
                     SupplierInvoiceId = i,
                     InvoiceDate = DateTime.Now.AddDays(i),
                     TotalAmount = 150 + (i * 25),
-                    TicketStatus = i % 2 == 0 ? "Approved" : "Under Review"
+                    TicketStatus = i % 2 == 0 ? "Approved" : "Review"
                 };
         supplierInvoices.Add(invoice);
     }
@@ -60,7 +60,7 @@
                     SupplierOrderId = i,
                     Date = DateTime.Now.AddDays(i),
                     SupplierOrderTotal = 300 + (i * 100),
-                    TicketStatus = i % 2 == 0 ? "Approved" : "Under Review"
+                    TicketStatus = i % 2 == 0 ? "Approved" : "Review"
                 };
         supplierOrders.Add(order);
     }
@@ -72,7 +72,7 @@
         // For example:
         if (status == "Approved")
             return "#4CAF50";
-        else if (status == "Under Review")
+        else if (status == "Review")
             return "#FFC107";
         else if (status == "Rejected")
             return "#F44336";
@@ -233,7 +233,7 @@
         border-radius: 4px;
         padding: 10px;
         margin-bottom: 10px;
-        height: 300px;
+        height: auto;
     }
 
         .panel h4 {
@@ -246,7 +246,11 @@
 
     .table{
         font-size:13px;
+        text-align:center;
+        line-height: 15px;
     }
+
+        
 
 </style>
 
@@ -312,14 +316,14 @@
 
                     <!-- Customer Invoices Panel Content -->
 
-                    <table class="table">
+                    <table class="table" style="table-layout: fixed; width: 100%;">
                         <thead>
                             <tr>
-                                <th>Number</th>
-                                <th>Due Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                <th></th>
+                                <th >Number</th>
+                                <th >Due Date</th>
+                                <th >Amount</th>
+                                <th >Status</th>
+                                <th >Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -329,9 +333,9 @@
                                     <td>@invoice.CustomerInvoiceId</td>
                                     <td>@invoice.InvoiceDate.ToString("MM/dd/yyyy")</td>
                                     <td>@invoice.TotalAmount.ToString("C")</td>
-                                    <td style="background-color: @(GetStatusColor(invoice.TicketStatus))">@invoice.TicketStatus</td>
-                                    <td>
-                                        @if (invoice.TicketStatus == "Under Review")
+                                    <td style="background-color: @(GetStatusColor(invoice.TicketStatus));vertical-align: middle; ">@invoice.TicketStatus</td>
+                                    
+                                        @if (invoice.TicketStatus == "Review")
                                         {
                                         <td>@Html.Partial("_ApproveButton", Model)</td>
                                         }
@@ -339,7 +343,7 @@
                                         {
                                         <td></td>
                                         }
-                                    </td>
+                                    
                                 </tr>
                             }
                         </tbody>
@@ -378,14 +382,14 @@
                     <!-- Customer Orders Panel Content -->
 
 
-                    <table class="table">
+                    <table class="table" style="table-layout: fixed; width: 100%;">
                         <thead>
                             <tr>
-                                <th>Number</th>
-                                <th>Due Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                <th></th>
+                                <th style="width: 20%; text-align: center;">Number</th>
+                                <th style="width: 20%; text-align: center;">Due Date</th>
+                                <th style="width: 20%; text-align: center;">Amount</th>
+                                <th style="width: 20%; text-align: center;">Status</th>
+                                <th style="width: 20%; text-align: center;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -395,7 +399,17 @@
                                     <td>@order.CustomerOrderId</td>
                                     <td>@order.Date.ToString("MM/dd/yyyy")</td>
                                     <td>@order.CustomerOrderTotal.ToString("C")</td>
-                                    <td style="background-color: @(GetStatusColor(order.TicketStatus))">@order.TicketStatus</td>
+                                    <td style="background-color: @(GetStatusColor(order.TicketStatus)); vertical-align: middle;">@order.TicketStatus</td>
+                                    
+                                        @if (order.TicketStatus == "Review")
+                                        {
+                                        <td>@Html.Partial("_ApproveButton", Model)</td>
+                                        }
+                                        else
+                                        {
+                                        <td></td>
+                                        }
+                                    
                                 </tr>
                             }
                         </tbody>
@@ -423,14 +437,14 @@
 
 
 
-                    <table class="table">
+                    <table class="table" style="table-layout: fixed; width: 100%;">
                         <thead>
                             <tr>
-                                <th>Number</th>
-                                <th>Due Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                <th></th>
+                                <th style="width: 20%; text-align: center;">Number</th>
+                                <th style="width: 20%; text-align: center;">Due Date</th>
+                                <th style="width: 20%; text-align: center;">Amount</th>
+                                <th style="width: 20%; text-align: center;">Status</th>
+                                <th style="width: 20%; text-align: center;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -440,7 +454,17 @@
                                     <td>@invoice.SupplierInvoiceId</td>
                                     <td>@invoice.InvoiceDate.ToString("MM/dd/yyyy")</td>
                                     <td>@invoice.TotalAmount.ToString("C")</td>
-                                    <td style="background-color: @(GetStatusColor(invoice.TicketStatus))">@invoice.TicketStatus</td>
+                                    <td style="background-color: @(GetStatusColor(invoice.TicketStatus)); vertical-align: middle;">@invoice.TicketStatus</td>
+                                    
+                                        @if (invoice.TicketStatus == "Review")
+                                        {
+                                        <td>@Html.Partial("_ApproveButton", Model)</td>
+                                        }
+                                        else
+                                        {
+                                        <td></td>
+                                        }
+                                    
                                 </tr>
                             }
                         </tbody>
@@ -466,14 +490,15 @@
 
 
 
-                    <table class="table">
+                    <table class="table" style="table-layout: fixed; width: 100%;">
+                       
                         <thead>
                             <tr>
-                                <th>Number</th>
-                                <th>Due Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                <th></th>
+                                <th style="width: 20%; text-align: center;">Number</th>
+                                <th style="width: 20%; text-align: center;">Due Date</th>
+                                <th style="width: 20%; text-align: center;">Amount</th>
+                                <th style="width: 20%; text-align: center;">Status</th>
+                                <th style="width: 20%; text-align: center;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -483,7 +508,17 @@
                                     <td>@order.SupplierOrderId</td>
                                     <td>@order.Date.ToString("MM/dd/yyyy")</td>
                                     <td>@order.SupplierOrderTotal.ToString("C")</td>
-                                    <td style="background-color: @(GetStatusColor(order.TicketStatus))">@order.TicketStatus</td>
+                                    <td style="background-color: @(GetStatusColor(order.TicketStatus)); vertical-align: middle;">@order.TicketStatus</td>
+                                    
+                                        @if (order.TicketStatus == "Review")
+                                        {
+                                        <td>@Html.Partial("_ApproveButton", Model)</td>
+                                        }
+                                        else
+                                        {
+                                        <td></td>
+                                        }
+                                    
                                 </tr>
                             }
                         </tbody>

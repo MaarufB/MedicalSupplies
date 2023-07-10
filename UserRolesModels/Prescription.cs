@@ -14,7 +14,7 @@ namespace UserRolesModels
         public int CustomerId { get; set; }
         public DateTime DateWritten { get; set; }
         public string DoctorName { get; set; }
-        public string DoctorContact { get; set; }
+        public string DoctorNPI { get; set; }
         public string Comments { get; set; }
         public int FacilityId { get; set; }
 
