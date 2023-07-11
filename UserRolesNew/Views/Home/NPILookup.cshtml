@@ -9,17 +9,16 @@
 
     .header {
         background-color: #E1F5FE;
-
         color: #FFFFFF;
         padding: 15px;
     }
 
     /*.column {
-        background-color: #FFFFFF;
-        border: 1px solid #B0BEC5;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }*/
+            background-color: #FFFFFF;
+            border: 1px solid #B0BEC5;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }*/
 
 
 
@@ -39,8 +38,6 @@
             /*background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1) 100%, transparent);*/
             background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 95%, rgba(255, 255, 255, 1) 95%, rgba(255, 255, 255, 0));
             z-index: -1;
-
-
         }
 
 
@@ -70,10 +67,8 @@
 
     .mdc-text-field {
         width: 200px;
-        
         display: flex;
         align-items: center;
-        
     }
 
     .mdc-text-field__input {
@@ -107,24 +102,64 @@
         margin-top: 20px;
     }
 
-    .left-menu{
-        padding-top:40px;
-        padding-left:40px;
-        font-size:19px;
-    }
-  
-    .date{
-        font-size:25px;
-    }
-    .time{
-        font-size:19px;
-    }
-
-    .right-menu{
+    .left-menu {
         padding-top: 40px;
         padding-left: 40px;
         font-size: 19px;
     }
+
+    .date {
+        font-size: 25px;
+    }
+
+    .time {
+        font-size: 19px;
+    }
+
+    .right-menu {
+        padding-top: 40px;
+        padding-left: 40px;
+        font-size: 19px;
+    }
+
+    
+
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .table-container {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: auto;
+        max-height: 400px;
+    }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -132,20 +167,20 @@
 
 
 <div class="row">
-   @* <div class="col-md-12 header">
-        <h2>Header</h2>
-        <p>Header content goes here.</p>
+    @* <div class="col-md-12 header">
+    <h2>Header</h2>
+    <p>Header content goes here.</p>
     </div>*@
 </div>
 <div class="row">
     <div class="col-md-2 column">
         <h3>XYZ Medicals</h3>
         <h5>Abc Ave, PA</h5>
-        
-        
+
+
         <div class="left-menu">
 
-            
+
             <a asp-action="index" asp-controller="Product" style="text-decoration: none;"><p>Products</p></a>
             <p>Suppliers</p>
             <p>Manufacturers</p>
@@ -154,9 +189,9 @@
             <a asp-action="NPILookup" asp-controller="Home" style="text-decoration: none;"><p>Doctors</p></a>
 
         </div>
-        
-        
-        </div>
+
+
+    </div>
     <div class="col-md-8 column">
         <div class="search-box">
             <div class="mdc-text-field">
@@ -175,27 +210,25 @@
 
 
 
-        @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here. 
-            everything else remain the same*@
+        @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
+        everything else remain the same*@
 
-        <div class="row">
-            @for (int row = 0; row < 3; row++)
-            {
-                <div class="row">
-                    @for (int col = 0; col < 3; col++)
-                    {
-                        <div class="col-md-4">
-                            <div class="card card-mini">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product @(row * 3 + col + 1)</h5>
-                                    <p class="card-text">Description @(row * 3 + col + 1) </p>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            }
-        </div>
+
+
+       
+
+
+
+        <input type="text" id="npi_org" placeholder="Doctor name or NPI">
+        <button onclick="searchAPI()">Search</button>
+
+        <div id="resultTable" class="table-container"></div>
+
+
+
+
+
+
 
         @*/END/*@
 
@@ -209,7 +242,7 @@
 
 
     <div class="col-md-2 column">
-        
+
         <div id="date-time" class="date-time">
             <p class="date"></p>
             <p class="time"></p>
@@ -218,7 +251,7 @@
 
 
         <div class="right-menu">
-            
+
             @if (User.IsInRole("Admin"))
             {
                 <a href="/AdminDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
@@ -260,4 +293,55 @@
 
     // Initial update
     updateTime();
+</script>
+
+<script>
+    function searchAPI() {
+        var searchTerm = $('#npi_org').val();
+        var apiUrl = 'https://clinicaltables.nlm.nih.gov/api/npi_idv/v3/search';
+        var queryString = '?terms=' + searchTerm + '&maxList=10'; // Modify the query string parameters as needed
+
+        // Make an API call
+        $.ajax({
+            url: apiUrl + queryString,
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                if (response && response.length) {
+                    console.log(response); // Check the structure of the API response in the browser console
+
+                    // Generate the table
+                    var tableHTML = '<table id="resultTable">';
+                    tableHTML += '<tr><th>Name</th><th>NPI</th><th>Type</th><th>Practice Address</th></tr>';
+
+                    for (var i = 0; i < response.length; i++) {
+                        var rowData = response[3][i];
+
+                        if (rowData && rowData.length >= 4) {
+                            tableHTML += '<tr>';
+                            tableHTML += '<td>' + rowData[0] + '</td>'; // Name
+                            tableHTML += '<td>' + rowData[1] + '</td>'; // NPI
+                            tableHTML += '<td>' + rowData[2] + '</td>'; // Type
+                            tableHTML += '<td>' + rowData[3] + '</td>'; // Practice Address
+                            tableHTML += '</tr>';
+                        } else {
+                            console.log('Invalid row data at index ' + i + ':', rowData);
+                        }
+                    }
+
+                    tableHTML += '</table>';
+
+                    // Display the table on the page
+                    tableHTML = '<div class="table-container">' + tableHTML + '</div>';
+                    $('#resultTable').html(tableHTML);
+                } else {
+                    console.log('No results found in the API response.');
+                }
+            },
+            error: function (error) {
+                // Handle any errors
+                console.error(error);
+            }
+        });
+    }
 </script>
