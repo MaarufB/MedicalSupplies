@@ -18,6 +18,11 @@ namespace UserRolesNew.Controllers
             return View();
         }
 
+        public IActionResult NPILookup()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
