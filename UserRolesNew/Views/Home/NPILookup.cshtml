@@ -74,6 +74,7 @@
     .mdc-text-field__input {
         text-align: center;
         padding-right: 14px; /* Adjust padding to accommodate the lens icon */
+        border-radius:20px;
     }
 
     .mdc-text-field__icon {
@@ -185,7 +186,7 @@
             <p>Suppliers</p>
             <p>Manufacturers</p>
             <p>Facilities</p>
-            <p>Doctors</p>
+            
             <a asp-action="NPILookup" asp-controller="Home" style="text-decoration: none;"><p>Doctors</p></a>
 
         </div>
@@ -205,6 +206,7 @@
                 <span class="mdc-button__ripple"></span>
                 <span class="material-icons">Go!</span>
             </button>
+            
         </div>
 
 
@@ -218,9 +220,11 @@
        
 
 
-
-        <input type="text" id="npi_org" placeholder="Doctor name or NPI">
-        <button onclick="searchAPI()">Search</button>
+        <div class="doctor-search" style="padding:70px">
+            <input type="text" id="npi_org" placeholder="Doctor name or NPI">
+            <button onclick="searchAPI()">Search</button>
+        </div>
+       
 
         <div id="resultTable" class="table-container"></div>
 
