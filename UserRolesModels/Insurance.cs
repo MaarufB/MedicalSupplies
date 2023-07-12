@@ -19,6 +19,7 @@ namespace UserRolesModels
         public bool SecondaryInsurance { get; set; }
         public DateTime DateEffective { get; set; }
         public DateTime DateExpire { get; set; }
+        
 
         public Customer Customer { get; set; }
         public InsuranceType InsuranceType { get; set; }
