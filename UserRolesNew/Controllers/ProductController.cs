@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UserRolesNew.Services;
+using UserRolesNew.Services.Contracts;
 using UserRolesNew.ViewModels.Product;
 
 namespace UserRolesNew.Controllers

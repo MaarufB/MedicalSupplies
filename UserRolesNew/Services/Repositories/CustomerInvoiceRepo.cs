@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UserRolesData.Context;
 using UserRolesModels;
+using UserRolesNew.Services.Contracts;
 
-namespace UserRolesNew.Services
+namespace UserRolesNew.Services.Repositories
 {
     public class CustomerInvoiceRepo : ICustomerInvoiceRepo
     {
@@ -15,11 +16,11 @@ namespace UserRolesNew.Services
         public List<CustomerInvoice> GetAllCustomerInvoices()
         {
             var customerInvoices = _context.CustomerInvoices
-                .Include(c=>c.CustomerOrder)
-                .Include(p=>p.PaymentStatus)
-                .Include(t=>t.TicketStatus)
-                .Include(i=>i.CustomerInvoiceItems)
-                .Include(r=>r.CustomerOrder.Customer)
+                .Include(c => c.CustomerOrder)
+                .Include(p => p.PaymentStatus)
+                .Include(t => t.TicketStatus)
+                .Include(i => i.CustomerInvoiceItems)
+                .Include(r => r.CustomerOrder.Customer)
                 .ToList();
 
             return customerInvoices;

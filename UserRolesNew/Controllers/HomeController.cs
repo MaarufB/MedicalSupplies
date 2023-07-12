@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SelectPdf;
 using System.Diagnostics;
 using UserRolesNew.Models;
 
@@ -27,6 +28,23 @@ namespace UserRolesNew.Controllers
         {
             return View();
         }
+
+
+
+        [HttpPost]
+        public ActionResult GeneratePDF(string htmlContent)
+        {
+            HtmlToPdf converter = new HtmlToPdf();
+            PdfDocument doc = converter.ConvertHtmlString(htmlContent);
+            byte[] pdf = doc.Save();
+            doc.Close();
+            return File(pdf, "application/pdf", "output.pdf");
+        }
+
+
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

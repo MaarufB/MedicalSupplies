@@ -5,8 +5,9 @@ using UserRolesNew.Models;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI;
-using UserRolesNew.Services;
 using UserRolesData.Context;
+using UserRolesNew.Services.Repositories;
+using UserRolesNew.Services.Contracts;
 
 namespace UserRolesNew
 {
@@ -59,6 +60,7 @@ namespace UserRolesNew
             builder.Services.AddScoped<ICustomerOrderRepo, CustomerOrderRepo>();
             builder.Services.AddScoped<ISupplierInvoiceRepo, SupplierInvoiceRepo>();
             builder.Services.AddScoped<ISupplierOrderRepo, SupplierOrderRepo>();
+            builder.Services.AddScoped<IInventoryRepo, InventoryRepo>();
 
 
 

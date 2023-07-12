@@ -1,6 +1,6 @@
 ﻿using UserRolesModels;
 
-namespace UserRolesNew.Services
+namespace UserRolesNew.Services.Contracts
 {
     public interface ISupplierInvoiceRepo
     {

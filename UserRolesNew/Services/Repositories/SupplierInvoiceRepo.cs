@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UserRolesData.Context;
 using UserRolesModels;
+using UserRolesNew.Services.Contracts;
 
-namespace UserRolesNew.Services
+namespace UserRolesNew.Services.Repositories
 {
     public class SupplierInvoiceRepo : ISupplierInvoiceRepo
     {
@@ -15,9 +16,9 @@ namespace UserRolesNew.Services
         public List<SupplierInvoice> GetAllSupplierInvoices()
         {
             var supplierInvoices = _context.SupplierInvoices
-                .Include(p=>p.PaymentStatus)
-                .Include(s=>s.SupplierOrder)
-                .Include(t=>t.TicketStatus)
+                .Include(p => p.PaymentStatus)
+                .Include(s => s.SupplierOrder)
+                .Include(t => t.TicketStatus)
                 .ToList();
 
             return supplierInvoices;
