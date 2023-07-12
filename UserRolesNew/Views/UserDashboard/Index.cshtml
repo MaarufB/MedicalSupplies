@@ -75,6 +75,7 @@
     .mdc-text-field__input {
         text-align: center;
         padding-right: 14px; /* Adjust padding to accommodate the lens icon */
+        border-radius: 10px;
     }
 
     .mdc-text-field__icon {
@@ -130,7 +131,7 @@
 
     .panel {
         background-color: #D1EAFD;
-        border: 2px solid #ddd;
+        /*border: 2px solid #ddd;*/
         border-radius: 4px;
         padding: 10px;
         margin-bottom: 10px;
@@ -213,7 +214,7 @@
                 <div class="panel">
 
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex-grow: 1; text-align: center;">Customer Invoices</span>
+                        <span style="flex-grow: 1; text-align: center;"><h6>CUSTOMER INVOICES</h6></span>
                         <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
                     </div>
                     
@@ -221,14 +222,14 @@
                     
                     <!-- Customer Invoices Panel Content -->
 
-                    <table class="table">
+                    <table class="table table-bordered border-primary text-center">
                         <thead>
                             <tr>
                                 <th>Number</th>
                                 <th>Due Date</th>
                                 <th>Amount</th>
                                 <th>Status</th>
-                                <th></th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -290,20 +291,20 @@
             <div class="col-md-6">
                 <div class="panel">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex-grow: 1; text-align: center;">Customer Orders</span>
+                        <span style="flex-grow: 1; text-align: center;"><h6>CUSTOMER ORDERS</h6></span>
                         <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
                     </div>
                     <!-- Customer Orders Panel Content -->
 
 
-                    <table class="table">
+                    <table class="table table-bordered border-primary text-center">
                         <thead>
                             <tr>
                                 <th>Number</th>
                                 <th>Due Date</th>
                                 <th>Amount</th>
                                 <th>Status</th>
-                                <th></th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -353,21 +354,21 @@
             <div class="col-md-6">
                 <div class="panel">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex-grow: 1; text-align: center;">Supplier Invoices</span>
+                        <span style="flex-grow: 1; text-align: center;"><h6>SUPPLIER INVOICES</h6></span>
                         <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
                     </div>
                     <!-- Supplier Invoices Panel Content -->
 
 
 
-                    <table class="table">
+                    <table class="table table-bordered border-primary text-center">
                         <thead>
                             <tr>
                                 <th>Number</th>
                                 <th>Due Date</th>
                                 <th>Amount</th>
                                 <th>Status</th>
-                                <th></th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -415,21 +416,22 @@
             <div class="col-md-6">
                 <div class="panel">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex-grow: 1; text-align: center;">Supplier Orders</span>
+                        <span style="flex-grow: 1; text-align: center;"><h6>SUPPLIER ORDERS</h6></span>
+
                         <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
                     </div>
                     <!-- Supplier Orders Panel Content -->
 
 
 
-                    <table class="table">
+                    <table class="table table-bordered border-primary text-center">
                         <thead>
                             <tr>
                                 <th>Number</th>
                                 <th>Due Date</th>
                                 <th>Amount</th>
                                 <th>Status</th>
-                                <th></th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -513,7 +515,14 @@
                 <a href="/UserDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
             }
             <p>Reports</p>
-            <p>Inventory</p>
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="/Inventory/Index" style="text-decoration: none;"><p>Inventory</p></a>
+            }
+            else
+            {
+                @*<a href="/UserDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>*@
+            }
         </div>
 
 

@@ -66,6 +66,7 @@
         justify-content: center;
         flex-direction: row;
         margin-top: 20px;
+        border-radius:50px;
     }
 
     .mdc-text-field {
@@ -74,11 +75,14 @@
         display: flex;
         align-items: center;
         
+        
     }
 
     .mdc-text-field__input {
         text-align: center;
         padding-right: 14px; /* Adjust padding to accommodate the lens icon */
+        border-radius: 10px;
+        
     }
 
     .mdc-text-field__icon {
@@ -147,10 +151,11 @@
 
             
             <a asp-action="index" asp-controller="Product" style="text-decoration: none;"><p>Products</p></a>
-            <p>Suppliers</p>
+            <a asp-action="index" asp-controller="Suppliers" style="text-decoration: none;"><p>Suppliers</p></a>
+            
             <p>Manufacturers</p>
-            <p>Facilities</p>
-            <p>Doctors</p>
+           
+            <a asp-action="index" asp-controller="Facilities" style="text-decoration: none;"><p>Facilities</p></a>
             <a asp-action="NPILookup" asp-controller="Home" style="text-decoration: none;"><p>Doctors</p></a>
 
         </div>
