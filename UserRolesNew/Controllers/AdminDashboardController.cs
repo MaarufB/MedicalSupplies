@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserRolesNew.Services.Contracts;
+using UserRolesNew.ViewModels.Customer;
 using UserRolesNew.ViewModels.Dashboard;
+using UserRolesNew.ViewModels.Supplier;
 
 namespace UserRolesNew.Controllers
 {

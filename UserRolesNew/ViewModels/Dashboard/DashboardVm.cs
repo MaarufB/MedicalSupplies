@@ -1,4 +1,7 @@
-﻿namespace UserRolesNew.ViewModels.Dashboard
+﻿using UserRolesNew.ViewModels.Customer;
+using UserRolesNew.ViewModels.Supplier;
+
+namespace UserRolesNew.ViewModels.Dashboard
 {
     public class DashboardVm
     {

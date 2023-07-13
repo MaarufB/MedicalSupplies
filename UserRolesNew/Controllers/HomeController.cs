@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SelectPdf;
 using System.Diagnostics;
 using UserRolesNew.Models;
@@ -14,6 +15,7 @@ namespace UserRolesNew.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
