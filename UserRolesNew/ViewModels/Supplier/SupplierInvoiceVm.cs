@@ -1,4 +1,5 @@
-﻿using UserRolesModels;
+﻿using Microsoft.AspNetCore.Http;
+using UserRolesModels;
 
 namespace UserRolesNew.ViewModels.Supplier
 {
@@ -37,6 +38,19 @@ namespace UserRolesNew.ViewModels.Supplier
         public string PaymentStatusName { get; set; }
         
         public List<SupplierInvoiceItemVm> SupplierInvoiceItems { get; set; }
+
+        public string ShippingAddress { get; set; }
+        public string BillingAddress { get; set; }
+
+
+        public void SetShippingAndBillingAddress(SupplierOrder supplierOrder)
+        {
+            if (supplierOrder != null)
+            {
+                ShippingAddress = supplierOrder.ShippingAddress;
+                BillingAddress = supplierOrder.BillingAddress;
+            }
+        }
 
 
 
