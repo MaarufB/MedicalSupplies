@@ -2,7 +2,7 @@
 @using UserRolesNew.ViewModels.Supplier;
 @using UserRolesNew.Helpers
 @using UserRolesNew.ViewModels.Dashboard;
-    using UserRolesNew.ViewModels.Customer;
+@using UserRolesNew.ViewModels.Customer;
 @model UserRolesNew.ViewModels.Dashboard.DashboardVm
 
 
@@ -313,7 +313,7 @@
 
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="flex-grow: 1; text-align: center;">Customer Invoices</span>
-                        <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
+                        <a asp-action="CreateInvoice" asp-controller="Customer" style="text-decoration: none;"><p>Create</p></a>
                     </div>
 
 
@@ -381,7 +381,7 @@
                 <div class="panel">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="flex-grow: 1; text-align: center;">Customer Orders</span>
-                        <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
+                        <a asp-action="CreateOrder" asp-controller="Customer" style="text-decoration: none;"><p>Create</p></a>
                     </div>
                     <!-- Customer Orders Panel Content -->
 
@@ -435,7 +435,7 @@
                 <div class="panel">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="flex-grow: 1; text-align: center;">Supplier Invoices</span>
-                        <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
+                        <a asp-action="CreateInvoice" asp-controller="Supplier" style="text-decoration: none;"><p>Create</p></a>
                     </div>
                     <!-- Supplier Invoices Panel Content -->
 
@@ -488,7 +488,7 @@
                 <div class="panel">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="flex-grow: 1; text-align: center;">Supplier Orders</span>
-                        <span style="text-align: right;"><a href="#" class="btn-create" style="text-decoration: none;">Create</a></span>
+                        <a asp-action="CreateOrder" asp-controller="Supplier" style="text-decoration: none;"><p>Create</p></a>
                     </div>
                     <!-- Supplier Orders Panel Content -->
 
@@ -574,7 +574,14 @@
                 <a href="/UserDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
             }
             <p>Reports</p>
-            <p>Inventory</p>
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="/Inventory/Index" style="text-decoration: none;"><p>Inventory</p></a>
+            }
+            else
+            {
+                @*<a href="/UserDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>*@
+            }
         </div>
 
 

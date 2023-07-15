@@ -1,4 +1,4 @@
-﻿@model UserRolesNew.ViewModels.Customer.CustomerOrderVm
+﻿@model UserRolesNew.ViewModels.Supplier.SupplierOrderVm
 
 
 <style>
@@ -13,11 +13,11 @@
     }
 
     /*.column {
-                                background-color: #FFFFFF;
-                                border: 1px solid #B0BEC5;
-                                padding: 20px;
-                                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                            }*/
+                                    background-color: #FFFFFF;
+                                    border: 1px solid #B0BEC5;
+                                    padding: 20px;
+                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                }*/
 
 
 
@@ -191,16 +191,16 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="customerId">Customer ID:</label>
-                                <input type="text" class="form-control" id="customerId" name="CustomerId" value="" />
+                                <label for="supplierId">Supplier ID:</label>
+                                <input type="text" class="form-control" id="supplierId" name="SupplierId" value="" />
                             </div>
                         </div>
 
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="customerName">Customer Name:</label>
-                                <input type="text" class="form-control" id="customerName" name="Date" value="@Model.CustomerName" />
+                                <label for="supplierName">Supplier Name:</label>
+                                <input type="text" class="form-control" id="supplierName" name="Date" value="@Model.SupplierName" />
                             </div>
                         </div>
 
@@ -269,25 +269,25 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="productName">Product:</label>
-                                        <input type="text" class="form-control product-name" name="CustomerOrderItems[0].ProductName" />
+                                        <input type="text" class="form-control product-name" name="SupplierOrderItems[0].ProductName" />
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="quantity">Quantity:</label>
-                                        <input type="text" class="form-control quantity" name="CustomerOrderItems[0].Quantity" />
+                                        <input type="text" class="form-control quantity" name="SupplierOrderItems[0].Quantity" />
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="unitPrice">Unit Price:</label>
-                                        <input type="text" class="form-control unit-price" name="CustomerOrderItems[0].UnitPrice" />
+                                        <input type="text" class="form-control unit-price" name="SupplierOrderItems[0].UnitPrice" />
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="lineTotal">Line total:</label>
-                                        <input type="text" class="form-control line-total" name="CustomerOrderItems[0].LineTotal" />
+                                        <input type="text" class="form-control line-total" name="SupplierOrderItems[0].LineTotal" />
                                     </div>
                                 </div>
                             </div>
@@ -320,7 +320,7 @@
 
                             <div class="form-group">
                                 <label for="orderTotal">Order Total:</label>
-                                <input type="text" class="form-control" id="orderTotal" name="OrderTotal" value="@Model.CustomerOrderTotal" />
+                                <input type="text" class="form-control" id="orderTotal" name="OrderTotal" value="@Model.SupplierOrderTotal" />
                             </div>
 
                         </div>
@@ -478,32 +478,32 @@
         newProductField.classList.add("order-item");
 
         newProductField.innerHTML = `
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="productName">Product Name:</label>
-                                <input type="text" class="form-control product-name" name="CustomerOrderItems[${productIndex}].ProductName" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="productName">Product Name:</label>
+                                    <input type="text" class="form-control product-name" name="CustomerOrderItems[${productIndex}].ProductName" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="quantity">Quantity:</label>
-                                <input type="text" class="form-control quantity" name="CustomerOrderItems[${productIndex}].Quantity" />
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="quantity">Quantity:</label>
+                                    <input type="text" class="form-control quantity" name="CustomerOrderItems[${productIndex}].Quantity" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="unitPrice">Unit Price:</label>
-                                <input type="text" class="form-control unit-price" name="CustomerOrderItems[${productIndex}].UnitPrice" />
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="unitPrice">Unit Price:</label>
+                                    <input type="text" class="form-control unit-price" name="CustomerOrderItems[${productIndex}].UnitPrice" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="lineTotal">Line total:</label>
-                                <input type="text" class="form-control line-total" name="CustomerOrderItems[${productIndex}].LineTotal" />
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="lineTotal">Line total:</label>
+                                    <input type="text" class="form-control line-total" name="CustomerOrderItems[${productIndex}].LineTotal" />
+                                </div>
                             </div>
-                        </div>
-                    </div>`;
+                        </div>`;
 
         productContainer.appendChild(newProductField);
         productIndex++;

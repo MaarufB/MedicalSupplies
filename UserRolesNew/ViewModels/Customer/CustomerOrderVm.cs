@@ -6,6 +6,7 @@
         public CustomerOrderVm()
         {
             CustomerOrderItems = new List<CustomerOrderItemVm>();
+            
         }
 
         public int CustomerOrderId { get; set; }
@@ -29,7 +30,7 @@
         public decimal GrandTotal { get; set; }
         public int TicketStatusId { get; set; }
 
-        // Additional properties from related entities if needed
+        
 
         public string PaymentMethodName { get; set; }
         public string TicketStatusName { get; set; }

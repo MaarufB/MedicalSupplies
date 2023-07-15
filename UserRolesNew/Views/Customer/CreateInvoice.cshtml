@@ -1,4 +1,4 @@
-﻿@model UserRolesNew.ViewModels.Customer.CustomerOrderVm
+﻿@model UserRolesNew.ViewModels.Customer.CustomerInvoiceVm
 
 
 <style>
@@ -13,11 +13,11 @@
     }
 
     /*.column {
-                                background-color: #FFFFFF;
-                                border: 1px solid #B0BEC5;
-                                padding: 20px;
-                                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                            }*/
+                                    background-color: #FFFFFF;
+                                    border: 1px solid #B0BEC5;
+                                    padding: 20px;
+                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                }*/
 
 
 
@@ -181,15 +181,15 @@
 
 
 
-        <h2 style="padding-left:280px; padding-top:80px; padding-bottom:30px">CUSTOMER ORDER</h2>
+        <h2 style="padding-left:280px; padding-top:80px; padding-bottom:30px">CUSTOMER INVOICE</h2>
 
-        <form method="post" asp-action="CreateOrder">
+        <form method="post" asp-action="CreateInvoice">
 
 
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="customerId">Customer ID:</label>
                                 <input type="text" class="form-control" id="customerId" name="CustomerId" value="" />
@@ -197,7 +197,7 @@
                         </div>
 
 
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="customerName">Customer Name:</label>
                                 <input type="text" class="form-control" id="customerName" name="Date" value="@Model.CustomerName" />
@@ -205,11 +205,19 @@
                         </div>
 
 
-
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="form-group">
-                                <label for="orderDate">Order Date:</label>
-                                <input type="text" class="form-control" id="orderDate" name="Date" value="@Model.Date.ToShortDateString()" />
+                                <label for="orderNo">Order No:</label>
+                                <input type="text" class="form-control" id="orderNo" name="Date" value="@Model.CustomerOrderNo" />
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="invoiceDate">Invoice Date:</label>
+                                <input type="text" class="form-control" id="invoiceDate" name="Date" value="@Model.InvoiceDate.ToShortDateString()" />
                             </div>
                         </div>
                     </div>
@@ -269,25 +277,25 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="productName">Product:</label>
-                                        <input type="text" class="form-control product-name" name="CustomerOrderItems[0].ProductName" />
+                                        <input type="text" class="form-control product-name" name="CustomerInvoiceItems[0].ProductName" />
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="quantity">Quantity:</label>
-                                        <input type="text" class="form-control quantity" name="CustomerOrderItems[0].Quantity" />
+                                        <input type="text" class="form-control quantity" name="CustomerInvoiceItems[0].Quantity" />
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="unitPrice">Unit Price:</label>
-                                        <input type="text" class="form-control unit-price" name="CustomerOrderItems[0].UnitPrice" />
+                                        <input type="text" class="form-control unit-price" name="CustomerInvoiceItems[0].UnitPrice" />
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="lineTotal">Line total:</label>
-                                        <input type="text" class="form-control line-total" name="CustomerOrderItems[0].LineTotal" />
+                                        <input type="text" class="form-control line-total" name="CustomerInvoiceItems[0].LineTotal" />
                                     </div>
                                 </div>
                             </div>
@@ -316,18 +324,18 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
 
                             <div class="form-group">
-                                <label for="orderTotal">Order Total:</label>
-                                <input type="text" class="form-control" id="orderTotal" name="OrderTotal" value="@Model.CustomerOrderTotal" />
+                                <label for="invoiceTotal">Invoice Total:</label>
+                                <input type="text" class="form-control" id="taxRate" name="InvoiceTotal" value="@Model.TotalAmount" />
                             </div>
 
                         </div>
 
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="taxAmount">Tax Rate:</label>
+                                <label for="taxRate">Tax Rate:</label>
                                 <input type="text" class="form-control" id="taxRate" name="TaxRate" value="@Model.TaxRate" />
                             </div>
                         </div>
@@ -340,7 +348,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
 
                             <div class="form-group">
                                 <label for="grandTotal">Grand Total:</label>
@@ -348,6 +356,19 @@
                             </div>
                         </div>
 
+
+                        <div class="col-md-2">
+
+                            <div class="form-group">
+                                <label for="paymentStatus">Payment Status</label>
+                                <select class="form-control" id="myDropdown">
+                                    <option value="">Select</option>
+                                    <option value="option1">Pending</option>
+                                    <option value="option2">Settled</option>
+                                
+                                </select>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -478,32 +499,32 @@
         newProductField.classList.add("order-item");
 
         newProductField.innerHTML = `
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="productName">Product Name:</label>
-                                <input type="text" class="form-control product-name" name="CustomerOrderItems[${productIndex}].ProductName" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="productName">Product Name:</label>
+                                    <input type="text" class="form-control product-name" name="CustomerOrderItems[${productIndex}].ProductName" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="quantity">Quantity:</label>
-                                <input type="text" class="form-control quantity" name="CustomerOrderItems[${productIndex}].Quantity" />
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="quantity">Quantity:</label>
+                                    <input type="text" class="form-control quantity" name="CustomerOrderItems[${productIndex}].Quantity" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="unitPrice">Unit Price:</label>
-                                <input type="text" class="form-control unit-price" name="CustomerOrderItems[${productIndex}].UnitPrice" />
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="unitPrice">Unit Price:</label>
+                                    <input type="text" class="form-control unit-price" name="CustomerOrderItems[${productIndex}].UnitPrice" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="lineTotal">Line total:</label>
-                                <input type="text" class="form-control line-total" name="CustomerOrderItems[${productIndex}].LineTotal" />
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="lineTotal">Line total:</label>
+                                    <input type="text" class="form-control line-total" name="CustomerOrderItems[${productIndex}].LineTotal" />
+                                </div>
                             </div>
-                        </div>
-                    </div>`;
+                        </div>`;
 
         productContainer.appendChild(newProductField);
         productIndex++;
@@ -522,5 +543,5 @@
     var formattedDate = year + '-' + month + '-' + day;
 
     // Set the default value of the orderDate input field
-    document.getElementById('orderDate').value = formattedDate;
+    document.getElementById('invoiceDate').value = formattedDate;
 </script>
