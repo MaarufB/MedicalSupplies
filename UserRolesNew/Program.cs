@@ -62,6 +62,7 @@ namespace UserRolesNew
             builder.Services.AddScoped<ISupplierOrderRepo, SupplierOrderRepo>();
             builder.Services.AddScoped<IInventoryRepo, InventoryRepo>();
             builder.Services.AddScoped<IFacilityRepo, FacilityRepo>();
+            builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
 
 
 
