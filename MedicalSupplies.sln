@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33717.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserRolesNew", "UserRolesNew\UserRolesNew.csproj", "{8F400E50-AA52-4345-AE34-96BA511BD2D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSuppliesWeb", "UserRolesNew\MedicalSuppliesWeb.csproj", "{8F400E50-AA52-4345-AE34-96BA511BD2D4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserRolesModels", "UserRolesModels\UserRolesModels.csproj", "{27B3CE7A-E280-4FAA-888C-3EDBF7C24F89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSuppliesModels", "UserRolesModels\MedicalSuppliesModels.csproj", "{27B3CE7A-E280-4FAA-888C-3EDBF7C24F89}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserRolesData", "UserRolesData\UserRolesData.csproj", "{975C6DC4-95ED-4823-BA74-B6906C3C9ACA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSuppliesData", "UserRolesData\MedicalSuppliesData.csproj", "{975C6DC4-95ED-4823-BA74-B6906C3C9ACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory Dashboard", "Inventory Dashboard\Inventory Dashboard.csproj", "{CF242DEF-6156-4DDA-981C-3ED401138B3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory Dashboard", "Inventory Dashboard\Inventory Dashboard.csproj", "{CF242DEF-6156-4DDA-981C-3ED401138B3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

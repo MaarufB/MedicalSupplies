@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UserRolesData\UserRolesData.csproj" />
-    <ProjectReference Include="..\UserRolesModels\UserRolesModels.csproj" />
+    <ProjectReference Include="..\UserRolesData\MedicalSuppliesData.csproj" />
+    <ProjectReference Include="..\UserRolesModels\MedicalSuppliesModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
