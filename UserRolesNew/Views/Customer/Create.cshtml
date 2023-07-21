@@ -1,5 +1,7 @@
 ﻿@model UserRolesNew.ViewModels.Customer.CustomerProfileVm
+<head>
 
+</head>
 
 <style>
     body {
@@ -183,37 +185,41 @@
 
         <h2 style="padding-left: 280px; padding-top: 80px; padding-bottom: 30px;">CREATE CUSTOMER</h2>
 
-        <form method="post" asp-action="Create">
+        <form method="post" asp-controller="Customer" asp-action="Create">
 
             <div class="card">
                 <div class="card-body">
+                    <h5 class="card-title" style="text-align:center">Bio</h5>
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="customerId">ID:</label>
-                                <input type="text" class="form-control" id="customerId" name="CustomerId" value="" />
+                                <input type="text" class="form-control" id="customerId" name="CustomerId" />
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="customerFirstName">First Name:</label>
-                                <input type="text" class="form-control" id="customerFirstName" name="CustomerFirstName" value="@Model.FirstName" />
+                                <input type="text" class="form-control" id="customerFirstName" name="FirstName" value="@Model.FirstName" />
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="customerLastName">Last Name:</label>
-                                <input type="text" class="form-control" id="customerLastName" name="CustomerLastName" value="@Model.LastName" />
+                                <input type="text" class="form-control" id="customerLastName" name="LastName" value="@Model.LastName" />
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-2">                            
+
                             <div class="form-group">
                                 <label for="dateOfBirth">DOB:</label>
-                                <input type="text" class="form-control" id="dateOfBirth" name="DateOfBirth" value="@Model.DOB" />
+                                <input type="date" class="form-control datepicker" id="dateOfBirth" name="DOB" placeholder="Select date">
+                               
                             </div>
+
                         </div>
                     </div>
 
@@ -221,34 +227,45 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="gender">Gender</label>
-                                <select class="form-control" id="gender" name="Gender">
+                                @*<select class="form-control" id="gender" name="Gender">                                    
+                                   
                                     <option value="">Select</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Other">Other</option>
+                                    <option value="Female" @(Model.Gender?.GenderName == "Female" ? "selected" : "")>Female</option>
+                                    <option value="Male" @(Model.Gender?.GenderName == "Male" ? "selected" : "")>Male</option>
+                                    <option value="Other" @(Model.Gender?.GenderName == "Other" ? "selected" : "")>Other</option>
+
+                                </select>*@
+
+                                <select class="form-control" id="gender" name="Gender.GenderId">
+                                    <option value="">Select</option>
+                                    <option value="1">Female</option>
+                                    <option value="2">Male</option>
+                                    <option value="3">Other</option>
                                 </select>
+
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="height">Height:</label>
-                                <input type = "text" class="form-control" id="height" name="Height" >@Model.Height</input>
+                                
+                                <input type="text" class="form-control" id="height" name="Height" value="@Model.Height" />
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="weight">Weight:</label>
-                                <input type="text" class="form-control" id="weight" name="Weight" >@Model.Weight</input>
+                                <input type="number" class="form-control" id="weight" name="Weight" value="@Model.Weight" />
                             </div>
                         </div>
 
 
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label for="contact">Contact:</label>
-                                <input type="text" class="form-control" id="contact" name="Contact" >@Model.CustomerNumbers</input>
+                                <label for="contact">Contact:</label>                                
+                                <input type="text" class="form-control" id="contact" name="Contact" value="@Model.CustomerNumbers" />
                             </div>
                         </div>
 
@@ -258,9 +275,9 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" style="margin-top: -2px;">
                 <div class="card-body">
-                    <h5 class="card-title">Address</h5>
+                    <h5 class="card-title" style="text-align:center">Address</h5>
                     <div id="address-container">
                         <!-- Initial address field -->
                         <div class="address">
@@ -298,89 +315,88 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" style="margin-top: -2px;">
                 <div class="card-body">
-                    <h5 class="card-title">Insurance</h5>
+                    <h5 class="card-title" style="text-align:center">Insurance</h5>
 
+                    <div id="insurance-container">
 
+                            <!-- Row 1 -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="insuranceType">Type:</label>
+                                    <input type="text" class="form-control" id="insuranceType" name="InsuranceDetails.InsuranceType" value="@Model.InsuranceDetails.InsuranceType" />
+                                    
+                                    </div>
+                                </div>
 
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="policyNo">Policy No:</label>
+                                        <input type="text" class="form-control" id="policyNo" name="InsuranceDetails.PolicyNo" value="@Model.InsuranceDetails.PolicyNo" />
+                                    </div>
+                                </div>
 
-
-                    <div class="row">
-                        
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="insuranceType">Type:</label>
-                                <input type="text" class="form-control" id="insuranceType" name="InsuranceType" value="@Model.InsuranceDetails.InsuranceType" />
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="groupId">GroupId:</label>
+                                        <input type="text" class="form-control" id="groupId" name="InsuranceDetails.GroupId" value="@Model.InsuranceDetails.GroupId" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="policyNo">Policy No:</label>
-                                <input type="text" class="form-control" id="policyNo" name="PolicyNo" value="@Model.InsuranceDetails.PolicyNo" />
+                            <!-- Row 2 -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="dateEffective">Date Effective:</label>
+                                    <input type="date" class="form-control datepicker" id="dateEffective" name="InsuranceDetails.DateEffective" placeholder="Select date" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="dateExpire">Date Expire:</label>
+                                    <input type="date" class="form-control datepicker" id="dateExpire" name="InsuranceDetails.DateExpire" placeholder="Select date" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="insuranceSelection">Insurance</label>
+                                        <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="InsuranceDetails.PrimaryInsurance" id="primaryInsurance" value="primary" />
+                                            <label class="form-check-label" for="primaryInsurance">
+                                                Primary
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="InsuranceDetails.SecondaryInsurance" id="secondaryInsurance" value="secondary" />
+                                            <label class="form-check-label" for="secondaryInsurance">
+                                                Secondary
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
                             </div>
-                        </div>
-
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="groupId">GroupId:</label>
-                                <input type="text" class="form-control" id="groupId" name="GroupId" value="@Model.InsuranceDetails.GroupId" />
-                            </div>
-                        </div>
-
-
-
                     </div>
 
-
-                    <div class="row">
-
-
-                        
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="dateEffective">Date Effective:</label>
-                                <input type="text" class="form-control" id="dateEffective" name="DateEffective" value="@Model.InsuranceDetails.DateEffective" />
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="dateExpire">Date Expire:</label>
-                                <input type="text" class="form-control" id="dateExpire" name="DateExpire" value="@Model.InsuranceDetails.DateExpire" />
-                            </div>
-                        </div>
-
-
-
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button type="button" id="add-insurance" class="btn btn-primary btn-sm">+</button>
                     </div>
 
+                  
+                </div>
+            </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <div style="display: flex; justify-content: center; padding: 10px;">
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
+            <div class="card" style=" margin-top: -2px;">
+                <div class="card-body" style="display: flex; justify-content: center; padding: 10px;">
+                    <button type="submit" class="btn btn-primary">Create</button>
                 </div>
             </div>
         </form>
@@ -546,3 +562,99 @@
     // Set the default value of the orderDate input field
     document.getElementById('invoiceDate').value = formattedDate;
 </script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap Datepicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+@*<script>
+    // Initialize datepicker
+    $(document).ready(function () {
+        $.noConflict();
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd', // Set the desired date format
+            autoclose: true,     // Automatically close the datepicker when a date is selected
+            todayHighlight: true // Highlight today's date
+        });
+    });
+</script>*@
+
+
+
+<script>
+    var insuranceContainer = document.getElementById("insurance-container");
+    var addInsuranceButton = document.getElementById("add-insurance");
+    var insuranceIndex = 1;
+
+    addInsuranceButton.addEventListener("click", function () {
+        var newInsuranceField = document.createElement("div");
+        newInsuranceField.classList.add("insurance");
+
+        newInsuranceField.innerHTML = `
+                <!-- Row 1 -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="insuranceType">Type:</label>
+                            <input type="text" class="form-control" name="Insurances[${insuranceIndex}].Type" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="policyNo">Policy No:</label>
+                            <input type="text" class="form-control" name="Insurances[${insuranceIndex}].PolicyNo" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="groupId">GroupId:</label>
+                            <input type="text" class="form-control" name="Insurances[${insuranceIndex}].GroupId" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="dateEffective">Date Effective:</label>
+                            <input type="text" class="form-control datepicker" name="Insurances[${insuranceIndex}].DateEffective" placeholder="Select date" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="dateExpire">Date Expire:</label>
+                            <input type="text" class="form-control datepicker" name="Insurances[${insuranceIndex}].DateExpire" placeholder="Select date" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="insuranceSelection">Insurance</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Insurances[${insuranceIndex}].Selection" id="primaryInsurance_${insuranceIndex}" value="primary" />
+                                <label class="form-check-label" for="primaryInsurance_${insuranceIndex}">
+                                    Primary
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Insurances[${insuranceIndex}].Selection" id="secondaryInsurance_${insuranceIndex}" value="secondary" />
+                                <label class="form-check-label" for="secondaryInsurance_${insuranceIndex}">
+                                    Secondary
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+
+        insuranceContainer.appendChild(newInsuranceField);
+        insuranceIndex++;
+    });
+</script>
+

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UserRolesModels;
 using UserRolesNew.Services.Contracts;
 using UserRolesNew.ViewModels.Customer;
 
@@ -35,7 +36,7 @@ namespace UserRolesNew.Controllers
                     Address = address.Address,
                     City = address.City,
                     State = address.State.LongState,
-                    PostalCode = address.Zip
+                    Zip = address.Zip
                 }).ToList(),
                 CustomerNumbers = customer.CustomerNumbers.Select(number => new CustomerNumberVm
                 {
@@ -77,24 +78,86 @@ namespace UserRolesNew.Controllers
         public IActionResult Create(CustomerProfileVm viewModel)
         {
             if (ModelState.IsValid)
-            {
-                // Perform necessary operations to save the customer profile
-                // You can access the submitted data through the viewModel parameter
+            {              
+                                
+                var customer = new Customer
+                {
+                    FirstName = viewModel.FirstName,
+                    LastName = viewModel.LastName,
+                    DOB = viewModel.DOB,
+                    Height = viewModel.Height,
+                    Weight = viewModel.Weight,
 
-                // Redirect to a success page or perform any other desired action
+                    Gender = new Gender
+                    {
+                        GenderId = viewModel.Gender.GenderId,
+                        GenderName = viewModel.Gender.GenderName
+                    }
+
+                };
+
+                //customer.GenderId = viewModel.Gender.GenderId;
+
+                
+                _customerRepo.AddCustomer(customer);
+
+                foreach (var addressVm in viewModel.CustomerAddresses)
+                {
+                    var stateId = _customerRepo.GetStateIdByName(addressVm.State);
+                    var address = new CustomerAddress
+                    {
+                        Address = addressVm.Address,
+                        City = addressVm.City,
+                        StateId = stateId,
+                        Zip = addressVm.Zip,
+                        CustomerId = customer.CustomerId // this is needed to set the foreign key link to the customer table
+                    };
+                    
+                    _customerRepo.AddCustomerAddress(address);
+                }
+
+                foreach (var numberVm in viewModel.CustomerNumbers)
+                {
+                    var number = new CustomerNumber
+                    {
+                        PhoneNumber = numberVm.PhoneNumber,
+                        CustomerId = customer.CustomerId // for foreign key
+                    };
+                    _customerRepo.AddCustomerNumber(number);
+                }
+
+                foreach (var insuranceVm in viewModel.Insurances)
+                {
+                    var insurance = new Insurance
+                    {
+                        CustomerId = customer.CustomerId, // for foreign key
+                        InsuranceTypeId = insuranceVm.InsuranceTypeId,
+                        GroupId = insuranceVm.GroupId,
+                        PolicyNo = insuranceVm.PolicyNo,
+                        PrimaryInsurance = insuranceVm.PrimaryInsurance,
+                        SecondaryInsurance = insuranceVm.SecondaryInsurance,
+                        DateEffective = insuranceVm.DateEffective,
+                        DateExpire = insuranceVm.DateExpire
+                    };
+                    _customerRepo.AddCustomerInsurance(insurance);
+                }                
                 return RedirectToAction("Index");
             }
+            if (!ModelState.IsValid)
+            {
+                foreach (var modelStateValue in ModelState.Values)
+                {
+                    foreach (var error in modelStateValue.Errors)
+                    {
+                        var errorMessage = error.ErrorMessage;
+                        
+                    }
+                }
+            }
 
-            // If the model state is not valid, return to the create view with the validation errors
+
             return View(viewModel);
         }
-
-
-
-
-
-
-
 
 
         [HttpGet]

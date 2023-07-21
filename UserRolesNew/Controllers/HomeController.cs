@@ -42,7 +42,8 @@ namespace UserRolesNew.Controllers
         public ActionResult GeneratePDF(string htmlContent)
         {
             HtmlToPdf converter = new HtmlToPdf();
-            PdfDocument doc = converter.ConvertHtmlString(htmlContent);
+            var htmlDocument = $"<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n    <title> - UserRolesNew</title>\r\n    <link rel=\"stylesheet\" href=\"https://localhost:7247/lib/bootstrap/dist/css/bootstrap.min.css\" />\r\n    \r\n</head>\r\n<body>{htmlContent}\r\n\r\n\r\n</body>\r\n</html>\r\n";
+            PdfDocument doc = converter.ConvertHtmlString(htmlDocument);
             byte[] pdf = doc.Save();
             doc.Close();
             return File(pdf, "application/pdf", "output.pdf");
