@@ -109,7 +109,7 @@ namespace UserRolesNew.Controllers
                         Address = addressVm.Address,
                         City = addressVm.City,
                         StateId = stateId,
-                        Zip = addressVm.PostalCode,
+                        Zip = addressVm.Zip,
                         CustomerId = customer.CustomerId // this is needed to set the foreign key link to the customer table
                     };
                     
@@ -143,16 +143,21 @@ namespace UserRolesNew.Controllers
                 }                
                 return RedirectToAction("Index");
             }
-           
+            if (!ModelState.IsValid)
+            {
+                foreach (var modelStateValue in ModelState.Values)
+                {
+                    foreach (var error in modelStateValue.Errors)
+                    {
+                        var errorMessage = error.ErrorMessage;
+                        
+                    }
+                }
+            }
+
+
             return View(viewModel);
         }
-
-
-
-
-
-
-
 
 
         [HttpGet]

@@ -201,14 +201,14 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="customerFirstName">First Name:</label>
-                                <input type="text" class="form-control" id="customerFirstName" name="CustomerFirstName" value="@Model.FirstName" />
+                                <input type="text" class="form-control" id="customerFirstName" name="FirstName" value="@Model.FirstName" />
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="customerLastName">Last Name:</label>
-                                <input type="text" class="form-control" id="customerLastName" name="CustomerLastName" value="@Model.LastName" />
+                                <input type="text" class="form-control" id="customerLastName" name="LastName" value="@Model.LastName" />
                             </div>
                         </div>
 
@@ -216,7 +216,7 @@
 
                             <div class="form-group">
                                 <label for="dateOfBirth">DOB:</label>
-                                <input type="text" class="form-control datepicker" id="dateOfBirth" name="DOB" placeholder="Select date">
+                                <input type="date" class="form-control datepicker" id="dateOfBirth" name="DOB" placeholder="Select date">
                                
                             </div>
 
@@ -257,7 +257,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="weight">Weight:</label>
-                                <input type="text" class="form-control" id="weight" name="Weight" value="@Model.Weight" />
+                                <input type="number" class="form-control" id="weight" name="Weight" value="@Model.Weight" />
                             </div>
                         </div>
 
@@ -351,14 +351,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="dateEffective">Date Effective:</label>
-                                        <input type="text" class="form-control datepicker" id="dateEffective" name="DateEffective" placeholder="Select date" />
+                                    <input type="date" class="form-control datepicker" id="dateEffective" name="InsuranceDetails.DateEffective" placeholder="Select date" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="dateExpire">Date Expire:</label>
-                                        <input type="text" class="form-control datepicker" id="dateExpire" name="DateExpire" placeholder="Select date" />
+                                    <input type="date" class="form-control datepicker" id="dateExpire" name="InsuranceDetails.DateExpire" placeholder="Select date" />
                                     </div>
                                 </div>
 
@@ -366,13 +366,13 @@
                                     <div class="form-group">
                                         <label for="insuranceSelection">Insurance</label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="insuranceSelection" id="primaryInsurance" value="primary" />
+                                        <input class="form-check-input" type="radio" name="InsuranceDetails.PrimaryInsurance" id="primaryInsurance" value="primary" />
                                             <label class="form-check-label" for="primaryInsurance">
                                                 Primary
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="insuranceSelection" id="secondaryInsurance" value="secondary" />
+                                        <input class="form-check-input" type="radio" name="InsuranceDetails.SecondaryInsurance" id="secondaryInsurance" value="secondary" />
                                             <label class="form-check-label" for="secondaryInsurance">
                                                 Secondary
                                             </label>
@@ -570,7 +570,7 @@
 <!-- Bootstrap Datepicker JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-<script>
+@*<script>
     // Initialize datepicker
     $(document).ready(function () {
         $.noConflict();
@@ -580,7 +580,7 @@
             todayHighlight: true // Highlight today's date
         });
     });
-</script>
+</script>*@
 
 
 
