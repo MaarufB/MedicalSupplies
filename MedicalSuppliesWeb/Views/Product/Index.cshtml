@@ -209,7 +209,16 @@
                 <a href="/UserDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
             }
             <p>Reports</p>
-            <p>Inventory</p>
+            @*<p>Inventory</p>*@
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="/Inventory/Index" style="text-decoration: none;"><p>Inventory</p></a>
+            }
+            else
+            {
+                <a href="/Home/AccessDenied" style="text-decoration: none;"><p>Inventory</p></a>
+            }
         </div>
 
 
