@@ -150,6 +150,7 @@
 
             <a asp-action="index" asp-controller="Facilities" style="text-decoration: none;"><p>Facilities</p></a>
             <a asp-action="NPILookup" asp-controller="Home" style="text-decoration: none;"><p>Doctors</p></a>
+            <a asp-action="Index" asp-controller="Customer" style="text-decoration: none;"><p>Customers</p></a>
 
         </div>
 
@@ -187,16 +188,16 @@
 
         <form method="post" asp-controller="Customer" asp-action="Create">
 
-            <div class="card">
+            <div class="card px-3 py-4">
                 <div class="card-body">
                     <h5 class="card-title" style="text-align:center">Bio</h5>
-                    <div class="row">
-                        <div class="col-md-2">
+                    <div class="row pb-5">
+                        @*<div class="col-md-1">
                             <div class="form-group">
                                 <label for="customerId">ID:</label>
                                 <input type="text" class="form-control" id="customerId" name="CustomerId" />
                             </div>
-                        </div>
+                        </div>*@
 
                         <div class="col-md-4">
                             <div class="form-group">
@@ -212,7 +213,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">                            
+                        <div class="col-md-4">                            
 
                             <div class="form-group">
                                 <label for="dateOfBirth">DOB:</label>
@@ -223,7 +224,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row pb-5">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="gender">Gender</label>
@@ -246,7 +247,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="height">Height:</label>
                                 
@@ -254,7 +255,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="weight">Weight:</label>
                                 <input type="number" class="form-control" id="weight" name="Weight" value="@Model.Weight" />
@@ -262,7 +263,7 @@
                         </div>
 
 
-                        <div class="col-md-5">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="contact">Contact:</label>                                
                                 <input type="text" class="form-control" id="contact" name="Contact" value="@Model.CustomerNumbers" />
@@ -275,13 +276,13 @@
                 </div>
             </div>
 
-            <div class="card" style="margin-top: -2px;">
+            <div class="card px-3 py-4" style="margin-top: -2px;">
                 <div class="card-body">
                     <h5 class="card-title" style="text-align:center">Address</h5>
                     <div id="address-container">
                         <!-- Initial address field -->
                         <div class="address">
-                            <div class="row">
+                            <div class="row pb-5">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="address">Address:</label>
@@ -310,19 +311,19 @@
                         </div>
                     </div>
                     <div style="display: flex; justify-content: flex-end;">
-                        <button type="button" id="add-address" class="btn btn-primary btn-sm">+</button>
+                        <button type="button" id="add-address" class="btn btn-outline-dark btn-sm">+</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card" style="margin-top: -2px;">
+            <div class="card px-3 py-4" style="margin-top: -2px;">
                 <div class="card-body">
                     <h5 class="card-title" style="text-align:center">Insurance</h5>
 
                     <div id="insurance-container">
 
                             <!-- Row 1 -->
-                            <div class="row">
+                            <div class="row pb-5">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="insuranceType">Type:</label>
@@ -386,7 +387,7 @@
                     </div>
 
                     <div style="display: flex; justify-content: flex-end;">
-                        <button type="button" id="add-insurance" class="btn btn-primary btn-sm">+</button>
+                        <button type="button" id="add-insurance" class="btn btn-outline-dark btn-sm">+</button>
                     </div>
 
                   
@@ -396,7 +397,7 @@
 
             <div class="card" style=" margin-top: -2px;">
                 <div class="card-body" style="display: flex; justify-content: center; padding: 10px;">
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-outline-dark">Create</button>
                 </div>
             </div>
         </form>
