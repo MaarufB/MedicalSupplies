@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UserRolesNew.ViewModels.Customer
+namespace MedicalSuppliesWeb.ViewModels.Customer
 {
     public class CustomerProfileVm
     {

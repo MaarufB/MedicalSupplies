@@ -1,6 +1,6 @@
 ﻿using MedicalSuppliesModels;
 
-namespace UserRolesNew.ViewModels.Customer
+namespace MedicalSuppliesWeb.ViewModels.Customer
 {
     public class CustomerInsuranceVm
     {

@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using UserRolesData.Context;
 using MedicalSuppliesModels;
+using MedicalSuppliesModels.Context;
 
 namespace Inventory_Dashboard.Services
 {
