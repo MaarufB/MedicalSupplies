@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SelectPdf;
 using System.Diagnostics;
 using UserRolesNew.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace UserRolesNew.Controllers
 {
@@ -54,10 +56,59 @@ namespace UserRolesNew.Controllers
 
 
 
+
+
+
+
+        [HttpGet]
+        [Authorize] // Optionally, restrict access to authenticated users
+        public IActionResult UploadFile()
+        {
+            return View(null);
+        }
+
+
+
+        [HttpPost]
+        [Authorize] // Optionally, restrict access to authenticated users
+        public IActionResult UploadFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                // Handle the case where no file is uploaded
+                // You can return an error message or redirect to a view with an error message
+                return View("Error");
+            }
+
+            // Get the file name and extension
+            var fileName = Path.GetFileName(file.FileName);
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            // Generate a unique file name to avoid potential conflicts
+            var uniqueFileName = Path.ChangeExtension(Path.GetRandomFileName(), fileExtension);
+
+            // Combine the file server directory path and the unique file name
+            var fileSavePath = Path.Combine("D:\\AAIT\\AAIT\\Class Code\\Natasha\\MSP\\UserRolesTest\\Jul 7 Copy\\File Server", uniqueFileName);
+
+            // Save the uploaded file to the file server directory
+            using (var stream = new FileStream(fileSavePath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            // Optionally, you can perform additional actions or return a success message
+            return RedirectToAction("Index");
+        }
+
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+
     }
 }

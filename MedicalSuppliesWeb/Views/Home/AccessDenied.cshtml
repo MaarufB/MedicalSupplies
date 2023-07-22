@@ -14,11 +14,11 @@
     }
 
     /*.column {
-            background-color: #FFFFFF;
-            border: 1px solid #B0BEC5;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }*/
+                background-color: #FFFFFF;
+                border: 1px solid #B0BEC5;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }*/
 
 
 
@@ -49,6 +49,7 @@
     .col-md-8.column:nth-child(2) {
         background-color: #D1EAFD;
         box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1), 10px 0 20px rgba(0, 0, 0, 0.1);
+        min-height:600px;
     }
 
     .col-md-2.column:last-child {
@@ -102,6 +103,8 @@
     .row {
         margin-bottom: 20px;
         margin-top: 20px;
+       
+        
     }
 
     .left-menu {
@@ -124,6 +127,9 @@
         font-size: 19px;
     }
 
+   
+    
+
 </style>
 
 
@@ -133,118 +139,131 @@
     <p>Header content goes here.</p>
     </div>*@
 </div>
-<div class="row">
-    <div class="col-md-2 column">
-        <h3>XYZ Medicals</h3>
-        <h5>Abc Ave, PA</h5>
 
 
-        <div class="left-menu">
 
 
-            <a asp-action="index" asp-controller="Product" style="text-decoration: none;"><p>Products</p></a>
-            <a asp-action="index" asp-controller="Suppliers" style="text-decoration: none;"><p>Suppliers</p></a>
-
-            <p>Manufacturers</p>
-
-            <a asp-action="index" asp-controller="Facilities" style="text-decoration: none;"><p>Facilities</p></a>
-            <a asp-action="NPILookup" asp-controller="Home" style="text-decoration: none;"><p>Doctors</p></a>
-
-            <a asp-action="Index" asp-controller="Customer" style="text-decoration: none;"><p>Customers</p></a>
-
-        </div>
 
 
-    </div>
-    <div class="col-md-8 column">
 
-        <div class="search-box">
 
-            <div class="mdc-text-field">
-                <input type="text" class="mdc-text-field__input" id="search-input">
+    <div class="row">       
 
-                @*<i class="material-icons mdc-text-field__icon">search</i>*@
+      
 
-                <div class="mdc-line-ripple"></div>
+        <div class="col-md-2 column">
+            <h3>XYZ Medicals</h3>
+            <h5>Abc Ave, PA</h5>
+
+
+            <div class="left-menu">
+
+
+                <a asp-action="index" asp-controller="Product" style="text-decoration: none;"><p>Products</p></a>
+                <a asp-action="index" asp-controller="Suppliers" style="text-decoration: none;"><p>Suppliers</p></a>
+
+                <p>Manufacturers</p>
+
+                <a asp-action="index" asp-controller="Facilities" style="text-decoration: none;"><p>Facilities</p></a>
+                <a asp-action="NPILookup" asp-controller="Home" style="text-decoration: none;"><p>Doctors</p></a>
+
+                <a asp-action="Index" asp-controller="Customer" style="text-decoration: none;"><p>Customers</p></a>
+
             </div>
 
-            @* <button class="mdc-button mdc-button--raised">
-            <span class="mdc-button__ripple"></span>
-            <span class="material-icons">Go!</span>
-            </button>*@
-            <button type="button" class="btn btn-outline-dark btn-sm" ">Go!</button>
+
+        </div>
+        <div class="col-md-8 column">
+
+            <div class="search-box">
+
+                <div class="mdc-text-field">
+                    <input type="text" class="mdc-text-field__input" id="search-input">
+
+                    @*<i class="material-icons mdc-text-field__icon">search</i>*@
+
+                    <div class="mdc-line-ripple"></div>
+                </div>
+
+                @* <button class="mdc-button mdc-button--raised">
+                <span class="mdc-button__ripple"></span>
+                <span class="material-icons">Go!</span>
+                </button>*@
+                <button type="button" class="btn btn-outline-dark btn-sm" ">Go!</button>
+            </div>
+
+
+
+
+                @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
+            everything else remain the same*@
+
+            <div class="row">
+                <h3>Access Denied</h3>
+            </div>
+
+                @*/END/*@
+
+
+
+
+
         </div>
 
 
 
 
-            @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
-        everything else remain the same*@
+        <div class="col-md-2 column">
 
-        <div class="row">
-            <h3>Access Denied</h3>
+            <div id="date-time" class="date-time">
+                <p class="date"></p>
+                <p class="time"></p>
+
+            </div>
+
+
+            <div class="right-menu">
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="/AdminDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
+                }
+                else
+                {
+                    <a href="/UserDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
+                }
+                <p>Reports</p>
+                @*<p>Inventory</p>*@
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="/Inventory/Index" style="text-decoration: none;"><p>Inventory</p></a>
+                }
+                else
+                {
+                    <a href="/Home/AccessDenied" style="text-decoration: none;"><p>Inventory</p></a>
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
         </div>
-
-            @*/END/*@
-
-
-
-
-
     </div>
 
 
 
-
-    <div class="col-md-2 column">
-
-        <div id="date-time" class="date-time">
-            <p class="date"></p>
-            <p class="time"></p>
-
-        </div>
-
-
-        <div class="right-menu">
-
-            @if (User.IsInRole("Admin"))
-            {
-                <a href="/AdminDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
-            }
-            else
-            {
-                <a href="/UserDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
-            }
-            <p>Reports</p>
-            @*<p>Inventory</p>*@
-
-            @if (User.IsInRole("Admin"))
-            {
-                <a href="/Inventory/Index" style="text-decoration: none;"><p>Inventory</p></a>
-            }
-            else
-            {
-                <a href="/Home/AccessDenied" style="text-decoration: none;"><p>Inventory</p></a>
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-
-
-    </div>
 </div>
-
-
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/11.0.0/material-components-web.min.js"></script>
@@ -270,3 +289,31 @@
     // Initial update
     updateTime();
 </script>
+
+
+@*Following is the script to dynamically adjust the size of the container*@
+
+@*<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        adjustContainerHeight();
+    });
+
+    // Function to adjust the container height dynamically
+    function adjustContainerHeight() {
+        const container = document.getElementById('container');
+        const contentHeight = container.scrollHeight; // Height of the content inside the container
+
+        // Set the container height based on the content height
+        if (contentHeight > container.clientHeight) {
+            container.style.height = `${contentHeight}px`;
+        } else {
+            container.style.height = ''; // Reset to the original CSS height if content is smaller
+        }
+    }
+</script>*@
+
+
+
+
+
+
