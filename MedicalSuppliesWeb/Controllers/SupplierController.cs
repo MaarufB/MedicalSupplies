@@ -1,10 +1,8 @@
-﻿using MedicalSuppliesWeb.Services.Contracts;
-using MedicalSuppliesWeb.ViewModels.Country;
+﻿using MedicalSuppliesWeb.ViewModels.Country;
 using MedicalSuppliesWeb.ViewModels.State;
 using MedicalSuppliesWeb.ViewModels.Supplier;
 using Microsoft.AspNetCore.Mvc;
-
-using MedicalSuppliesWeb.ViewModels.Supplier;
+using MedicalSuppliesServices.Services.Contracts;
 
 namespace MedicalSuppliesWeb.Controllers
 {

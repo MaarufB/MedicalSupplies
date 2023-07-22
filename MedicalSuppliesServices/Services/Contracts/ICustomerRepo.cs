@@ -1,8 +1,6 @@
-﻿using System.Net;
-using MedicalSuppliesModels;
-using MedicalSuppliesWeb.ViewModels.State;
+﻿using MedicalSuppliesModels;
 
-namespace MedicalSuppliesWeb.Services.Contracts
+namespace MedicalSuppliesServices.Services.Contracts
 {
     public interface ICustomerRepo
     {
@@ -12,7 +10,7 @@ namespace MedicalSuppliesWeb.Services.Contracts
 
         public void AddCustomerAddress(CustomerAddress address);
 
-        public int GetStateIdByName(StateVm state);
+        public int GetStateIdByName(string state);
 
         public void AddCustomerNumber(CustomerNumber number);
 

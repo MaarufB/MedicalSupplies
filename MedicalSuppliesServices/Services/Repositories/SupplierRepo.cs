@@ -1,9 +1,9 @@
 ﻿using MedicalSuppliesModels;
 using MedicalSuppliesModels.Context;
-using MedicalSuppliesWeb.Services.Contracts;
+using MedicalSuppliesServices.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedicalSuppliesWeb.Services.Repositories
+namespace MedicalSuppliesServices.Services.Repositories
 {
     public class SupplierRepo : ISupplierRepo
     {
