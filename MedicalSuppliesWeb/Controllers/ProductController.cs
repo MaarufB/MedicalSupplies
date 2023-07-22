@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MedicalSuppliesWeb.Services.Contracts;
 using MedicalSuppliesWeb.ViewModels.Product;
+using MedicalSuppliesServices.Services.Contracts;
 
 namespace MedicalSuppliesWeb.Controllers
 {

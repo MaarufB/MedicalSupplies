@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MedicalSuppliesModels;
-using MedicalSuppliesWeb.Services.Contracts;
 using MedicalSuppliesModels.Context;
+using MedicalSuppliesServices.Services.Contracts;
 
-namespace MedicalSuppliesWeb.Services.Repositories
+namespace MedicalSuppliesServices.Services.Repositories
 {
     public class FacilityRepo : IFacilityRepo
     {

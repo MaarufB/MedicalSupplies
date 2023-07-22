@@ -1,6 +1,6 @@
 ﻿using MedicalSuppliesModels;
 
-namespace MedicalSuppliesWeb.Services.Contracts
+namespace MedicalSuppliesServices.Services.Contracts
 {
     public interface IProductRepo
     {

@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MedicalSuppliesModels;
-using MedicalSuppliesWeb.Services.Contracts;
 using MedicalSuppliesWeb.ViewModels.Customer;
 using MedicalSuppliesWeb.ViewModels.State;
-using MedicalSuppliesWeb.Services.Contracts;
-using MedicalSuppliesWeb.ViewModels.Customer;
+using MedicalSuppliesServices.Services.Contracts;
 
 namespace MedicalSuppliesWeb.Controllers
 {
@@ -113,7 +111,7 @@ namespace MedicalSuppliesWeb.Controllers
 
                 foreach (var addressVm in viewModel.CustomerAddresses)
                 {
-                    var stateId = _customerRepo.GetStateIdByName(addressVm.State);
+                    var stateId = _customerRepo.GetStateIdByName(addressVm.State.State);
                     var address = new CustomerAddress
                     {
                         Address = addressVm.Address,

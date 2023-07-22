@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MedicalSuppliesModels;
-using MedicalSuppliesWeb.ViewModels.State;
-using MedicalSuppliesWeb.Services.Contracts;
 using MedicalSuppliesModels.Context;
+using MedicalSuppliesServices.Services.Contracts;
 
-namespace MedicalSuppliesWeb.Services.Repositories
+namespace MedicalSuppliesServices.Services.Repositories
 {
     public class CustomerRepo : ICustomerRepo
     {
@@ -65,12 +64,12 @@ namespace MedicalSuppliesWeb.Services.Repositories
 
         
 
-        public int GetStateIdByName(StateVm state)
+        public int GetStateIdByName(string state)
         {
             //IMPORTANT : need to do server side validation here
             //make sure to do client side validation too
 
-            var selectedState = _context.States.FirstOrDefault(p => p.LongState == state.State);
+            var selectedState = _context.States.FirstOrDefault(p => p.LongState == state);
             if (selectedState != null)
             {
                 return selectedState.StateId;
