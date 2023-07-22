@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace UserRolesNew.Migrations
+namespace MedicalSuppliesWeb.Migrations
 {
     public partial class madechangestorazorpages : Migration
     {

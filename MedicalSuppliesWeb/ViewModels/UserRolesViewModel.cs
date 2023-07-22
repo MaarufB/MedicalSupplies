@@ -1,4 +1,4 @@
-﻿namespace UserRolesNew.ViewModels
+﻿namespace MedicalSuppliesWeb.ViewModels
 {
     public class UserRolesViewModel
     {

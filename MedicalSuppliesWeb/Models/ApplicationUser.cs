@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using UserRolesData.Contracts;
+using MedicalSuppliesData.Contracts;
 
-namespace UserRolesNew.Models
+namespace MedicalSuppliesWeb.Models
 {
     public class ApplicationUser : IdentityUser, IApplicationUser
     {

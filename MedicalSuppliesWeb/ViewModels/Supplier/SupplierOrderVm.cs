@@ -1,6 +1,6 @@
 ﻿using MedicalSuppliesModels;
 
-namespace UserRolesNew.ViewModels.Supplier
+namespace MedicalSuppliesWeb.ViewModels.Supplier
 {
     public class SupplierOrderVm
     {

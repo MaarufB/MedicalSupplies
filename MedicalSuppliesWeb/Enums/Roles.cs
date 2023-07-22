@@ -1,4 +1,4 @@
-﻿namespace UserRolesNew.Enums
+﻿namespace MedicalSuppliesWeb.Enums
 {
     public enum Roles
     {

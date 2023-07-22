@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using UserRolesNew.Models;
+using MedicalSuppliesWeb.Models;
 
-namespace UserRolesNew.Areas.Identity.Pages.Account
+namespace MedicalSuppliesWeb.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {

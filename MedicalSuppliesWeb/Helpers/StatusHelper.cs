@@ -1,4 +1,4 @@
-﻿namespace UserRolesNew.Helpers
+﻿namespace MedicalSuppliesWeb.Helpers
 {
     public class StatusHelper
     {

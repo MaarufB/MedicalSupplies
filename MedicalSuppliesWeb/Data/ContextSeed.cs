@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using UserRolesNew.Models;
+using MedicalSuppliesWeb.Models;
 
-namespace UserRolesNew.Data
+namespace MedicalSuppliesWeb.Data
 {
     public class ContextSeed
     {

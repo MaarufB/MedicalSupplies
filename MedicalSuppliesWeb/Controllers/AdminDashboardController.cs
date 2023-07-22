@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UserRolesNew.Services.Contracts;
-using UserRolesNew.ViewModels.Customer;
-using UserRolesNew.ViewModels.Dashboard;
-using UserRolesNew.ViewModels.Supplier;
+using MedicalSuppliesWeb.Services.Contracts;
+using MedicalSuppliesWeb.ViewModels.Customer;
+using MedicalSuppliesWeb.ViewModels.Dashboard;
+using MedicalSuppliesWeb.ViewModels.Supplier;
 
 namespace UserRolesNew.Controllers
 {

@@ -1,4 +1,4 @@
-﻿namespace UserRolesNew.ViewModels.Product
+﻿namespace MedicalSuppliesWeb.ViewModels.Product
 {
     public class ProductVm
     {

@@ -1,6 +1,6 @@
-﻿using UserRolesNew.ViewModels.Customer;
+﻿using MedicalSuppliesWeb.ViewModels.Customer;
 
-namespace UserRolesNew.ViewModels.Supplier
+namespace MedicalSuppliesWeb.ViewModels.Supplier
 {
     public class SupplierVm
     {
