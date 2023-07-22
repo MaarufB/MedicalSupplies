@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MedicalSuppliesModels;
-using UserRolesNew.Services.Contracts;
-using UserRolesNew.ViewModels.Customer;
+using MedicalSuppliesWeb.Services.Contracts;
+using MedicalSuppliesWeb.ViewModels.Customer;
 using MedicalSuppliesWeb.ViewModels.State;
 using MedicalSuppliesWeb.Services.Contracts;
 using MedicalSuppliesWeb.ViewModels.Customer;

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UserRolesNew.Services.Contracts;
-using UserRolesNew.ViewModels.Product;
+using MedicalSuppliesWeb.Services.Contracts;
+using MedicalSuppliesWeb.ViewModels.Product;
 
-namespace UserRolesNew.Controllers
+namespace MedicalSuppliesWeb.Controllers
 {
     public class ProductController : Controller
     {

@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using UserRolesNew.Data;
-using UserRolesNew.Models;
-using UserRolesNew.Services.Repositories;
-using UserRolesNew.Services.Contracts;
-using MedicalSuppliesWeb.Services.Contracts;
+using MedicalSuppliesWeb.Data;
+using MedicalSuppliesWeb.Models;
 using MedicalSuppliesWeb.Services.Repositories;
+using MedicalSuppliesWeb.Services.Contracts;
 using MedicalSuppliesModels.Context;
 
 namespace UserRolesNew

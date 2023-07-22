@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MedicalSuppliesModels;
-using UserRolesNew.Services.Contracts;
 using MedicalSuppliesModels.Context;
+using MedicalSuppliesWeb.Services.Contracts;
 
-namespace UserRolesNew.Services.Repositories
+namespace MedicalSuppliesWeb.Services.Repositories
 {
     public class CustomerInvoiceRepo : ICustomerInvoiceRepo
     {

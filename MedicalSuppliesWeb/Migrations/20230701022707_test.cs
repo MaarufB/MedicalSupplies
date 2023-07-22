@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace UserRolesNew.Migrations
+namespace MedicalSuppliesWeb.Migrations
 {
     public partial class test : Migration
     {

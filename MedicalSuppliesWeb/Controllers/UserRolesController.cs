@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using UserRolesNew.Enums;
-using UserRolesNew.Models;
-using UserRolesNew.ViewModels;
+using MedicalSuppliesWeb.Enums;
+using MedicalSuppliesWeb.Models;
+using MedicalSuppliesWeb.ViewModels;
 
-namespace UserRolesNew.Controllers
+namespace MedicalSuppliesWeb.Controllers
 {
     public class UserRolesController : Controller
     {

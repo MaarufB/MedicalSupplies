@@ -4,7 +4,7 @@ using MedicalSuppliesWeb.ViewModels.State;
 using MedicalSuppliesWeb.ViewModels.Supplier;
 using Microsoft.AspNetCore.Mvc;
 
-using UserRolesNew.ViewModels.Supplier;
+using MedicalSuppliesWeb.ViewModels.Supplier;
 
 namespace MedicalSuppliesWeb.Controllers
 {

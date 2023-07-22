@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UserRolesNew.Services.Contracts;
-using UserRolesNew.ViewModels.Inventory;
+using MedicalSuppliesWeb.Services.Contracts;
+using MedicalSuppliesWeb.ViewModels.Inventory;
 
-namespace UserRolesNew.Controllers
+namespace MedicalSuppliesWeb.Controllers
 {
     public class InventoryController : Controller
     {

@@ -1,6 +1,6 @@
 ﻿using MedicalSuppliesModels;
 
-namespace UserRolesNew.Services.Contracts
+namespace MedicalSuppliesWeb.Services.Contracts
 {
     public interface ICustomerInvoiceRepo
     {

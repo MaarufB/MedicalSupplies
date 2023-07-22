@@ -1,4 +1,4 @@
-﻿namespace UserRolesNew.ViewModels.Inventory
+﻿namespace MedicalSuppliesWeb.ViewModels.Inventory
 {
     public class InventoryVm
     {

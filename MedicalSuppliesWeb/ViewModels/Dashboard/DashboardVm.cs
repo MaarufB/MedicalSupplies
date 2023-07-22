@@ -1,7 +1,7 @@
-﻿using UserRolesNew.ViewModels.Customer;
-using UserRolesNew.ViewModels.Supplier;
+﻿using MedicalSuppliesWeb.ViewModels.Customer;
+using MedicalSuppliesWeb.ViewModels.Supplier;
 
-namespace UserRolesNew.ViewModels.Dashboard
+namespace MedicalSuppliesWeb.ViewModels.Dashboard
 {
     public class DashboardVm
     {

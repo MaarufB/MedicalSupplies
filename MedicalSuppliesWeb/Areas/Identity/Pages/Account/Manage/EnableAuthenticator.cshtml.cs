@@ -13,9 +13,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using UserRolesNew.Models;
+using MedicalSuppliesWeb.Models;
 
-namespace UserRolesNew.Areas.Identity.Pages.Account.Manage
+namespace MedicalSuppliesWeb.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {

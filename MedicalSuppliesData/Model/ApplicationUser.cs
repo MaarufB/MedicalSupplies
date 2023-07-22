@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UserRolesData.Contracts;
+using MedicalSuppliesData.Contracts;
 
-namespace UserRolesData.Model
+namespace MedicalSuppliesWeb.Model
 {
     public class ApplicationUser:IdentityUser,IApplicationUser
     {

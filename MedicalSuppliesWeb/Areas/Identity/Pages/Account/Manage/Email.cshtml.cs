@@ -12,9 +12,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using UserRolesNew.Models;
+using MedicalSuppliesWeb.Models;
 
-namespace UserRolesNew.Areas.Identity.Pages.Account.Manage
+namespace MedicalSuppliesWeb.Areas.Identity.Pages.Account.Manage
 {
     public class EmailModel : PageModel
     {
