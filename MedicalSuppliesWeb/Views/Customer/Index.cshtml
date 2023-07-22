@@ -1,4 +1,4 @@
-﻿@model List<UserRolesNew.ViewModels.Customer.CustomerProfileVm>
+﻿@model List<MedicalSuppliesWeb.ViewModels.Customer.CustomerProfileVm>
 
 
 <style>
@@ -183,10 +183,11 @@
 
 
 
-        <div style="display: flex; justify-content: space-between; align-items: center; padding-left: 30px; padding-right: 30px;">
-            <h3 style="text-align: center; margin: 0; text-decoration: underline;">Customers</h3>
-            <a href="/Customer/Create" class="btn btn-primary">Create</a>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 30px; padding-right: 30px;">
+            <h3 style="text-align: center; margin: 0; flex-grow: 1; text-decoration: underline;">Customers</h3>
+            <a href="/Customer/Create" class="btn btn-sm btn-outline-dark" ">New</a>
         </div>
+
 
         <div class="card-columns" style="padding: 30px;">
             @foreach (var customer in Model)
@@ -194,16 +195,18 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         ID: @customer.CustomerId
+                       
+                        <a href="/Customer/Edit/@customer.CustomerId" class="btn btn-sm btn-outline-dark" style="float: right;">Edit</a>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">@customer.FirstName @customer.LastName</h5>
+                        <h4 class="card-title">@customer.FirstName @customer.LastName</h4>
                         <p class="card-text"><strong>DOB:</strong> @customer.DOB.ToShortDateString()</p>
                         <p class="card-text"><strong>Gender:</strong> @customer.Gender.GenderName</p>
                         <strong>Address:</strong>
                         <ul class="card-text" style="list-style-type: none; padding: 0;">
                             @foreach (var address in customer.CustomerAddresses)
                             {
-                                <li>@address.Address, @address.City, @address.State @address.Zip</li>
+                                <li>@address.Address, @address.City, @address.State.State @address.Zip</li>
                             }
                         </ul>
                         <strong>Contact:</strong>
