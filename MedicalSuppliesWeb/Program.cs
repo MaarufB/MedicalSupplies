@@ -2,12 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UserRolesNew.Data;
 using UserRolesNew.Models;
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.UI;
-using UserRolesData.Context;
 using UserRolesNew.Services.Repositories;
 using UserRolesNew.Services.Contracts;
+using MedicalSuppliesWeb.Services.Contracts;
+using MedicalSuppliesWeb.Services.Repositories;
+using MedicalSuppliesModels.Context;
 
 namespace UserRolesNew
 {
@@ -63,6 +62,7 @@ namespace UserRolesNew
             builder.Services.AddScoped<IInventoryRepo, InventoryRepo>();
             builder.Services.AddScoped<IFacilityRepo, FacilityRepo>();
             builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
+            builder.Services.AddScoped<ISupplierRepo, SupplierRepo>();
 
 
 

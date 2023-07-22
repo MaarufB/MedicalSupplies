@@ -1,4 +1,4 @@
-﻿using UserRolesModels;
+﻿using MedicalSuppliesModels;
 
 namespace Inventory_Dashboard.Services
 {

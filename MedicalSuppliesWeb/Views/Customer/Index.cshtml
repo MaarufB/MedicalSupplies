@@ -142,7 +142,7 @@
 
 
             <a asp-action="index" asp-controller="Product" style="text-decoration: none;"><p>Products</p></a>
-            <a asp-action="index" asp-controller="Suppliers" style="text-decoration: none;"><p>Suppliers</p></a>
+            <a asp-action="index" asp-controller="Supplier" style="text-decoration: none;"><p>Suppliers</p></a>
 
             <p>Manufacturers</p>
 
@@ -183,56 +183,40 @@
 
 
 
-        <div style="display: flex; padding-left: 350px; padding-top: 40px; padding-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-left: 30px; padding-right: 30px;">
             <h3 style="text-align: center; margin: 0; text-decoration: underline;">Customers</h3>
-            <a href="/Customer/Create" style="text-align: right; padding-left: 280px; text-decoration:none">Create</a>
+            <a href="/Customer/Create" class="btn btn-primary">Create</a>
         </div>
 
-
-        <table class="table table-bordered border-primary text-center" style="vertical-align: middle;">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>FIRST NAME</th>
-                        <th>LAST NAME</th>
-                        <th>DOB</th>
-                        
-                        <th>GENDER</th>
-                        <th>ADDRESS</th>
-                        <th>CONTACT</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var customer in Model)
-                    {
-                        <tr>
-                            <td>@customer.CustomerId</td>
-                            <td>@customer.FirstName</td>
-                            <td>@customer.LastName</td>
-                            <td>@customer.DOB.ToShortDateString()</td>
-                            
-                            <td>@customer.Gender.GenderName</td>
-                            <td>
-                                @foreach (var address in customer.CustomerAddresses)
-                                {
-                                    <div>
-                                        @address.Address <br />
-                                        @address.City, @address.State @address.Zip
-                                    </div>
-                                }
-                            </td>
-                            <td>
-                                @foreach (var number in customer.CustomerNumbers)
-                                {
-                                    <div>@number.PhoneNumber</div>
-                                }
-                            </td>
-                            
-                        </tr>
-                    }
-                </tbody>
-            </table>
+        <div class="card-columns" style="padding: 30px;">
+            @foreach (var customer in Model)
+            {
+                <div class="card mb-3">
+                    <div class="card-header">
+                        ID: @customer.CustomerId
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@customer.FirstName @customer.LastName</h5>
+                        <p class="card-text"><strong>DOB:</strong> @customer.DOB.ToShortDateString()</p>
+                        <p class="card-text"><strong>Gender:</strong> @customer.Gender.GenderName</p>
+                        <strong>Address:</strong>
+                        <ul class="card-text" style="list-style-type: none; padding: 0;">
+                            @foreach (var address in customer.CustomerAddresses)
+                            {
+                                <li>@address.Address, @address.City, @address.State @address.Zip</li>
+                            }
+                        </ul>
+                        <strong>Contact:</strong>
+                        <ul class="card-text" style="list-style-type: none; padding: 0;">
+                            @foreach (var number in customer.CustomerNumbers)
+                            {
+                                <li>@number.PhoneNumber</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
 
 
 

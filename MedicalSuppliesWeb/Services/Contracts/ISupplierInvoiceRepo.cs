@@ -1,4 +1,4 @@
-﻿using UserRolesModels;
+﻿using MedicalSuppliesModels;
 
 namespace UserRolesNew.Services.Contracts
 {

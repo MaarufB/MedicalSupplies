@@ -1,7 +1,8 @@
-﻿using UserRolesModels;
-using UserRolesNew.ViewModels.Facility;
+﻿using MedicalSuppliesModels;
+using MedicalSuppliesWeb.ViewModels.Facility;
 
-namespace UserRolesNew.Services.Contracts
+
+namespace MedicalSuppliesWeb.Services.Contracts
 {
     public interface IGooglePlacesService
     {

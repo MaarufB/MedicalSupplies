@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using UserRolesNew.Services.Contracts;
-using UserRolesNew.ViewModels.Country;
-using UserRolesNew.ViewModels.Facility;
-using UserRolesNew.ViewModels.State;
+﻿using MedicalSuppliesWeb.Services.Contracts;
+using MedicalSuppliesWeb.ViewModels.Country;
+using MedicalSuppliesWeb.ViewModels.Facility;
+using MedicalSuppliesWeb.ViewModels.State;
+using Microsoft.AspNetCore.Mvc;
 
-namespace UserRolesNew.Controllers
+
+namespace MedicalSuppliesWeb.Controllers
 {
     public class FacilitiesController : Controller
     {

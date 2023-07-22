@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UserRolesData.Context;
-using UserRolesModels;
+using MedicalSuppliesModels;
 using UserRolesNew.Services.Contracts;
+using MedicalSuppliesModels.Context;
 
 namespace UserRolesNew.Services.Repositories
 {

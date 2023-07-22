@@ -1,7 +1,7 @@
 ﻿using Inventory_Dashboard.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using UserRolesModels;
+using MedicalSuppliesModels;
 
 namespace Inventory_Dashboard.Controllers
 {

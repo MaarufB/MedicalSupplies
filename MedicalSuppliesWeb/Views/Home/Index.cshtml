@@ -151,7 +151,7 @@
 
             
             <a asp-action="index" asp-controller="Product" style="text-decoration: none;"><p>Products</p></a>
-            <a asp-action="index" asp-controller="Suppliers" style="text-decoration: none;"><p>Suppliers</p></a>
+            <a asp-action="index" asp-controller="Supplier" style="text-decoration: none;"><p>Suppliers</p></a>
             
             <p>Manufacturers</p>
            
@@ -272,9 +272,12 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/11.0.0/material-components-web.min.js"></script>
 <script>
-    mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
-    mdc.button.MDCRipple.attachTo(document.querySelector('.mdc-button'));
+    document.addEventListener("DOMContentLoaded", function () {
+        mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+        mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
+    });
 </script>
+
 
 <script>
     function updateTime() {

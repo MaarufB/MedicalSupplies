@@ -2,8 +2,8 @@
 
 namespace MedicalSuppliesWeb.Services.Contracts
 {
-    public interface IFacilityRepo
+    public interface ISupplierRepo
     {
-        public List<Facility> GetAllFacilities();
+        public List<Supplier> GetAllSuppliers();
     }
 }

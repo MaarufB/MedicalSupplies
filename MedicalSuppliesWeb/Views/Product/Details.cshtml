@@ -1,6 +1,6 @@
-﻿@model List<MedicalSuppliesWeb.ViewModels.Facility.FacilityVm>
+﻿@model UserRolesNew.ViewModels.Product.ProductVm
 
-    
+
 
 <style>
     body {
@@ -14,11 +14,11 @@
     }
 
     /*.column {
-            background-color: #FFFFFF;
-            border: 1px solid #B0BEC5;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }*/
+                background-color: #FFFFFF;
+                border: 1px solid #B0BEC5;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }*/
 
 
 
@@ -48,9 +48,7 @@
 
     .col-md-8.column:nth-child(2) {
         background-color: #D1EAFD;
-       /* box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1), 10px 0 20px rgba(0, 0, 0, 0.1);*/
-        box-shadow: -10px 0 20px #1A1A1A1A, 10px 0 20px #1A1A1A1A;
-        min-height: 600px;
+        box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1), 10px 0 20px rgba(0, 0, 0, 0.1);
     }
 
     .col-md-2.column:last-child {
@@ -183,42 +181,68 @@
             @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
         everything else remain the same*@
 
-        <div style="display: flex; padding-left: 350px; padding-top: 40px; padding-bottom: 20px;">
-            <h3 style="text-align: center; margin: 0; text-decoration: underline;">Facilities</h3>
-            <a href="/Customer/Create" style="text-align: right; padding-left: 280px; text-decoration:none">Create</a>
-        </div>
+        <h3>Product Details</h3>
 
-        <div class="card-deck">
-            @foreach (var facility in Model)
-            {
-                <div class="card mb-4">
-                    <div class="card-header">
-                        Facility ID: @facility.FacilityId
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">@facility.FacilityName</h5>
-                        <p class="card-text"><strong>Contact:</strong> @facility.ContactName</p>
-                        <p class="card-text"><strong>Email:</strong> @facility.ContactEmail</p>
-                        <strong>Address:</strong>
-                        <ul>
-                            @foreach (var address in facility.FacilityAddresses)
-                            {
-                                <li>@address.Address, @address.City, @address.Zip, @address.State.State, @address.Country.Country</li>
-                            }
-                        </ul>
-                        <strong>Phone:</strong>
-                        <ul>
-                            @foreach (var number in facility.FacilityNumbers)
-                            {
-                                <li>@number.PhoneNumber</li>
-                            }
-                        </ul>
+
+
+        <div class="container" style="padding-top: 30px">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="text-center mb-4 flex-grow-1">@Model.ProductName</h2>
+                            <div class="form-group ml-2 mb-4">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a href="/Product/Edit" class="btn btn-sm btn-outline-dark">Edit</a>
+                                }
+                                else
+                                {
+                                    <a href="/Home/AccessDenied" class="btn btn-sm btn-outline-dark">Edit</a>
+                                }
+                            </div>
+                        </div>
+                       
+                        <div class="form-group mb-3">
+                            <label for="productId">Product ID:</label>
+                            <input type="text" id="productId" class="form-control" readonly value="@Model.ProductId" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="productName">Product Name:</label>
+                            <input type="text" id="productName" class="form-control" readonly value="@Model.ProductName" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="description">Description:</label>
+                            <textarea id="description" class="form-control" rows="3" readonly>@Model.Description</textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="price">Price:</label>
+                            <input type="text" id="price" class="form-control" readonly value="@($"${Model.Price}")" />
+
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="manufacturerName">Manufacturer:</label>
+                            <input type="text" id="manufacturerName" class="form-control" readonly value="@Model.ManufacturerName" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="categoryName">Category:</label>
+                            <input type="text" id="categoryName" class="form-control" readonly value="@Model.CategoryName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="supplierName">Supplier:</label>
+                            <input type="text" id="supplierName" class="form-control" readonly value="@Model.SupplierName" />
+                        </div>
+
+                       
+                        <div class="form-group d-flex justify-content-center mt-3" >
+                            @*<a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-outline-dark">Back to Products</a>*@
+                            <a href="/Product/Index" class="btn btn-sm btn-outline-dark">Back to Products</a>
+                        </div>
                     </div>
                 </div>
-            }
+            </div>
         </div>
-
-
 
 
             @*/END/*@

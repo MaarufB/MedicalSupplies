@@ -1,6 +1,5 @@
-﻿@model List<MedicalSuppliesWeb.ViewModels.Facility.FacilityVm>
+﻿@model List<MedicalSuppliesWeb.ViewModels.Supplier.SupplierProfileVm>
 
-    
 
 <style>
     body {
@@ -48,9 +47,7 @@
 
     .col-md-8.column:nth-child(2) {
         background-color: #D1EAFD;
-       /* box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1), 10px 0 20px rgba(0, 0, 0, 0.1);*/
-        box-shadow: -10px 0 20px #1A1A1A1A, 10px 0 20px #1A1A1A1A;
-        min-height: 600px;
+        box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1), 10px 0 20px rgba(0, 0, 0, 0.1);
     }
 
     .col-md-2.column:last-child {
@@ -183,41 +180,55 @@
             @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
         everything else remain the same*@
 
+
+
         <div style="display: flex; padding-left: 350px; padding-top: 40px; padding-bottom: 20px;">
-            <h3 style="text-align: center; margin: 0; text-decoration: underline;">Facilities</h3>
-            <a href="/Customer/Create" style="text-align: right; padding-left: 280px; text-decoration:none">Create</a>
+            <h3 style="text-align: center; margin: 0; text-decoration: underline;">All Suppliers</h3>
+            <!-- Add link to create a new supplier if needed -->
         </div>
 
-        <div class="card-deck">
-            @foreach (var facility in Model)
+            @if (Model.Count > 0)
             {
-                <div class="card mb-4">
-                    <div class="card-header">
-                        Facility ID: @facility.FacilityId
+            <div class="card-deck">
+                    @foreach (var supplier in Model)
+                    {
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Supplier ID: @supplier.SupplierId
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@supplier.SupplierName</h5>
+                            <p class="card-text"><strong>Contact:</strong> @supplier.ContactName</p>
+                            <p class="card-text"><strong>Email:</strong> @supplier.ContactEmail</p>
+                                @if (supplier.SupplierAddresses.Count > 0)
+                                {
+                                <strong>Address:</strong>
+                                <ul>
+                                        @foreach (var address in supplier.SupplierAddresses)
+                                        {
+                                        <li>@address.Address, @address.City, @address.Zip, @address.State.State, @address.Country.Country</li>
+                                        }
+                                </ul>
+                                }
+                                @if (supplier.SupplierNumbers.Count > 0)
+                                {
+                                <strong>Phone:</strong>
+                                <ul>
+                                        @foreach (var number in supplier.SupplierNumbers)
+                                        {
+                                        <li>@number.PhoneNumber</li>
+                                        }
+                                </ul>
+                                }
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">@facility.FacilityName</h5>
-                        <p class="card-text"><strong>Contact:</strong> @facility.ContactName</p>
-                        <p class="card-text"><strong>Email:</strong> @facility.ContactEmail</p>
-                        <strong>Address:</strong>
-                        <ul>
-                            @foreach (var address in facility.FacilityAddresses)
-                            {
-                                <li>@address.Address, @address.City, @address.Zip, @address.State.State, @address.Country.Country</li>
-                            }
-                        </ul>
-                        <strong>Phone:</strong>
-                        <ul>
-                            @foreach (var number in facility.FacilityNumbers)
-                            {
-                                <li>@number.PhoneNumber</li>
-                            }
-                        </ul>
-                    </div>
-                </div>
+                    }
+            </div>
             }
-        </div>
-
+            else
+            {
+            <p>No suppliers found.</p>
+            }
 
 
 
@@ -285,9 +296,12 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/11.0.0/material-components-web.min.js"></script>
 <script>
-    mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
-    mdc.button.MDCRipple.attachTo(document.querySelector('.mdc-button'));
+    document.addEventListener("DOMContentLoaded", function () {
+        mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+        mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
+    });
 </script>
+
 
 <script>
     function updateTime() {

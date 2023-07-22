@@ -1,14 +1,58 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MedicalSuppliesWeb.Services.Contracts;
+using MedicalSuppliesWeb.ViewModels.Country;
+using MedicalSuppliesWeb.ViewModels.State;
+using MedicalSuppliesWeb.ViewModels.Supplier;
+using Microsoft.AspNetCore.Mvc;
 
 using UserRolesNew.ViewModels.Supplier;
 
-namespace UserRolesNew.Controllers
+namespace MedicalSuppliesWeb.Controllers
 {
     public class SupplierController : Controller
     {
+        private readonly ISupplierRepo _supplierRepo;
+
+        public SupplierController(ISupplierRepo supplierRepo)
+        {
+            _supplierRepo = supplierRepo;
+        }
         public IActionResult Index()
         {
-            return View();
+            
+            var suppliers = _supplierRepo.GetAllSuppliers();
+
+            
+            var supplierViewModels = suppliers.Select(supplier => new SupplierProfileVm
+            {
+                SupplierId = supplier.SupplierId,
+                SupplierName = supplier.SupplierName,
+                ContactName = supplier.ContactName,
+                ContactEmail = supplier.ContactEmail,
+                SupplierAddresses = supplier.SupplierAddresses.Select(address => new SupplierAddressVm
+                {
+                    SupplierAddressId = address.SupplierAddressId,
+                    Address = address.Address,
+                    City = address.City,
+                    State = new StateVm
+                    {
+                        State = address.State.LongState
+                    },
+                    Country = new CountryVm
+                    {
+                        Country = address.Country.CountryName,
+                    },
+                    Zip = address.Zip
+                }).ToList(),
+                SupplierNumbers = supplier.SupplierNumbers.Select(number => new SupplierNumberVm
+                {
+                    
+                    SupplierNumberId = number.SupplierNumberId,
+                    PhoneNumber = number.PhoneNumber,
+                }).ToList()
+            }).ToList();
+
+            
+            return View(supplierViewModels);
         }
 
         [HttpGet]

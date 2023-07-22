@@ -1,4 +1,6 @@
-﻿namespace UserRolesNew.ViewModels.Facility
+﻿using MedicalSuppliesWeb.ViewModels.Facility;
+
+namespace MedicalSuppliesWeb.ViewModels.Facility
 {
     public class FacilityVm
     {

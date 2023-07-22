@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UserRolesData.Context;
-using UserRolesModels;
+using MedicalSuppliesModels;
 using UserRolesNew.Services.Contracts;
+using MedicalSuppliesModels.Context;
 
 namespace UserRolesNew.Services.Repositories
 {
@@ -21,6 +21,17 @@ namespace UserRolesNew.Services.Repositories
                 .Include(m => m.Manufacturer)
                 .Include(c => c.Colour).ToList();
             return products;
+        }
+
+        public Product GetProductById(int id)
+        {
+            var product = _context.Products
+        .Include(p => p.Manufacturer) 
+        .Include(p => p.Supplier)     
+        .Include(p => p.Category)     
+        .FirstOrDefault(p => p.ProductId == id);
+
+            return product;
         }
     }
 }
