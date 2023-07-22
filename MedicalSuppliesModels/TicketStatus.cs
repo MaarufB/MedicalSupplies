@@ -1,4 +1,4 @@
-﻿namespace UserRolesModels
+﻿namespace MedicalSuppliesModels
 {
     public class TicketStatus
     {

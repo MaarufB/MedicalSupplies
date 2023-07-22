@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UserRolesModels;
+using MedicalSuppliesModels;
 using UserRolesNew.Services.Contracts;
 using UserRolesNew.ViewModels.Customer;
+using MedicalSuppliesWeb.ViewModels.State;
+using MedicalSuppliesWeb.Services.Contracts;
 
-namespace UserRolesNew.Controllers
+namespace MedicalSuppliesWeb.Controllers
 {
     public class CustomerController : Controller
     {
@@ -35,7 +37,14 @@ namespace UserRolesNew.Controllers
                     CustomerAddressId = address.AddressId,
                     Address = address.Address,
                     City = address.City,
-                    State = address.State.LongState,
+
+                    State = new StateVm
+                    {
+                        Id = address.State.StateId,
+                        State = address.State.LongState
+                        
+                    },
+                    
                     Zip = address.Zip
                 }).ToList(),
                 CustomerNumbers = customer.CustomerNumbers.Select(number => new CustomerNumberVm

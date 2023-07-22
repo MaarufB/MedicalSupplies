@@ -1,7 +1,7 @@
-﻿using UserRolesNew.ViewModels.Country;
-using UserRolesNew.ViewModels.State;
+﻿using MedicalSuppliesWeb.ViewModels.Country;
+using MedicalSuppliesWeb.ViewModels.State;
 
-namespace UserRolesNew.ViewModels.Facility
+namespace MedicalSuppliesWeb.ViewModels.Facility
 {
     public class FacilityAddressVm
     {

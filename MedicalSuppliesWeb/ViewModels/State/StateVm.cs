@@ -1,9 +1,10 @@
-﻿using UserRolesModels;
+﻿using MedicalSuppliesModels;
 
-namespace UserRolesNew.ViewModels.State
+namespace MedicalSuppliesWeb.ViewModels.State
 {
     public class StateVm
     {
+        public int Id { get; set; }
         public string State { get; set; }
         
     }

@@ -142,7 +142,7 @@
 
             
             <a asp-action="index" asp-controller="Product" style="text-decoration: none;"><p>Products</p></a>
-            <a asp-action="index" asp-controller="Suppliers" style="text-decoration: none;"><p>Suppliers</p></a>
+            <a asp-action="index" asp-controller="Supplier" style="text-decoration: none;"><p>Suppliers</p></a>
 
             <p>Manufacturers</p>
 
@@ -176,8 +176,37 @@
         @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
         everything else remain the same*@
 
-        <div class="row">
-            Products to be displayed here
+        <div class="row" style="padding:30px">
+
+            <h3 style="text-align:center; padding-bottom:20px">Products</h3>
+            @*<table class="table table-bordered table-hover">*@
+                <table class="table table-bordered border-primary table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Manufacturer</th>
+                        <th>Category</th>
+                        <th>Supplier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr class="product-row" data-product-id="@product.ProductId">
+                            <td>@product.ProductId</td>
+                            <td>@product.ProductName</td>
+                            <td>@product.Description</td>
+                            <td>@product.Price</td>
+                            <td>@product.ManufacturerName</td>
+                            <td>@product.CategoryName</td>
+                            <td>@product.SupplierName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
 
         @*/END/*@
@@ -251,4 +280,19 @@
 
     // Initial update
     updateTime();
+</script>
+
+
+<script>
+    // Add click event listener to each row with the "product-row" class
+    const productRows = document.querySelectorAll('.product-row');
+    productRows.forEach(row => {
+        row.addEventListener('click', () => {
+            // Get the product ID from the data attribute of the clicked row
+            const productId = row.dataset.productId;
+
+            // Redirect to the individual product view with the selected product ID
+            window.location.href = `/Product/Details/${productId}`;
+        });
+    });
 </script>

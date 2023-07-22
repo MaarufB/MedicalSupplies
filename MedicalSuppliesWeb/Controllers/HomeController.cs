@@ -33,6 +33,7 @@ namespace UserRolesNew.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult AccessDenied()
         {
             return View();
@@ -53,13 +54,6 @@ namespace UserRolesNew.Controllers
 
 
 
-
-
-
-
-
-
-
         [HttpGet]
         [Authorize] // Optionally, restrict access to authenticated users
         public IActionResult UploadFile()
@@ -70,13 +64,13 @@ namespace UserRolesNew.Controllers
 
 
         [HttpPost]
-        [Authorize] // Optionally, restrict access to authenticated users
+        [Authorize] // Restrict access to authenticated users
         public IActionResult UploadFile(IFormFile file)
         {
             if (file == null || file.Length == 0)
             {
                 // Handle the case where no file is uploaded
-                // You can return an error message or redirect to a view with an error message
+                // We can even return an error message or redirect to a view with an error message
                 return View("Error");
             }
 
@@ -84,19 +78,19 @@ namespace UserRolesNew.Controllers
             var fileName = Path.GetFileName(file.FileName);
             var fileExtension = Path.GetExtension(file.FileName);
 
-            // Generate a unique file name to avoid potential conflicts
+            // Generating a unique file name to avoid potential conflicts
             var uniqueFileName = Path.ChangeExtension(Path.GetRandomFileName(), fileExtension);
 
-            // Combine the file server directory path and the unique file name
+            // Combining the file server directory path and the unique file name
             var fileSavePath = Path.Combine("D:\\AAIT\\AAIT\\Class Code\\Natasha\\MSP\\UserRolesTest\\Jul 7 Copy\\File Server", uniqueFileName);
 
-            // Save the uploaded file to the file server directory
+            // SAving the uploaded file to the file server directory
             using (var stream = new FileStream(fileSavePath, FileMode.Create))
             {
                 file.CopyTo(stream);
             }
 
-            // Optionally, you can perform additional actions or return a success message
+            // Optionally, we can perform additional actions or return a success message
             return RedirectToAction("Index");
         }
 

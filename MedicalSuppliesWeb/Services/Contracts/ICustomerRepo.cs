@@ -1,7 +1,8 @@
 ﻿using System.Net;
-using UserRolesModels;
+using MedicalSuppliesModels;
+using MedicalSuppliesWeb.ViewModels.State;
 
-namespace UserRolesNew.Services.Contracts
+namespace MedicalSuppliesWeb.Services.Contracts
 {
     public interface ICustomerRepo
     {
@@ -11,7 +12,7 @@ namespace UserRolesNew.Services.Contracts
 
         public void AddCustomerAddress(CustomerAddress address);
 
-        public int GetStateIdByName(string state);
+        public int GetStateIdByName(StateVm state);
 
         public void AddCustomerNumber(CustomerNumber number);
 
