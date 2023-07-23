@@ -1,15 +1,19 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MedicalSuppliesWeb.Model;
-
-
+using Microsoft.Extensions.Hosting;
 
 namespace MedicalSuppliesModels.Context
 {
     public class MSDBContext : IdentityDbContext<ApplicationUser>
     {
+        
+
+        
+
         public MSDBContext(DbContextOptions<MSDBContext> options) : base(options)
         {
+           
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -52,7 +56,10 @@ namespace MedicalSuppliesModels.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            optionsBuilder.UseSqlServer("Data Source=Stardust\\MSSQLSERVER01;Initial Catalog=RolesTest02;Trusted_Connection=True;MultipleActiveResultSets=True;");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=Stardust\\MSSQLSERVER01;Initial Catalog=RolesTest02;Trusted_Connection=True;MultipleActiveResultSets=True;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -71,9 +78,38 @@ namespace MedicalSuppliesModels.Context
                 .WithMany(f => f.CustomerFacilities)
                 .HasForeignKey(cf => cf.FacilityId)
                 .OnDelete(DeleteBehavior.Restrict);
+                  
 
             base.OnModelCreating(modelBuilder);
         }
+
+        public void SeedData()
+        {
+            var categories = new List<Category>
+                {
+                    new Category { CategoryId = 1, CategoryName = "Category 1" },
+                    new Category { CategoryId = 2, CategoryName = "Category 2" }
+                };
+
+            var colours = new List<Colour>
+                {
+                    new Colour { ColourId = 1, ColourName = "Red" },
+                    new Colour { ColourId = 2, ColourName = "Blue" }
+                };
+
+            var customers = new List<Customer>
+                {
+                    new Customer { FirstName = "John", LastName = "Doe", Height = "180" },
+                    new Customer { FirstName = "Jane", LastName = "Smith", Height = "170" }
+                };
+
+            Categories.AddRange(categories);
+            Colours.AddRange(colours);
+            Customers.AddRange(customers);
+
+            SaveChanges();
+        }
+
 
 
 
