@@ -1,4 +1,4 @@
-# Inventory and User Roles Management for XYZ Medical Supplies
+# Inventory & User Roles Management : XYZ Medical Supplies
 
 
 
