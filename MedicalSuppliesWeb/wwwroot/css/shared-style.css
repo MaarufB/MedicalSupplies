@@ -1,0 +1,100 @@
+
+body {
+    background-color: #E1F5FE;
+}
+
+.column {
+    padding: 20px;
+    position: relative;
+}
+
+
+.col-md-2.column:first-child {
+    background-color: #c8e3fa;
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.col-md-8.column:nth-child(2) {
+    background-color: #D1EAFD;
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1), 10px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.col-md-2.column:last-child {
+    background-color: #c8e3fa;
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 20px;
+    border-radius: 50px;
+}
+
+.mdc-text-field {
+    width: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.mdc-text-field__input {
+    text-align: center;
+    padding-right: 14px; /* Adjust padding to accommodate the lens icon */
+    border-radius: 10px;
+}
+
+.mdc-text-field__icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.mdc-button {
+    margin-left: 10px;
+}
+
+
+
+.card-mini {
+    max-width: 200px;
+    height: auto;
+    padding: 10px;
+}
+
+.row {
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding-top: 20px;
+}
+
+.left-menu {
+    padding-top: 40px;
+    padding-left: 40px;
+    font-size: 19px;
+}
+
+.date {
+    font-size: 25px;
+}
+
+.time {
+    font-size: 19px;
+}
+
+.right-menu {
+    padding-top: 40px;
+    padding-left: 40px;
+    font-size: 19px;
+}
+
+.sem-text {
+    padding: 10px
+}
+
+

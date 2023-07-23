@@ -1,0 +1,25 @@
+﻿<div class="col-md-2 column">
+    <div id="date-time" class="date-time">
+        <p class="date"></p>
+        <p class="time"></p>
+    </div>
+    <div class="right-menu">
+        @if (User.IsInRole("Admin"))
+        {
+            <a href="/AdminDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
+        }
+        else
+        {
+            <a href="/UserDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
+        }
+        <p>Reports</p>
+        @if (User.IsInRole("Admin"))
+        {
+            <a href="/Inventory/Index" style="text-decoration: none;"><p>Inventory</p></a>
+        }
+        else
+        {
+            <a href="/Home/AccessDenied" style="text-decoration: none;"><p>Inventory</p></a>
+        }
+    </div>
+</div>
