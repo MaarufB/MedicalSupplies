@@ -3,560 +3,264 @@
 
 
 
-<style>
-    body {
-        background-color: #E1F5FE;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-    .header {
-        background-color: #E1F5FE;
-        color: #FFFFFF;
-        padding: 15px;
-    }
+    <link rel="stylesheet" href="~/css/shared-style.css" />
 
-    /*.column {
-            background-color: #FFFFFF;
-            border: 1px solid #B0BEC5;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }*/
+</head>
+<body>
+    <div class="row">
+        <partial name="_LeftColumn" />
+        <div class="col-md-8 column">
+            <partial name="_SearchBox" />
 
+            @*/DYNAMIC CONTENT BEGINS*@
 
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel">
 
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="flex-grow: 1; text-align: center;"><h6>CUSTOMER INVOICES</h6></span>
 
-    .column {
-        padding: 20px;
-        position: relative;
-    }
-
-        .column:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: -5px;
-            right: -5px;
-            /*background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1) 100%, transparent);*/
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 95%, rgba(255, 255, 255, 1) 95%, rgba(255, 255, 255, 0));
-            z-index: -1;
-        }
-
-
-    .col-md-2.column:first-child {
-        background-color: #c8e3fa;
-        box-shadow: 10px 0 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .col-md-8.column:nth-child(2) {
-        background-color: #D1EAFD;
-        box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1), 10px 0 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .col-md-2.column:last-child {
-        background-color: #c8e3fa;
-        box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .search-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-        margin-top: 20px;
-    }
-
-    .mdc-text-field {
-        width: 200px;
-        display: flex;
-        align-items: center;
-    }
-
-    .mdc-text-field__input {
-        text-align: center;
-        padding-right: 14px; /* Adjust padding to accommodate the lens icon */
-        border-radius: 10px;
-    }
-
-    .mdc-text-field__icon {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-        color: rgba(0, 0, 0, 0.54);
-    }
-
-    .mdc-button {
-        margin-left: 10px;
-    }
+                            <a asp-action="CreateInvoice" asp-controller="Customer" style="text-decoration: none;"><p>Create</p></a>
+                        </div>
 
 
 
-    .card-mini {
-        max-width: 200px; /* Adjust the maximum width as desired */
-        height: auto; /* Adjust the height as desired */
-        padding: 10px; /* Adjust the padding as desired */
-    }
+                        <!-- Customer Invoices Panel Content -->
 
-    .row {
-        margin-bottom: 20px;
-        margin-top: 20px;
-    }
+                        <table class="table table-bordered border-primary text-center">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Due Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
 
-    .left-menu {
-        padding-top: 40px;
-        padding-left: 40px;
-        font-size: 19px;
-    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1234</td>
+                                    <td>01/01/2023</td>
+                                    <td>$100.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
 
-    .date {
-        font-size: 25px;
-    }
+                                </tr>
+                                <tr>
+                                    <td>2345</td>
+                                    <td>02/01/2023</td>
+                                    <td>$200.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
 
-    .time {
-        font-size: 19px;
-    }
+                                </tr>
+                                <tr>
+                                    <td>4567</td>
+                                    <td>03/01/2023</td>
+                                    <td>$150.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
 
-    .right-menu {
-        padding-top: 40px;
-        padding-left: 40px;
-        font-size: 19px;
-    }
+                                </tr>
+                                <tr>
+                                    <td>5678</td>
+                                    <td>04/01/2023</td>
+                                    <td>$300.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+                                    @*<td><a href="#" class="btn-create">Create New</a></td>*@
+                                </tr>
+                            </tbody>
 
+                        </table>
 
-
-
-
-
-    .panel {
-        background-color: #D1EAFD;
-        /*border: 2px solid #ddd;*/
-        border-radius: 4px;
-        padding: 10px;
-        margin-bottom: 10px;
-        height: 300px;
-        
-    }
-
-        .panel h4 {
-            margin-top: 0;
-            
-        }
-
-    .panel-content {
-        /* Additional styling for panel content */
-    }
-
-
-   
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="flex-grow: 1; text-align: center;"><h6>CUSTOMER ORDERS</h6></span>
+                            <a asp-action="CreateOrder" asp-controller="Customer" style="text-decoration: none;"><p>Create</p></a>
+                        </div>
+                        <!-- Customer Orders Panel Content -->
 
 
+                        <table class="table table-bordered border-primary text-center">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Due Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1234</td>
+                                    <td>01/01/2023</td>
+                                    <td>$100.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
+
+                                </tr>
+                                <tr>
+                                    <td>2345</td>
+                                    <td>02/01/2023</td>
+                                    <td>$200.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
+
+                                </tr>
+                                <tr>
+                                    <td>4567</td>
+                                    <td>03/01/2023</td>
+                                    <td>$150.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+
+                                </tr>
+                                <tr>
+                                    <td>5678</td>
+                                    <td>04/01/2023</td>
+                                    <td>$300.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
+                                    @*<td><a href="#" class="btn-create">Create New</a></td>*@
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="flex-grow: 1; text-align: center;"><h6>SUPPLIER INVOICES</h6></span>
+                            <a asp-action="CreateInvoice" asp-controller="Supplier" style="text-decoration: none;"><p>Create</p></a>
+                        </div>
+                        <!-- Supplier Invoices Panel Content -->
 
 
 
+                        <table class="table table-bordered border-primary text-center">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Due Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1234</td>
+                                    <td>01/01/2023</td>
+                                    <td>$100.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+
+                                </tr>
+                                <tr>
+                                    <td>2345</td>
+                                    <td>02/01/2023</td>
+                                    <td>$200.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
+
+                                </tr>
+                                <tr>
+                                    <td>4567</td>
+                                    <td>03/01/2023</td>
+                                    <td>$150.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+
+                                </tr>
+                                <tr>
+                                    <td>5678</td>
+                                    <td>04/01/2023</td>
+                                    <td>$300.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
+                                    @*<td><a href="#" class="btn-create">Create New</a></td>*@
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="flex-grow: 1; text-align: center;"><h6>SUPPLIER ORDERS</h6></span>
+
+                            <a asp-action="CreateOrder" asp-controller="Supplier" style="text-decoration: none;"><p>Create</p></a>
+                        </div>
+                        <!-- Supplier Orders Panel Content -->
 
 
 
-</style>
+                        <table class="table table-bordered border-primary text-center">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Due Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1234</td>
+                                    <td>01/01/2023</td>
+                                    <td>$100.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">under review</td>
+                                    @*<h6 style="background-color: @StatusHelper.GetStatusColor(invoice.TicketStatus)">@invoice.TicketStatus</h6>*@
 
 
-<div class="row">
-    @* <div class="col-md-12 header">
-    <h2>Header</h2>
-    <p>Header content goes here.</p>
-    </div>*@
-</div>
-<div class="row">
-    <div class="col-md-2 column">
-        <h3>XYZ Medicals</h3>
-        <h5>Abc Ave, PA</h5>
+                                </tr>
+                                <tr>
+                                    <td>2345</td>
+                                    <td>02/01/2023</td>
+                                    <td>$200.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
+
+                                </tr>
+                                <tr>
+                                    <td>4567</td>
+                                    <td>03/01/2023</td>
+                                    <td>$150.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
 
 
-        <div class="left-menu">
+                                </tr>
+                                <tr>
+                                    <td>5678</td>
+                                    <td>04/01/2023</td>
+                                    <td>$300.00</td>
+                                    <td style="background-color: @(StatusHelper.GetStatusColor("approved")); ">Approved</td>
+                                    @*<td><a href="#" class="btn-create">Create New</a></td>*@
+                                </tr>
+                            </tbody>
 
-            
-            <a asp-action="index" asp-controller="Product" style="text-decoration: none;"><p>Products</p></a>
-            <a asp-action="index" asp-controller="Supplier" style="text-decoration: none;"><p>Suppliers</p></a>
+                        </table>
 
-            <p>Manufacturers</p>
+                    </div>
+                </div>
+            </div>
 
-            <a asp-action="index" asp-controller="Facilities" style="text-decoration: none;"><p>Facilities</p></a>
-            <a asp-action="NPILookup" asp-controller="Home" style="text-decoration: none;"><p>Doctors</p></a>
 
-            <a asp-action="Index" asp-controller="Customer" style="text-decoration: none;"><p>Customers</p></a>
+            @*/END/*@
 
         </div>
 
-
-    </div>
-    <div class="col-md-8 column">
-        <div class="search-box">
-            <div class="mdc-text-field">
-                <input type="text" class="mdc-text-field__input" id="search-input">
-
-                @*<i class="material-icons mdc-text-field__icon">search</i>*@
-
-                <div class="mdc-line-ripple"></div>
-            </div>
-            <button class="mdc-button mdc-button--raised">
-                <span class="mdc-button__ripple"></span>
-                <span class="material-icons">Go!</span>
-            </button>
-        </div>
-
-
-
-
-        @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
-        everything else remain the same*@
-
-       
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel">
-
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex-grow: 1; text-align: center;"><h6>CUSTOMER INVOICES</h6></span>
-                        
-                        <a asp-action="CreateInvoice" asp-controller="Customer" style="text-decoration: none;"><p>Create</p></a>
-                    </div>
-                    
-                    
-                    
-                    <!-- Customer Invoices Panel Content -->
-
-                    <table class="table table-bordered border-primary text-center">
-                        <thead>
-                            <tr>
-                                <th>Number</th>
-                                <th>Due Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1234</td>
-                                <td>01/01/2023</td>
-                                <td>$100.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-                               
-                            </tr>
-                            <tr>
-                                <td>2345</td>
-                                <td>02/01/2023</td>
-                                <td>$200.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>4567</td>
-                                <td>03/01/2023</td>
-                                <td>$150.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>5678</td>
-                                <td>04/01/2023</td>
-                                <td>$300.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
-                            </tr>
-                        </tbody>
-
-                    </table>
-              
-
-
-
-
-
-
-
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex-grow: 1; text-align: center;"><h6>CUSTOMER ORDERS</h6></span>
-                        <a asp-action="CreateOrder" asp-controller="Customer" style="text-decoration: none;"><p>Create</p></a>
-                    </div>
-                    <!-- Customer Orders Panel Content -->
-
-
-                    <table class="table table-bordered border-primary text-center">
-                        <thead>
-                            <tr>
-                                <th>Number</th>
-                                <th>Due Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1234</td>
-                                <td>01/01/2023</td>
-                                <td>$100.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
-
-                            </tr>
-                            <tr>
-                                <td>2345</td>
-                                <td>02/01/2023</td>
-                                <td>$200.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
-
-                            </tr>
-                            <tr>
-                                <td>4567</td>
-                                <td>03/01/2023</td>
-                                <td>$150.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-
-                            </tr>
-                            <tr>
-                                <td>5678</td>
-                                <td>04/01/2023</td>
-                                <td>$300.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
-                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
-                            </tr>
-                        </tbody>
-
-                    </table>
-
-
-
-
-
-
-
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex-grow: 1; text-align: center;"><h6>SUPPLIER INVOICES</h6></span>
-                        <a asp-action="CreateInvoice" asp-controller="Supplier" style="text-decoration: none;"><p>Create</p></a>
-                    </div>
-                    <!-- Supplier Invoices Panel Content -->
-
-
-
-                    <table class="table table-bordered border-primary text-center">
-                        <thead>
-                            <tr>
-                                <th>Number</th>
-                                <th>Due Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1234</td>
-                                <td>01/01/2023</td>
-                                <td>$100.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-
-                            </tr>
-                            <tr>
-                                <td>2345</td>
-                                <td>02/01/2023</td>
-                                <td>$200.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
-
-                            </tr>
-                            <tr>
-                                <td>4567</td>
-                                <td>03/01/2023</td>
-                                <td>$150.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-
-                            </tr>
-                            <tr>
-                                <td>5678</td>
-                                <td>04/01/2023</td>
-                                <td>$300.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved"))">Approved</td>
-                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
-                            </tr>
-                        </tbody>
-
-                    </table>
-
-
-
-
-
-
-
-
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="flex-grow: 1; text-align: center;"><h6>SUPPLIER ORDERS</h6></span>
-
-                        <a asp-action="CreateOrder" asp-controller="Supplier" style="text-decoration: none;"><p>Create</p></a>
-                    </div>
-                    <!-- Supplier Orders Panel Content -->
-
-
-
-                    <table class="table table-bordered border-primary text-center">
-                        <thead>
-                            <tr>
-                                <th>Number</th>
-                                <th>Due Date</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1234</td>
-                                <td>01/01/2023</td>
-                                <td>$100.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">under review</td>
-                                @*<h6 style="background-color: @StatusHelper.GetStatusColor(invoice.TicketStatus)">@invoice.TicketStatus</h6>*@
-
-
-                            </tr>
-                            <tr>
-                                <td>2345</td>
-                                <td>02/01/2023</td>
-                                <td>$200.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("under review"))">Under Review</td>
-
-                            </tr>
-                            <tr>
-                                <td>4567</td>
-                                <td>03/01/2023</td>
-                                <td>$150.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("rejected"))">Rejected</td>
-                                
-
-                            </tr>
-                            <tr>
-                                <td>5678</td>
-                                <td>04/01/2023</td>
-                                <td>$300.00</td>
-                                <td style="background-color: @(StatusHelper.GetStatusColor("approved")); ">Approved</td>
-                                @*<td><a href="#" class="btn-create">Create New</a></td>*@
-                            </tr>
-                        </tbody>
-
-                    </table>
-
-
-
-
-
-
-
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
-        @*/END/*@
-
-
-
-
-
+        <partial name="_RightColumn" />
     </div>
 
+    <script src="~/js/DateTime.js"></script>
 
-
-
-    <div class="col-md-2 column">
-
-        <div id="date-time" class="date-time">
-            <p class="date"></p>
-            <p class="time"></p>
-
-        </div>
-
-
-        <div class="right-menu">
-            @if (User.IsInRole("Admin"))
-            {
-                <a href="/AdminDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
-            }
-            else
-            {
-                <a href="/UserDashboard/Index" style="text-decoration: none;"><p>Dashboard</p></a>
-            }
-            <p>Reports</p>
-            @if (User.IsInRole("Admin"))
-            {
-                <a href="/Inventory/Index" style="text-decoration: none;"><p>Inventory</p></a>
-            }
-            else
-            {
-                <a href="/Home/AccessDenied" style="text-decoration: none;"><p>Inventory</p></a>
-            }
-        </div>
-
-
-    </div>
-</div>
-
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/11.0.0/material-components-web.min.js"></script>
-<script>
-    mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
-    mdc.button.MDCRipple.attachTo(document.querySelector('.mdc-button'));
-</script>
-
-<script>
-    function updateTime() {
-        var currentDate = new Date();
-        var date = currentDate.toDateString();
-        var time = currentDate.toLocaleTimeString();
-        var dateElement = document.querySelector('.date');
-        var timeElement = document.querySelector('.time');
-        dateElement.textContent = date;
-        timeElement.textContent = time;
-    }
-
-    // Update the time every second
-    setInterval(updateTime, 1000);
-
-    // Initial update
-    updateTime();
-</script>
+</body>
+</html>
