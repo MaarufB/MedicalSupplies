@@ -12,24 +12,12 @@
 
         <partial name="_LeftColumn" />
 
-
         <div class="col-md-8 column">
 
-            <div class="search-box">
-
-                <div class="mdc-text-field">
-                    <input type="text" class="mdc-text-field__input" id="search-input">
-                    <div class="mdc-line-ripple"></div>
-                </div>
+            <partial name="_SearchBox" />
 
 
-                <button type="button" class="btn btn-outline-dark btn-sm" ">Go!</button>
-            </div>
-
-
-
-
-                @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
+            @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
             everything else remain the same*@
 
             <div class="row">
@@ -51,47 +39,15 @@
                 }
             </div>
 
-                @*/END/*@
-
+            @*/END/*@
 
         </div>
-
-
-                @Html.Partial("_RightColumn")
-                @*<partial name="_RightColumn" />*@
-
-
-
+        
+        <partial name="_RightColumn" />
 
     </div>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/11.0.0/material-components-web.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
-            mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
-        });
-    </script>
-
-
-    <script>
-        function updateTime() {
-            var currentDate = new Date();
-            var date = currentDate.toDateString();
-            var time = currentDate.toLocaleTimeString();
-            var dateElement = document.querySelector('.date');
-            var timeElement = document.querySelector('.time');
-            dateElement.textContent = date;
-            timeElement.textContent = time;
-        }
-
-        // Update the time every second
-        setInterval(updateTime, 1000);
-
-        // Initial update
-        updateTime();
-    </script>
+    <script src="~/js/DateTime.js"></script>
 
 </body>
 </html>
