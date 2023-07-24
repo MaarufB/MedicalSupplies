@@ -12,113 +12,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #E1F5FE;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .header {
-            background-color: #E1F5FE;
-            color: #FFFFFF;
-            padding: 15px;
-        }
-
-        .center-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-            height: calc(100vh - 150px);
-            margin-bottom: 50px;
-        }
-
-        .user-roles-box {
-            background-color: #D1EAFD;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
-            width: 100%; /* Make the box 100% width */
-            max-width: 700px; /* Set a maximum width */
-            margin: 0 auto;
-        }
-
-        .user-roles-title {
-            margin-bottom: 20px;
-            color: #333333;
-            font-weight: 500;
-        }
-
-        .table {
-            width: 100%;
-            margin-bottom: 1rem;
-            color: #333333;
-        }
-
-            .table th,
-            .table td {
-                padding: 0.75rem;
-                vertical-align: top;
-                border-top: 1px solid #C0C0C0;
-            }
-
-            .table thead th {
-                vertical-align: bottom;
-                border-bottom: 2px solid #C0C0C0;
-            }
-
-            .table tbody + tbody {
-                border-top: 2px solid #C0C0C0;
-            }
-
-        .table-sm th,
-        .table-sm td {
-            padding: 0.3rem;
-        }
-
-        .btn-primary {
-            background-color: #007BFF;
-            border-color: #007BFF;
-        }
-
-            
-    </style>
+    <link rel="stylesheet" href="~/css/userRoles-style.css" />
+  
 </head>
 <body>
-    <div class="center-container">
-        <div class="col-md-6">
-            <section>
-                <div class="user-roles-box">
-                    <h1 class="user-roles-title">User Roles</h1>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Roles</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var user in Model)
-                            {
-                                <tr>
-                                    <td>@user.FirstName</td>
-                                    <td>@user.LastName</td>
-                                    <td>@user.Email</td>
-                                    <td>@string.Join(" , ", user.Roles.ToList())</td>
-                                    <td>
-                                        <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Manage</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+    <div class="row">
+
+        <partial name="_LeftColumn" />
+
+        <div class="col-md-8 column">
+
+            <partial name="_SearchBox" />
+
+
+            @*/DYNAMIC CONTENT BEGIN*@
+
+            <div class="center-container">
+                <div class="col-md-6">
+                    <section>
+
+                        <div><h3 class="user-roles-title">User Roles</h3></div>
+                        <div class="user-roles-box">
+                            
+                            <table class="table table-striped table-bordered border-primary table-hover text-center">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Roles</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in Model)
+                                    {
+                                        <tr>
+                                            <td>@user.FirstName</td>
+                                            <td>@user.LastName</td>
+                                            <td>@user.Email</td>
+                                            <td>@string.Join(" , ", user.Roles.ToList())</td>
+                                            <td>
+                                                <a class="btn btn-outline-dark" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Manage</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
                 </div>
-            </section>
+            </div>
+
+            @*/END/*@
+
         </div>
+
+        <partial name="_RightColumn" />
+
     </div>
+
+    <script src="~/js/DateTime.js"></script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js"></script>

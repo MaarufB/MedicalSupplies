@@ -21,5 +21,15 @@
         {
             <a href="/Home/AccessDenied" style="text-decoration: none;"><p>Inventory</p></a>
         }
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a href="/Userroles/Index" style="text-decoration: none;"><p>Users</p></a>
+        }
+        else
+        {
+            <a href="/Home/AccessDenied" style="text-decoration: none;"><p>Inventory</p></a>
+        }
+
     </div>
 </div>
