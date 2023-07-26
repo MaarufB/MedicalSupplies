@@ -1,0 +1,80 @@
+﻿@model List<MedicalSuppliesWeb.ViewModels.Inventory.InventoryVm>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="~/css/shared-style.css" />
+
+</head>
+<body>
+
+    <div class="row">
+
+        <partial name="_LeftColumn" />
+
+        <div class="col-md-8 column">
+
+            <partial name="_SearchBox" />
+
+
+            @*/DYNAMIC CONTENT BEGIN*@
+
+            <h3>Inventory Reports</h3>
+
+            <div>
+                <canvas id="inventoryChart" width="400" height="200"></canvas>
+            </div>
+            <div id="inventoryData" data-model='@Json.Serialize(Model)'></div> 
+
+
+            @*/END/*@
+
+        </div>
+
+        <partial name="_RightColumn" />
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+    <script src="~/js/DateTime.js"></script>
+    <script>
+
+
+        // Razor syntax to access the inventory data from the model
+        var inventoryData = {
+            labels: [@foreach (var item in Model)
+        {
+            @Html.Raw($"'{item.ProductName}',")
+            ;
+        }],
+            datasets: [{
+                label: 'Inventory Count',
+                data: [@foreach (var item in Model)
+        {
+            @Html.Raw($"{item.QuantityInStock},")
+            ;
+        }],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var inventoryChart = new Chart(document.getElementById('inventoryChart'), {
+            type: 'bar',
+            data: inventoryData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>
