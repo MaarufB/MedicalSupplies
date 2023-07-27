@@ -1,0 +1,135 @@
+﻿@model MedicalSuppliesWeb.ViewModels.Search.SearchVm
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/css/shared-style.css" />
+</head>
+<body>
+
+    <div class="row">
+
+        <partial name="_LeftColumn" />
+
+        <div class="col-md-8 column">
+
+            <partial name="_SearchBox" />
+
+            
+            <div class="search-results-area" style="padding: 40px;">
+                <div class="search-results" style="padding: 20px; border: 1px solid black;">
+
+                    
+                   
+                    <table class="table table-bordered table-primary">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Products != null && Model.Products.Any())
+                            {
+                                @foreach (var product in Model.Products)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("Details", "Products", new { id = product.ProductId }) " style="text-decoration: none">
+                                                @product.ProductName
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="1">No products found.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    
+                    
+                    <table class="table table-bordered table-primary">
+                        <thead>
+                            <tr>
+                                <th>Supplier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Suppliers != null && Model.Suppliers.Any())
+                            {
+                                @foreach (var supplier in Model.Suppliers)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("Details", "Supplier", new { id = supplier.SupplierId })" style="text-decoration: none">
+                                                @supplier.SupplierName
+                                            </a>
+
+                                            
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="1">No suppliers found.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                   
+                    
+                    <table class="table table-bordered table-primary">
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Customers != null && Model.Customers.Any())
+                            {
+                                @foreach (var customer in Model.Customers)
+                                {
+                                    <tr>
+                                        <td>
+                                            @*<a href="@Url.Action("Details", "Customer", new { id = customer.CustomerId })" style="text-decoration: none">
+                                                @customer.FirstName @customer.LastName
+                                            </a>*@
+
+                                            <a asp-controller="Customer" asp-action="Details" asp-route-id="@customer.CustomerId" style="text-decoration: none">
+                                                @customer.FirstName @customer.LastName
+                                            </a>
+
+                                        </td>
+                                       
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="1">No customers found.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+        <partial name="_RightColumn" />
+
+    </div>
+
+    <script src="~/js/DateTime.js"></script>
+
+</body>
+</html>

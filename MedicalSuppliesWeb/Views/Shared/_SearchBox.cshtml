@@ -1,11 +1,67 @@
 ﻿
-<div class="search-box">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <div class="mdc-text-field">
-        <input type="text" class="mdc-text-field__input" id="search-input">
-        <div class="mdc-line-ripple"></div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="search-input" placeholder="Search">
+                <div class="input-group-append" style="padding-left:7px">
+                    <button type="button" class="btn btn-outline-dark" id="search-btn">Go!</button>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-    <button type="button" class="btn btn-outline-dark btn-sm">Go!</button>
 </div>
+
+
+
+<script>
+    $(document).ready(function () {
+     
+        $("#search-btn").on("click", function () {
+            
+            var query = $("#search-input").val().trim();
+
+            
+            searchAll(query);
+        });
+
+      
+        function searchAll(query) {
+            var searchTypes = ["products", "suppliers", "customers"];
+
+           
+            var allResults = [];
+            var completedRequests = 0;
+
+            searchTypes.forEach(function (searchType) {
+                $.ajax({
+                    url: "https://localhost:7203/api/Search/" + searchType,
+                    data: { query: query },
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        // Merge the results for each type into the allResults array
+                        allResults = allResults.concat(data);
+
+                        // Check if all requests have completed
+                        completedRequests++;
+                        if (completedRequests === searchTypes.length) {
+                            // Encode the JSON data before redirecting to prevent URL issues
+                            var encodedResults = encodeURIComponent(JSON.stringify(allResults));
+                            // Redirect to the results page with the combined search results as a query parameter
+                            window.location.href = "/Search/Index?results=" + encodedResults;
+                        }
+                    },
+                    error: function (error) {
+                        console.log("Error while searching:", error);
+                        // Handle the error if necessary
+                        completedRequests++;
+                    }
+                });
+            });
+        }
+    });
+</script>
