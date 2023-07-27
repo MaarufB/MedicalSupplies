@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSuppliesData", "Medi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory Dashboard", "Inventory Dashboard\Inventory Dashboard.csproj", "{CF242DEF-6156-4DDA-981C-3ED401138B3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSuppliesServices", "MedicalSuppliesServices\MedicalSuppliesServices.csproj", "{2919AF00-F8A7-4175-B401-4B208942AC62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSuppliesServices", "MedicalSuppliesServices\MedicalSuppliesServices.csproj", "{2919AF00-F8A7-4175-B401-4B208942AC62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSuppliesDataTest", "MedicalSuppliesDataTest\MedicalSuppliesDataTest.csproj", "{194FC1B5-50B8-47BB-8D22-DA7A0BDDA2A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSuppliesDataTest", "MedicalSuppliesDataTest\MedicalSuppliesDataTest.csproj", "{194FC1B5-50B8-47BB-8D22-DA7A0BDDA2A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSuppliesSearchAPI", "MedicalSuppliesSearchAPI\MedicalSuppliesSearchAPI.csproj", "{A246BA8D-5AF6-46FB-A3A1-0BD92315661B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{194FC1B5-50B8-47BB-8D22-DA7A0BDDA2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{194FC1B5-50B8-47BB-8D22-DA7A0BDDA2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{194FC1B5-50B8-47BB-8D22-DA7A0BDDA2A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A246BA8D-5AF6-46FB-A3A1-0BD92315661B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A246BA8D-5AF6-46FB-A3A1-0BD92315661B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A246BA8D-5AF6-46FB-A3A1-0BD92315661B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A246BA8D-5AF6-46FB-A3A1-0BD92315661B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
