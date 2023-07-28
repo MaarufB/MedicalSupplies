@@ -29,7 +29,14 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\css\Home\" />
-    <Folder Include="wwwroot\js\Home\" />
+    <Folder Include="wwwroot\js\Customer\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\js\Supplier\CreateInvoice.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
