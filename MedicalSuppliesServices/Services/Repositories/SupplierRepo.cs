@@ -25,5 +25,11 @@ namespace MedicalSuppliesServices.Services.Repositories
 
             return suppliers;
         }
+
+        public Supplier GetSupplierById(int supplierId)
+        {
+           var supplier =  _context.Suppliers.FirstOrDefault(s=>s.SupplierId == supplierId);
+            return supplier;
+        }
     }
 }

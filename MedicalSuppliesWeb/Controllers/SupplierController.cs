@@ -3,6 +3,7 @@ using MedicalSuppliesWeb.ViewModels.State;
 using MedicalSuppliesWeb.ViewModels.Supplier;
 using Microsoft.AspNetCore.Mvc;
 using MedicalSuppliesServices.Services.Contracts;
+using MedicalSuppliesServices.Services.Repositories;
 
 namespace MedicalSuppliesWeb.Controllers
 {
@@ -100,6 +101,21 @@ namespace MedicalSuppliesWeb.Controllers
 
             // If the model state is not valid, return to the create order view with the validation errors
             return View(viewModel);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetSupplierDetails(int supplierId)
+        {
+            var supplier = _supplierRepo.GetSupplierById(supplierId);
+            if (supplier != null)
+            {
+                
+                return Json(new { supplierName = supplier.SupplierName });
+            }
+
+            
+            return Json(null);
         }
 
 

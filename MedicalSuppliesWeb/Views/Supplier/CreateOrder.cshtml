@@ -34,7 +34,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="supplierId">Supplier ID:</label>
-                                    <input type="text" class="form-control" id="supplierId" name="SupplierId" value="" />
+                                    <input type="text" class="form-control" id="supplierId" name="SupplierId" value="" oninput="getSupplierDetails(this.value)" />
                                 </div>
                             </div>
 
@@ -262,6 +262,31 @@
         // Set the default value of the orderDate input field
         document.getElementById('orderDate').value = formattedDate;
     </script>
+
+
+    <script>
+        function getSupplierDetails(supplierId) {
+
+            fetch(`/Supplier/GetSupplierDetails?supplierId=${supplierId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+
+                        document.getElementById("supplierName").value = data.supplierName;
+                    } else {
+
+                        document.getElementById("supplierName").value = "";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+
+
+
+
 
 </body>
 </html>
