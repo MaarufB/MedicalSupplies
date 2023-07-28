@@ -4,16 +4,21 @@ using MedicalSuppliesWeb.ViewModels.Supplier;
 using Microsoft.AspNetCore.Mvc;
 using MedicalSuppliesServices.Services.Contracts;
 using MedicalSuppliesServices.Services.Repositories;
+using MedicalSuppliesWeb.ViewModels.Customer;
+using MedicalSuppliesModels;
 
 namespace MedicalSuppliesWeb.Controllers
 {
     public class SupplierController : Controller
     {
         private readonly ISupplierRepo _supplierRepo;
+        private readonly ISupplierOrderRepo _supplierOrderRepo;
 
-        public SupplierController(ISupplierRepo supplierRepo)
+        public SupplierController(ISupplierRepo supplierRepo, ISupplierOrderRepo supplierOrderRepo)
         {
             _supplierRepo = supplierRepo;
+            _supplierOrderRepo = supplierOrderRepo; 
+
         }
         public IActionResult Index()
         {
@@ -116,6 +121,56 @@ namespace MedicalSuppliesWeb.Controllers
 
             
             return Json(null);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetSupplierOrderDetails(int supplierOrderId)
+        {
+            var supplierOrder = _supplierOrderRepo.GetSupplierOrderDetails(supplierOrderId);
+
+            if (supplierOrder == null)
+            {
+                return NotFound();
+            }
+
+
+            var supplierOrderVm = new SupplierOrderVm
+            {
+                SupplierOrderId = supplierOrder.SupplierOrderId,
+                Date = supplierOrder.Date,
+                SupplierOrderTotal = supplierOrder.SupplierOrderTotal,
+                OrderStatus = supplierOrder.OrderStatus,
+                SupplierId = supplierOrder.SupplierId,
+                SupplierName = supplierOrder.Supplier.SupplierName,
+                ShippingAddress = supplierOrder.ShippingAddress,
+                BillingAddress = supplierOrder.BillingAddress,
+                TaxRate = supplierOrder.TaxRate,
+                TaxAmount = supplierOrder.TaxAmount,
+
+                GrandTotal = supplierOrder.GrandTotal,
+
+                SupplierOrderItems = new List<SupplierOrderItemVm>()
+            };
+
+
+            foreach (var supplierOrderItem in supplierOrder.SupplierOrderItems)
+            {
+                var supplierOrderItemVm = new SupplierOrderItemVm
+                {
+
+                    ProductName = supplierOrderItem.Product.ProductName,
+                    Quantity = supplierOrderItem.Quantity,
+                    UnitPrice = supplierOrderItem.UnitPrice,
+                    LineTotal = supplierOrderItem.LineTotal
+                };
+
+                supplierOrderVm.SupplierOrderItems.Add(supplierOrderItemVm);
+            }
+
+            return Json(supplierOrderVm);
+
+
         }
 
 
