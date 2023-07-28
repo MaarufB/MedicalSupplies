@@ -23,5 +23,17 @@ namespace MedicalSuppliesServices.Services.Repositories
 
             return supplierOrders;
         }
+
+        public SupplierOrder GetSupplierOrderDetails(int supplierOrderId)
+        {
+            var supplierOrder = _context.SupplierOrders
+         .Include(co => co.Supplier)
+         .Include(co => co.SupplierOrderItems)
+             .ThenInclude(coi => coi.Product)
+         .FirstOrDefault(co => co.SupplierOrderId == supplierOrderId);
+
+
+            return supplierOrder;
+        }
     }
 }
