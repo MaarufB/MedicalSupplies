@@ -257,11 +257,12 @@
         var productIndex = 0;
 
         function addProductField() {
-             // Increment the productIndex to get the correct index for the new item.
-
+             
+            
             var newProductField = document.createElement("div");
             newProductField.classList.add("order-item");
             productIndex++;
+            var currentIndex = productIndex;
             newProductField.innerHTML = `
                             <div class="row">
                                 <div class="col-md-5">
@@ -302,7 +303,7 @@
                             </div>`;
 
             productContainer.appendChild(newProductField);
-            getProductUnitPrice("", productIndex);
+            getProductUnitPrice("", currentIndex);
         }
 
 
@@ -416,6 +417,7 @@
 
             // Update the productIndex for the remaining product fields
             var remainingProductFields = document.querySelectorAll(".order-item");
+            /*productIndex = 0;*/ // Reset productIndex to 0 before updating it
             remainingProductFields.forEach((field, newIndex) => {
                 var productNameInput = field.querySelector(".product-name");
                 var quantityInput = field.querySelector(".quantity");
@@ -429,6 +431,7 @@
 
                 var deleteButton = field.querySelector(".btn-outline-danger");
                 deleteButton.setAttribute("onclick", `deleteProductField(${newIndex})`);
+                /*productIndex = newIndex;*/ // Update the productIndex for the next iteration
             });
 
             updateOrderTotal();
