@@ -23,5 +23,17 @@ namespace MedicalSuppliesServices.Services.Repositories
                 .ToList();
             return customerOrders;
         }
+
+        public CustomerOrder GetCustomerOrderDetails(int customerOrderId)
+        {
+            var customerOrder = _context.CustomerOrders
+         .Include(co => co.Customer)
+         .Include(co => co.CustomerOrderItems)
+             .ThenInclude(coi => coi.Product) 
+         .FirstOrDefault(co => co.CustomerOrderId == customerOrderId);
+
+
+            return customerOrder;
+        }
     }
 }
