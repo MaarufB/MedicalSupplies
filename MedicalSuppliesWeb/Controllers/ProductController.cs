@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MedicalSuppliesWeb.ViewModels.Product;
 using MedicalSuppliesServices.Services.Contracts;
+using MedicalSuppliesModels;
 
 namespace MedicalSuppliesWeb.Controllers
 {
@@ -125,6 +126,14 @@ namespace MedicalSuppliesWeb.Controllers
 
             // Redirect to the Details page or any other appropriate action after the update
             return RedirectToAction("Details", new { id = product.ProductId });
+        }
+
+
+        public IActionResult GetProductUnitPrice(Product product)
+        {
+            var unitPrice = _productRepo.GetProductUnitPrice(product);
+            return Json(new { UnitPrice = unitPrice });
+
         }
 
     }

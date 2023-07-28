@@ -217,6 +217,21 @@ namespace MedicalSuppliesWeb.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public IActionResult GetCustomerDetails(int customerId)
+        {
+            var customer = _customerRepo.GetCustomerById(customerId);
+            if (customer != null)
+            {
+                // Return the customer details in JSON format
+                return Json(new { firstName = customer.FirstName, lastName = customer.LastName });
+            }
+
+            // If customer is not found, return null in JSON format
+            return Json(null);
+        }
+
+
 
 
 

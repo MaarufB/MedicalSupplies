@@ -76,5 +76,13 @@ namespace MedicalSuppliesServices.Services.Repositories
             }
             return -1;
         }
+
+        public Customer GetCustomerById(int customerId)
+        {
+            var customer = _context.Customers.FirstOrDefault(c=>c.CustomerId == customerId);
+            return customer;
+        }
+
+        
     }
 }

@@ -6,5 +6,6 @@ namespace MedicalSuppliesServices.Services.Contracts
     {
         public List<Product> GetAllProducts();
         public Product GetProductById(int id);
+        public decimal GetProductUnitPrice(Product product);
     }
 }

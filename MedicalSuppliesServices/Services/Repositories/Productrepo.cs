@@ -33,5 +33,11 @@ namespace MedicalSuppliesServices.Services.Repositories
 
             return product;
         }
+
+        public decimal GetProductUnitPrice(Product product)
+        {
+            var unitPrice = _context.Products.FirstOrDefault(p=>p.ProductName == product.ProductName);
+            return unitPrice == null ? 0 : unitPrice.Price;
+        }
     }
 }

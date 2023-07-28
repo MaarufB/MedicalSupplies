@@ -15,5 +15,7 @@ namespace MedicalSuppliesServices.Services.Contracts
         public void AddCustomerNumber(CustomerNumber number);
 
         public void AddCustomerInsurance(Insurance insurance);
+
+        public Customer GetCustomerById(int id);
     }
 }
