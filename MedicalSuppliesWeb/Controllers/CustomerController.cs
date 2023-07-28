@@ -9,10 +9,13 @@ namespace MedicalSuppliesWeb.Controllers
     public class CustomerController : Controller
     {
         private readonly ICustomerRepo _customerRepo;
+        private readonly ICustomerOrderRepo _customerOrderRepo;
 
-        public CustomerController(ICustomerRepo customerRepo)
+        public CustomerController(ICustomerRepo customerRepo, ICustomerOrderRepo customerOrderRepo)
         {
             _customerRepo = customerRepo;
+            _customerOrderRepo = customerOrderRepo;
+
         }
         public IActionResult Index()
         {
@@ -232,10 +235,53 @@ namespace MedicalSuppliesWeb.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult GetCustomerOrderDetails(int customerOrderId)
+        {
+            var customerOrder = _customerOrderRepo.GetCustomerOrderDetails(customerOrderId);
+
+            if (customerOrder == null)
+            {
+                return NotFound();
+            }
+
+           
+            var customerOrderVm = new CustomerOrderVm
+            {
+                CustomerOrderId = customerOrder.CustomerOrderId,
+                Date = customerOrder.Date,
+                CustomerOrderTotal = customerOrder.CustomerOrderTotal,
+                OrderStatus = customerOrder.OrderStatus,
+                CustomerId = customerOrder.CustomerId,
+                CustomerName = customerOrder.Customer.FirstName,
+                ShippingAddress = customerOrder.ShippingAddress,
+                BillingAddress = customerOrder.BillingAddress,
+                TaxRate = customerOrder.TaxRate,
+                TaxAmount = customerOrder.TaxAmount,
+              
+                GrandTotal = customerOrder.GrandTotal,
+                
+                CustomerOrderItems = new List<CustomerOrderItemVm>()
+            };
+
+            
+            foreach (var customerOrderItem in customerOrder.CustomerOrderItems)
+            {
+                var customerOrderItemVm = new CustomerOrderItemVm
+                {
+                    
+                    ProductName = customerOrderItem.Product.ProductName,
+                    Quantity = customerOrderItem.Quantity,
+                    UnitPrice = customerOrderItem.UnitPrice,
+                    LineTotal = customerOrderItem.LineTotal
+                };
+
+                customerOrderVm.CustomerOrderItems.Add(customerOrderItemVm); 
+            }
+
+            return Json(customerOrderVm);
 
 
-
-
-
+        }
     }
 }

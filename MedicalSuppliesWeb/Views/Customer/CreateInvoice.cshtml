@@ -42,7 +42,8 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="customerName">Customer Name:</label>
-                                <input type="text" class="form-control" id="customerName" name="Date" value="@Model.CustomerName" />
+                                @*<input type="text" class="form-control" id="customerName" name="Date" value="@Model.CustomerName" />*@
+                                    <input type="text" class="form-control" id="customerName" name="CustomerName" value="" readonly />
                             </div>
                         </div>
 
@@ -50,7 +51,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="orderNo">Order No:</label>
-                                <input type="text" class="form-control" id="orderNo" name="Date" value="@Model.CustomerOrderNo" />
+                                    <input type="text" class="form-control" id="orderNo" name="OrderNo" onchange="return getCustomerOrderDetails();" />
                             </div>
                         </div>
 
@@ -59,7 +60,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="invoiceDate">Invoice Date:</label>
-                                <input type="text" class="form-control" id="invoiceDate" name="Date" value="@Model.InvoiceDate.ToShortDateString()" />
+                                <input type="date" class="form-control" id="invoiceDate" name="Date" value="" />
                             </div>
                         </div>
                     </div>
@@ -68,7 +69,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="shippingAddress">Shipping Address:</label>
-                                <textarea class="form-control" id="shippingAddress" name="ShippingAddress" rows="3">@Model.ShippingAddress</textarea>
+                                @*<textarea class="form-control" id="shippingAddress" name="ShippingAddress" rows="3">@Model.ShippingAddress</textarea>*@
+                                    <textarea class="form-control" id="shippingAddress" name="ShippingAddress" rows="3" readonly></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -134,23 +136,24 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
 
                             <div class="form-group">
                                 <label for="invoiceTotal">Invoice Total:</label>
-                                <input type="text" class="form-control" id="taxRate" name="InvoiceTotal" value="@Model.TotalAmount" />
+                                @*<input type="text" class="form-control" id="taxRate" name="InvoiceTotal" value="@Model.TotalAmount" />*@
+                                    <input type="text" class="form-control" id="invoiceTotal" name="InvoiceTotal" value="" readonly />
                             </div>
 
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="taxRate">Tax Rate:</label>
                                 <input type="text" class="form-control" id="taxRate" name="TaxRate" value="@Model.TaxRate" />
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
 
                             <div class="form-group">
                                 <label for="taxAmount">Tax Amount:</label>
@@ -158,27 +161,47 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                       
 
-                            <div class="form-group">
-                                <label for="grandTotal">Grand Total:</label>
-                                <input type="text" class="form-control" id="grandTotal" name="GrandTotal" value="@Model.GrandTotal" />
+                    </div>
+
+                    <div class="row">
+
+                            
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label for="discount">Discount:</label>
+                                    <input type="text" class="form-control" id="discount" name="GrandTotal" value="@Model.DiscountAmount" />
+                                </div>
                             </div>
-                        </div>
 
 
-                        <div class="col-md-2">
 
-                            <div class="form-group">
-                                <label for="paymentStatus">Payment Status</label>
-                                <select class="form-control" id="myDropdown">
-                                    <option value="">Select</option>
-                                    <option value="option1">Pending</option>
-                                    <option value="option2">Settled</option>
-                                
-                                </select>
+                        
+                        
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label for="grandTotal">Grand Total:</label>
+                                    <input type="text" class="form-control" id="grandTotal" name="GrandTotal" value="@Model.GrandTotal" />
+                                </div>
                             </div>
-                        </div>
+
+
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label for="paymentStatus">Payment Status</label>
+                                    <select class="form-control" id="myDropdown">
+                                        <option value="">Select</option>
+                                        <option value="option1">Pending</option>
+                                        <option value="option2">Settled</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
 
                     </div>
 
@@ -267,6 +290,147 @@
         productIndex++;
     });
 </script>
+
+
+
+
+    <script>
+        function getCustomerOrderDetails() {
+            var customerOrderId = document.getElementById("orderNo").value;
+            if (customerOrderId) {
+                fetch(`/Customer/GetCustomerOrderDetails?customerOrderId=${customerOrderId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Response from server:", data);
+                        if (data) {
+
+                            console.log("Customer ID:", data.customerId);
+                            console.log("Customer Name:", data.customerName);
+                            console.log("Shipping Address:", data.shippingAddress);
+
+
+                            // Update the form fields with the retrieved data
+                            document.getElementById("customerId").value = data.customerId;
+                            document.getElementById("customerName").value = data.customerName;
+                            document.getElementById("shippingAddress").value = data.shippingAddress;
+
+
+                            document.getElementById("invoiceTotal").value = data.customerOrderTotal;
+                            document.getElementById("taxAmount").value = data.taxAmount;
+                            document.getElementById("taxRate").value = data.taxRate;
+
+                            updateOrderItems(data.customerOrderItems);
+
+
+                        } else {
+                            
+                            alert("CustomerOrder not found.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("An error occurred while fetching data.");
+                    });
+            }
+        }
+
+
+
+        function updateOrderItems(orderItems) {
+            // Remove all existing order items
+            var productContainer = document.getElementById("product-container");
+            productContainer.innerHTML = "";
+
+
+            var invoiceTotal = 0;
+
+
+
+            // Create and add new order item fields
+            orderItems.forEach((item, index) => {
+                var newProductField = document.createElement("div");
+                newProductField.classList.add("order-item");
+
+                newProductField.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="productName">Product Name:</label>
+                                <input type="text" class="form-control product-name" name="CustomerOrderItems[${index}].ProductName" value="${item.productName}" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="quantity">Quantity:</label>
+                                <input type="text" class="form-control quantity" name="CustomerOrderItems[${index}].Quantity" value="${item.quantity}" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="unitPrice">Unit Price:</label>
+                                <input type="text" class="form-control unit-price" name="CustomerOrderItems[${index}].UnitPrice" value="${item.unitPrice}" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="lineTotal">Line total:</label>
+                                <input type="text" class="form-control line-total" name="CustomerOrderItems[${index}].LineTotal" value="${item.lineTotal}" />
+                            </div>
+                        </div>
+                    </div>`;
+
+                productContainer.appendChild(newProductField);
+
+
+
+
+                //var lineTotal = item.quantity * item.unitPrice;
+                //invoiceTotal += lineTotal;
+
+                //// Set the line total value for the current order item in the form
+                //var lineTotalInput = newProductField.querySelector(".line-total");
+                //lineTotalInput.value = lineTotal;
+
+
+
+
+            });
+
+
+            //var invoiceTotalField = document.getElementById("invoiceTotal");
+            //invoiceTotalField.value = invoiceTotal;
+        }
+
+
+
+        function calculateGrandTotal() {
+            // Get the values from the corresponding fields
+            var invoiceTotal = parseFloat(document.getElementById("invoiceTotal").value);
+            var taxAmount = parseFloat(document.getElementById("taxAmount").value);
+            var discount = parseFloat(document.getElementById("discount").value);
+
+            // Calculate the grand total
+            var grandTotal = invoiceTotal + taxAmount - discount;
+
+            // Populate the grand total field
+            document.getElementById("grandTotal").value = grandTotal;
+        }
+
+        // Call the calculateGrandTotal function whenever the discount field changes
+        document.getElementById("discount").addEventListener("change", calculateGrandTotal);
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
 
 
 
