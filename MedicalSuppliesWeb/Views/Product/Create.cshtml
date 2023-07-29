@@ -22,7 +22,199 @@
 
             @*/DYNAMIC CONTENT BEGIN*@
 
-            <h3>Cerate a form here for product creation</h3>
+            <h2 style="padding-left: 280px; padding-top: 40px; padding-bottom: 30px;">CREATE PRODUCT</h2>
+
+            <form method="post" asp-controller="Customer" asp-action="Create">
+
+                <div class="card px-3 py-4">
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align:center">Details</h5>
+                        <div class="row pb-5">
+                            
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="productName">Product:</label>
+                                    <input type="text" class="form-control" id="productName" name="ProductName" value="@Model.ProductName" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="customerLastName">Description:</label>
+                                    <input type="text" class="form-control" id="description" name="Description" value="@Model.Description" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label for="dateOfBirth">Price:</label>
+                                    <input type="text" class="form-control" id="price" name="Price" value="@Model.Price">
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row pb-5">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="manufacturer">Manufacturer</label>
+
+
+                                    <select class="form-control" id="manufacturer" name="@Model.ManufacturerName">
+                                        <option value="">Select</option>
+                                        @foreach (var manufacturer in Model.AvailableManufacturers)
+                                        {
+                                            <option value="@manufacturer.ManufacturerId">@manufacturer.ManufacturerName</option>
+                                        }
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="supplier">Supplier</label>
+
+
+                                    <select class="form-control" id="supplier" name="@Model.SupplierName">
+                                        <option value="">Select</option>
+
+                                        @foreach (var supplier in Model.AvailableSuppliers)
+                                        {
+                                            <option value="@supplier.SupplierId">@supplier.SupplierName</option>
+                                        }
+
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="category">Category</label>
+
+
+                                    <select class="form-control" id="category" name="@Model.CategoryName">
+                                        <option value="">Select</option>
+                                        @foreach (var category in Model.AvailableCategories)
+                                        {
+                                            <option value="@category.CategoryId">@category.CategoryName</option>
+                                        }
+
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card px-3 py-4" style="margin-top: -2px;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align:center">Stock Details</h5>
+                        <div id="stock-container">
+                            <!-- Initial address field -->
+                            <div class="stock">
+                                <div class="row pb-4">
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="stock">Location:</label>
+
+
+                                            <select class="form-control" id="location" name="@Model.LocationName">
+                                                <option value="">Select</option>
+                                                @foreach (var location in Model.AvailableLocations)
+                                                {
+                                                    <option value="@location.LocationId">@location.LocationName</option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="colour">Colour</label>
+
+
+                                            <select class="form-control" id="colour" name="@Model.ColourName">
+                                                <option value="">Select</option>
+                                                @foreach (var colour in Model.AvailableColours)
+                                                {
+                                                    <option value="@colour.ColourId">@colour.ColourName</option>
+                                                }
+
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+                                            <label for="dateCreated">Created:</label>
+                                            <input type="date" class="form-control datepicker" id="dateCreated" name="dateCreated" placeholder="Select date">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row pb-4">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="stock">Stock:</label>
+                                            <input type="text" class="form-control" id="stock" name="Stock" value="@Model.Inventory.QuantityInStock" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="reorderLevel">Reorder Level:</label>
+                                            <input type="text" class="form-control" id="reorderLevel" name="ReorderLevel" value="@Model.Inventory.ReorderLevel" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+                                            <label for="stockUpdated">Stock Update:</label>
+                                            <input type="date" class="form-control datepicker" id="stockUpdated" name="stockUpdated" value="@Model.Inventory.LastStockUpdate" placeholder="Select date">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="card" style=" margin-top: -2px;">
+                    <div class="card-body" style="display: flex; justify-content: center; padding: 10px;">
+                        <button type="submit" class="btn btn-outline-dark">Create</button>
+                    </div>
+                </div>
+            </form>
 
             @*/END/*@
 

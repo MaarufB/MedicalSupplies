@@ -1,4 +1,6 @@
 ﻿using MedicalSuppliesModels;
+using MedicalSuppliesWeb.ViewModels.Inventory;
+using MedicalSuppliesWeb.ViewModels.Location;
 
 namespace MedicalSuppliesWeb.ViewModels.Product
 {
@@ -13,6 +15,8 @@ namespace MedicalSuppliesWeb.ViewModels.Product
         public string ColourName { get; set; }
         public string SupplierName { get; set; }
 
+        public string LocationName { get; set; }
+
 
         // Selected IDs for Manufacturer, Supplier, Colour, and Category
         public int ManufacturerId { get; set; }
@@ -20,11 +24,19 @@ namespace MedicalSuppliesWeb.ViewModels.Product
         public int ColourId { get; set; }
         public int CategoryId { get; set; }
 
+        public int LocationId { get; set; }
+
+
         // Lists of available options for dropdown lists in the view
         public List<Manufacturer> AvailableManufacturers { get; set; }
         public List<MedicalSuppliesModels.Supplier> AvailableSuppliers { get; set; }
         public List<Colour> AvailableColours { get; set; }
         public List<Category> AvailableCategories { get; set; }
+
+        public List<MedicalSuppliesModels.Location> AvailableLocations { get; set; }
+
+
+        public InventoryVm Inventory { get; set; }
 
 
 

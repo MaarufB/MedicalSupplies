@@ -20,6 +20,7 @@ namespace MedicalSuppliesServices.Services.Repositories
                 .Include(s => s.Supplier)
                 .Include(m => m.Manufacturer)
                 .Include(c => c.Colour).ToList();
+                
             return products;
         }
 
