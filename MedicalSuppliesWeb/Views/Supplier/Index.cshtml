@@ -17,9 +17,19 @@
 
             @*DYNAMIC CONTENT BEGINS*@
 
-            <div style="display: flex; padding-left: 350px; padding-top: 40px; padding-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; padding-left: 350px; padding-top: 40px; padding-bottom: 20px;">
                 <h3 style="text-align: center; margin: 0; text-decoration: underline;">All Suppliers</h3>
-                <!-- Add link to create a new supplier if needed -->
+
+                <div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="/Supplier/Create" class="btn btn-sm btn-outline-dark">Create</a>
+                    }
+                    else
+                    {
+                        <a href="/Home/AccessDenied" class="btn btn-sm btn-outline-dark">Create</a>
+                    }
+                </div>
             </div>
 
             @if (Model.Count > 0)

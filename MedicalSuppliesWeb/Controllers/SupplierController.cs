@@ -174,5 +174,42 @@ namespace MedicalSuppliesWeb.Controllers
         }
 
 
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            // Create a new instance of the SupplierProfileVm view model
+            var supplierViewModel = new SupplierProfileVm();
+
+            return View(supplierViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Create(SupplierProfileVm newSupplier)
+        {
+            if (!ModelState.IsValid)
+            {
+                // If the model state is invalid, return the same view with validation errors
+                return View(newSupplier);
+            }
+
+            // Create a new Supplier entity based on the data in the view model
+            var newSupplierEntity = new Supplier
+            {
+                SupplierName = newSupplier.SupplierName,
+                ContactName = newSupplier.ContactName,
+                ContactEmail = newSupplier.ContactEmail
+            };
+
+            // Save the new supplier entity to the database
+            // _supplierRepo.AddSupplier(newSupplierEntity);
+            // _supplierRepo.SaveChanges();
+
+            // Redirect to the Details page for the newly created supplier or any other appropriate action
+            return RedirectToAction("Details", new { id = newSupplierEntity.SupplierId });
+        }
+
+
+
     }
 }
