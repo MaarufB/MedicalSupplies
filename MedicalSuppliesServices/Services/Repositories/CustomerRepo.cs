@@ -79,7 +79,9 @@ namespace MedicalSuppliesServices.Services.Repositories
 
         public Customer GetCustomerById(int customerId)
         {
-            var customer = _context.Customers.FirstOrDefault(c=>c.CustomerId == customerId);
+            var customer = _context.Customers
+                .Include(g=>g.Gender)
+                .FirstOrDefault(c=>c.CustomerId == customerId);
             return customer;
         }
 

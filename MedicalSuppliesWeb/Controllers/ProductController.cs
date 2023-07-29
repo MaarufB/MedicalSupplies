@@ -44,12 +44,12 @@ namespace MedicalSuppliesWeb.Controllers
         
             public IActionResult Details(int id)
             {
-                // Retrieve the product by its ID from the database
+                
                 var product = _productRepo.GetProductById(id);
 
                 if (product == null)
                 {
-                    // If the product is not found, return a not found view or redirect to another page
+                    
                     return NotFound();
                 }
 

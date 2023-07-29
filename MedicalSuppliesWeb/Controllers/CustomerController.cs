@@ -44,9 +44,9 @@ namespace MedicalSuppliesWeb.Controllers
                     {
                         Id = address.State.StateId,
                         State = address.State.LongState
-                        
+
                     },
-                    
+
                     Zip = address.Zip
                 }).ToList(),
                 CustomerNumbers = customer.CustomerNumbers.Select(number => new CustomerNumberVm
@@ -89,8 +89,8 @@ namespace MedicalSuppliesWeb.Controllers
         public IActionResult Create(CustomerProfileVm viewModel)
         {
             if (ModelState.IsValid)
-            {              
-                                
+            {
+
                 var customer = new Customer
                 {
                     FirstName = viewModel.FirstName,
@@ -109,7 +109,7 @@ namespace MedicalSuppliesWeb.Controllers
 
                 //customer.GenderId = viewModel.Gender.GenderId;
 
-                
+
                 _customerRepo.AddCustomer(customer);
 
                 foreach (var addressVm in viewModel.CustomerAddresses)
@@ -123,7 +123,7 @@ namespace MedicalSuppliesWeb.Controllers
                         Zip = addressVm.Zip,
                         CustomerId = customer.CustomerId // this is needed to set the foreign key link to the customer table
                     };
-                    
+
                     _customerRepo.AddCustomerAddress(address);
                 }
 
@@ -151,7 +151,7 @@ namespace MedicalSuppliesWeb.Controllers
                         DateExpire = insuranceVm.DateExpire
                     };
                     _customerRepo.AddCustomerInsurance(insurance);
-                }                
+                }
                 return RedirectToAction("Index");
             }
             if (!ModelState.IsValid)
@@ -161,7 +161,7 @@ namespace MedicalSuppliesWeb.Controllers
                     foreach (var error in modelStateValue.Errors)
                     {
                         var errorMessage = error.ErrorMessage;
-                        
+
                     }
                 }
             }
@@ -175,7 +175,7 @@ namespace MedicalSuppliesWeb.Controllers
         public IActionResult CreateOrder()
         {
             var viewModel = new CustomerOrderVm();
-           
+
             return View(viewModel);
         }
 
@@ -245,7 +245,7 @@ namespace MedicalSuppliesWeb.Controllers
                 return NotFound();
             }
 
-           
+
             var customerOrderVm = new CustomerOrderVm
             {
                 CustomerOrderId = customerOrder.CustomerOrderId,
@@ -258,30 +258,97 @@ namespace MedicalSuppliesWeb.Controllers
                 BillingAddress = customerOrder.BillingAddress,
                 TaxRate = customerOrder.TaxRate,
                 TaxAmount = customerOrder.TaxAmount,
-              
+
                 GrandTotal = customerOrder.GrandTotal,
-                
+
                 CustomerOrderItems = new List<CustomerOrderItemVm>()
             };
 
-            
+
             foreach (var customerOrderItem in customerOrder.CustomerOrderItems)
             {
                 var customerOrderItemVm = new CustomerOrderItemVm
                 {
-                    
+
                     ProductName = customerOrderItem.Product.ProductName,
                     Quantity = customerOrderItem.Quantity,
                     UnitPrice = customerOrderItem.UnitPrice,
                     LineTotal = customerOrderItem.LineTotal
                 };
 
-                customerOrderVm.CustomerOrderItems.Add(customerOrderItemVm); 
+                customerOrderVm.CustomerOrderItems.Add(customerOrderItemVm);
             }
 
             return Json(customerOrderVm);
 
 
+        }
+
+
+        public IActionResult Details(int id)
+        {
+
+            var customer = _customerRepo.GetCustomerById(id);
+            if (customer == null)
+            {
+
+                return NotFound();
+            }
+
+            #pragma warning disable CS8601
+            var customerViewModel = new CustomerProfileVm
+            {
+                CustomerId = customer.CustomerId,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                DOB = customer.DOB,
+                Height = customer.Height,
+                Weight = customer.Weight,
+                Gender = new CustomerGenderVm
+                {
+                    GenderId = customer.Gender.GenderId,
+                    GenderName = customer.Gender.GenderName
+                },
+
+                CustomerAddresses = customer.CustomerAddresses?.Select(address => new CustomerAddressVm
+                {
+                    CustomerAddressId = address.AddressId,
+                    Address = address.Address,
+                    City = address.City,
+                    State = new StateVm
+                    {
+                        Id = address.State.StateId,
+                        State = address.State.LongState
+                    },
+                    Zip = address.Zip
+                }).ToList(),
+
+                CustomerNumbers = customer.CustomerNumbers?.Select(number => new CustomerNumberVm
+                {
+                    CustomerNumberId = number.CustomerNumberId,
+                    PhoneNumber = number.PhoneNumber
+                }).ToList(),
+
+                Insurances = customer.Insurances?.Select(insurance => new CustomerInsuranceVm
+                {
+                    InsuranceId = insurance.InsuranceId,
+                    CustomerId = insurance.CustomerId,
+                    InsuranceTypeId = insurance.InsuranceTypeId,
+                    GroupId = insurance.GroupId,
+                    PolicyNo = insurance.PolicyNo,
+                    PrimaryInsurance = insurance.PrimaryInsurance,
+                    SecondaryInsurance = insurance.SecondaryInsurance,
+                    DateEffective = insurance.DateEffective,
+                    DateExpire = insurance.DateExpire,
+                    InsuranceType = new CustomerInsuranceTypeVm
+                    {
+                        InsuranceTypeId = insurance.InsuranceType.InsuranceTypeId,
+                        Description = insurance.InsuranceType.Description
+                    }
+                }).ToList()
+            };
+
+            return View(customerViewModel);
         }
     }
 }
