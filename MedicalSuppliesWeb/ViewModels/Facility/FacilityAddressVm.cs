@@ -8,6 +8,7 @@ namespace MedicalSuppliesWeb.ViewModels.Facility
         public string Address { get; set; }
         public string City { get; set; }
         public string Zip { get; set; }
+        public int StateId { get; set; }
         public StateVm State { get; set; }
         public CountryVm Country { get; set; }
     }

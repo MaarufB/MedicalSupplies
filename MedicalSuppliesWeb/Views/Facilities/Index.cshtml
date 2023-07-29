@@ -22,9 +22,18 @@
             @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
             everything else remain the same*@
 
-            <div style="display: flex; padding-left: 350px; padding-top: 40px; padding-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-left: 370px; padding-top: 40px; padding-bottom: 20px;">
                 <h3 style="text-align: center; margin: 0; text-decoration: underline;">Facilities</h3>
-                <a href="/Customer/Create" style="text-align: right; padding-left: 280px; text-decoration:none">Create</a>
+                <div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="/Facilities/Create" class="btn btn-sm btn-outline-dark">Create</a>
+                    }
+                    else
+                    {
+                        <a href="/Home/AccessDenied" class="btn btn-sm btn-outline-dark">Create</a>
+                    }
+                </div>
             </div>
 
             <div class="card-deck">

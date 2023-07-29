@@ -1,0 +1,37 @@
+﻿@model MedicalSuppliesWeb.ViewModels.Facility.FacilityVm
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="~/css/shared-style.css" />
+
+</head>
+
+<body>
+    <div class="row">
+        <partial name="_LeftColumn" />
+
+
+        <div class="col-md-8 column">
+
+            <partial name="_SearchBox" />
+
+            @*//following div (row) is the dynamic content of this page, it changes on each other page view redirected from here.
+            everything else remain the same*@
+            <h3>create facility here</h3>
+           
+
+            @*/END/*@
+
+        </div>
+
+        <partial name="_RightColumn" />
+    </div>
+
+    <script src="~/js/DateTime.js"></script>
+
+</body>
+</html>
