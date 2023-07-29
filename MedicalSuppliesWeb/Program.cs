@@ -61,6 +61,9 @@ namespace UserRolesNew
             builder.Services.AddScoped<IFacilityRepo, FacilityRepo>();
             builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
             builder.Services.AddScoped<ISupplierRepo, SupplierRepo>();
+            builder.Services.AddScoped<IManufacturerRepo, ManufacturerRepo>();
+            builder.Services.AddScoped<IColourRepo, ColourRepo>();
+            builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 
 
 

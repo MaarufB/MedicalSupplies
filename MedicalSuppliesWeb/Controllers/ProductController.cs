@@ -8,10 +8,19 @@ namespace MedicalSuppliesWeb.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepo _productRepo;
+        private readonly IManufacturerRepo _manufacturerRepo;
+        private readonly ISupplierRepo _supplierRepo;
+        private readonly IColourRepo _colourRepo;
+        private readonly ICategoryRepo _categoryRepo;
 
-        public ProductController(IProductRepo productRepo)
+        public ProductController(IProductRepo productRepo, IManufacturerRepo manufacturerRepo, ISupplierRepo supplierRepo, IColourRepo colourRepo, ICategoryRepo categoryRepo)
         {
             _productRepo = productRepo;
+            _manufacturerRepo = manufacturerRepo;  
+            _supplierRepo = supplierRepo;
+            _colourRepo = colourRepo;
+            _categoryRepo = categoryRepo;
+
         }
         [HttpGet]
         public IActionResult Index()
@@ -135,6 +144,68 @@ namespace MedicalSuppliesWeb.Controllers
             return Json(new { UnitPrice = unitPrice });
 
         }
+
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            // Load data for dropdown lists from the database
+            var manufacturers = _manufacturerRepo.GetAllManufacturers();
+            var suppliers = _supplierRepo.GetAllSuppliers();
+            var colours = _colourRepo.GetAllColours();
+            var categories = _categoryRepo.GetAllCategories();
+
+            // Create a new instance of the ProductVm view model and populate the available options
+            var productViewModel = new ProductVm
+            {
+                AvailableManufacturers = manufacturers.ToList(),
+                AvailableSuppliers = suppliers.ToList(),
+                AvailableColours = colours.ToList(),
+                AvailableCategories = categories.ToList()
+            };
+
+            return View(productViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Create(ProductVm newProduct)
+        {
+            if (!ModelState.IsValid)
+            {
+                
+                var manufacturers = _manufacturerRepo.GetAllManufacturers();
+                var suppliers = _supplierRepo.GetAllSuppliers();
+                var colours = _colourRepo.GetAllColours();
+                var categories = _categoryRepo.GetAllCategories();
+
+                newProduct.AvailableManufacturers = manufacturers.ToList();
+                newProduct.AvailableSuppliers = suppliers.ToList();
+                newProduct.AvailableColours = colours.ToList();
+                newProduct.AvailableCategories = categories.ToList();
+
+                return View(newProduct);
+            }
+
+            // Create a new Product entity based on the data in the view model
+            var newProductEntity = new Product
+            {
+                ProductName = newProduct.ProductName,
+                Description = newProduct.Description,
+                Price = newProduct.Price,
+                ManufacturerId = newProduct.ManufacturerId,
+                SupplierId = newProduct.SupplierId,
+                ColourId = newProduct.ColourId,
+                CategoryId = newProduct.CategoryId
+            };
+
+            // Save the new product entity to the database
+            //_productRepo.AddProduct(newProductEntity);
+            //_productRepo.SaveChanges();
+
+            // Redirect to the Details page for the newly created product or any other appropriate action
+            return RedirectToAction("Details", new { id = newProductEntity.ProductId });
+        }
+
 
     }
 }
