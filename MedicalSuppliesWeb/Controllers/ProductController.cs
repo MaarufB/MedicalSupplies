@@ -2,6 +2,8 @@
 using MedicalSuppliesWeb.ViewModels.Product;
 using MedicalSuppliesServices.Services.Contracts;
 using MedicalSuppliesModels;
+using GoogleMaps.LocationServices;
+using MedicalSuppliesWeb.ViewModels.Inventory;
 
 namespace MedicalSuppliesWeb.Controllers
 {
@@ -12,14 +14,21 @@ namespace MedicalSuppliesWeb.Controllers
         private readonly ISupplierRepo _supplierRepo;
         private readonly IColourRepo _colourRepo;
         private readonly ICategoryRepo _categoryRepo;
+        private readonly ILocationRepo _locationRepo;
 
-        public ProductController(IProductRepo productRepo, IManufacturerRepo manufacturerRepo, ISupplierRepo supplierRepo, IColourRepo colourRepo, ICategoryRepo categoryRepo)
+        public ProductController(IProductRepo productRepo, 
+            IManufacturerRepo manufacturerRepo, 
+            ISupplierRepo supplierRepo, 
+            IColourRepo colourRepo, 
+            ICategoryRepo categoryRepo,
+            ILocationRepo locationRepo)
         {
             _productRepo = productRepo;
             _manufacturerRepo = manufacturerRepo;  
             _supplierRepo = supplierRepo;
             _colourRepo = colourRepo;
             _categoryRepo = categoryRepo;
+            _locationRepo = locationRepo;
 
         }
         [HttpGet]
@@ -154,6 +163,7 @@ namespace MedicalSuppliesWeb.Controllers
             var suppliers = _supplierRepo.GetAllSuppliers();
             var colours = _colourRepo.GetAllColours();
             var categories = _categoryRepo.GetAllCategories();
+            var locations = _locationRepo.GetAllLocations();
 
             // Create a new instance of the ProductVm view model and populate the available options
             var productViewModel = new ProductVm
@@ -161,7 +171,9 @@ namespace MedicalSuppliesWeb.Controllers
                 AvailableManufacturers = manufacturers.ToList(),
                 AvailableSuppliers = suppliers.ToList(),
                 AvailableColours = colours.ToList(),
-                AvailableCategories = categories.ToList()
+                AvailableCategories = categories.ToList(),
+                AvailableLocations = locations.ToList(),
+                Inventory = new InventoryVm()
             };
 
             return View(productViewModel);
@@ -177,11 +189,13 @@ namespace MedicalSuppliesWeb.Controllers
                 var suppliers = _supplierRepo.GetAllSuppliers();
                 var colours = _colourRepo.GetAllColours();
                 var categories = _categoryRepo.GetAllCategories();
+                var locations = _locationRepo.GetAllLocations();
 
                 newProduct.AvailableManufacturers = manufacturers.ToList();
                 newProduct.AvailableSuppliers = suppliers.ToList();
                 newProduct.AvailableColours = colours.ToList();
                 newProduct.AvailableCategories = categories.ToList();
+                newProduct.AvailableLocations = locations.ToList();
 
                 return View(newProduct);
             }
@@ -201,6 +215,23 @@ namespace MedicalSuppliesWeb.Controllers
             // Save the new product entity to the database
             //_productRepo.AddProduct(newProductEntity);
             //_productRepo.SaveChanges();
+
+            if (newProduct.Inventory != null)
+            {
+                var newInventoryEntity = new Inventory
+                {
+                    ProductId = newProductEntity.ProductId,
+                    QuantityInStock = newProduct.Inventory.QuantityInStock,
+                    SupplierId = newProduct.Inventory.SupplierId,
+                    ReorderLevel = newProduct.Inventory.ReorderLevel,
+                    LastStockUpdate = newProduct.Inventory.LastStockUpdate,
+                    LocationId = newProduct.LocationId // Set the LocationId property from the ProductVm
+                };
+
+                // Save the new inventory entity to the database
+                // _inventoryRepo.AddInventory(newInventoryEntity);
+                // _inventoryRepo.SaveChanges();
+            }
 
             // Redirect to the Details page for the newly created product or any other appropriate action
             return RedirectToAction("Details", new { id = newProductEntity.ProductId });

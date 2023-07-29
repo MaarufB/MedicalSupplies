@@ -18,8 +18,22 @@
 
         <div class="row" style="padding:30px">
 
-            <h3 style="text-align:center; padding-bottom:20px">Products</h3>
-            @*<table class="table table-bordered table-hover">*@
+                <div class="col-md-11">
+                    <h3 style="text-align: center; padding-bottom: 20px">Products</h3>
+                </div>
+                <div class="col-md-1 text-right">                  
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="/Product/Create" class="btn btn-sm btn-outline-dark">Create</a>
+                    }
+                    else
+                    {
+                        <a href="/Home/AccessDenied" class="btn btn-sm btn-outline-dark">Create</a>
+                    }
+
+                </div>
+
                 <table class="table table-bordered border-primary table-hover text-center">
                 <thead>
                     <tr>
