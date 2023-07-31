@@ -1,5 +1,6 @@
 ﻿using MedicalSuppliesModels;
 
+
 namespace MedicalSuppliesServices.Services.Contracts
 {
     public interface ICustomerRepo
@@ -17,5 +18,9 @@ namespace MedicalSuppliesServices.Services.Contracts
         public void AddCustomerInsurance(Insurance insurance);
 
         public Customer GetCustomerById(int id);
+
+        //public void UpdateCustomer(CustomerProfileVm customer);
+
+        public void UpdateCustomer(Customer customer);
     }
 }

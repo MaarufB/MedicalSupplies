@@ -3,6 +3,7 @@ using MedicalSuppliesModels;
 using MedicalSuppliesWeb.ViewModels.Customer;
 using MedicalSuppliesWeb.ViewModels.State;
 using MedicalSuppliesServices.Services.Contracts;
+using AutoMapper;
 
 namespace MedicalSuppliesWeb.Controllers
 {
@@ -10,12 +11,13 @@ namespace MedicalSuppliesWeb.Controllers
     {
         private readonly ICustomerRepo _customerRepo;
         private readonly ICustomerOrderRepo _customerOrderRepo;
+        private readonly IMapper _mapper;
 
-        public CustomerController(ICustomerRepo customerRepo, ICustomerOrderRepo customerOrderRepo)
+        public CustomerController(ICustomerRepo customerRepo, ICustomerOrderRepo customerOrderRepo, IMapper mapper)
         {
             _customerRepo = customerRepo;
             _customerOrderRepo = customerOrderRepo;
-
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -350,5 +352,51 @@ namespace MedicalSuppliesWeb.Controllers
 
             return View(customerViewModel);
         }
+
+
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var customer = _customerRepo.GetCustomerById(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            // Use AutoMapper to map the Customer to CustomerProfileVm
+            var customerViewModel = _mapper.Map<CustomerProfileVm>(customer);
+
+            // Pass the ViewModel to the view for editing
+            return View(customerViewModel);
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult Edit(CustomerProfileVm viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var customer = _customerRepo.GetCustomerById(viewModel.CustomerId);
+                if (customer == null)
+                {
+                    return NotFound();
+                }
+
+                // Use AutoMapper to update the customer properties with the edited values
+                _mapper.Map(viewModel, customer);
+
+                _customerRepo.UpdateCustomer(customer);
+
+                return RedirectToAction("Details", new { id = viewModel.CustomerId });
+            }
+
+            return View(viewModel);
+        }
+
+
+
     }
 }

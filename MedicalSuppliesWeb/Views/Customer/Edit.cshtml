@@ -1,0 +1,158 @@
+﻿@model MedicalSuppliesWeb.ViewModels.Customer.CustomerProfileVm
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="~/css/shared-style.css" />
+
+</head>
+<body>
+    <div class="row">
+        <partial name="_LeftColumn" />
+        <div class="col-md-8 column">
+
+            <partial name="_SearchBox" />
+
+            @* DYNAMIC CONTENT BEGIN *@
+
+            <h4 style="text-align:center">Editing : @Model.FirstName @Model.LastName  </h4>
+
+            <div class="container" style="padding-top: 30px">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card p-4">
+                            <form asp-controller="Customer" asp-action="Edit" method="post">
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h2 class="text-center mb-4 flex-grow-1">@Model.FirstName @Model.LastName</h2>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="customerId">Customer ID:</label>
+                                    <input type="text" id="customerId" class="form-control" readonly value="@Model.CustomerId" />
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="customerFirstName">First Name:</label>
+                                    <input type="text" id="customerFirstName" class="form-control" asp-for="FirstName" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="customerLastName">Last Name:</label>
+                                    <input type="text" id="customerLastName" class="form-control" asp-for="LastName" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="dob">Date of Birth:</label>
+                                    <input type="date" id="dob" name="dob" class="form-control" asp-for="DOB" />
+                                    <span asp-validation-for="DOB" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="customerHeight">Height:</label>
+                                    <input type="number" id="customerHeight" class="form-control" asp-for="Height" />
+                                    <span asp-validation-for="Height" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="customerWeight">Weight:</label>
+                                    <input type="number" id="customerWeight" class="form-control" asp-for="Weight" />
+                                    <span asp-validation-for="Weight" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="gender">Gender:</label>
+                                    <input type="text" id="gender" class="form-control" readonly value="@Model.Gender.GenderName" />
+                                </div>
+
+                                @foreach (var nr in Model.CustomerNumbers)
+                                {
+                                    <div class="form-group mb-3">
+                                        <h5>Number:</h5>
+
+                                        <div class="form-group mb-3">
+                                            <label for="number">Phone Number:</label>
+                                            <input type="text" id="number" class="form-control" readonly value="@nr.PhoneNumber" />
+                                        </div>
+                                    </div>
+                                }
+
+                                @foreach (var address in Model.CustomerAddresses)
+                                {
+                                    <div class="form-group mb-3">
+                                        <h5>Address:</h5>
+
+                                        <div class="form-group mb-3">
+                                            <label for="address">Address:</label>
+                                            <input type="text" id="address" class="form-control" readonly value="@address.Address" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="city">City:</label>
+                                            <input type="text" id="city" class="form-control" readonly value="@address.City" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="state">State:</label>
+                                            <input type="text" id="state" class="form-control" readonly value="@address.State.State" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="zip">Zip:</label>
+                                            <input type="text" id="zip" class="form-control" readonly value="@address.Zip" />
+                                        </div>
+                                    </div>
+                                }
+
+                                @{
+                                    var insuranceCount = 0;
+                                }
+
+                                @foreach (var insurance in Model.Insurances)
+                                {
+                                    insuranceCount++;
+
+                                    <div class="form-group mb-3">
+                                        <h5>Insurance @insuranceCount:</h5>
+                                        <div class="form-group mb-3">
+                                            <label for="insuranceId">Insurance ID:</label>
+                                            <input type="text" id="insuranceId" class="form-control" readonly value="@insurance.InsuranceId" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="policyNo">Policy Number:</label>
+                                            <input type="text" id="policyNo" class="form-control" readonly value="@insurance.PolicyNo" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="insuranceType">Insurance Type:</label>
+                                            <input type="text" id="insuranceType" class="form-control" readonly value="@insurance.InsuranceType.Description" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="effectiveDate">Effective Date:</label>
+                                            <input type="text" id="effectiveDate" class="form-control" readonly value="@insurance.DateEffective" />
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="expireDate">Expire Date:</label>
+                                            <input type="text" id="expireDate" class="form-control" readonly value="@insurance.DateExpire" />
+                                        </div>
+                                    </div>
+                                }
+
+                                <div class="form-group d-flex justify-content-center mt-3">
+                                    <button type="submit" class="btn btn-sm btn-outline-dark">Save Changes</button>
+                                    <a href="/Customer/Index" class="btn btn-sm btn-outline-dark ml-2">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* END *@
+
+        </div>
+
+        <partial name="_RightColumn" />
+    </div>
+
+    <script src="~/js/DateTime.js"></script>
+</body>
+</html>
+
