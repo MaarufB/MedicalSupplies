@@ -5,6 +5,8 @@ using MedicalSuppliesWeb.Models;
 using MedicalSuppliesModels.Context;
 using MedicalSuppliesServices.Services.Contracts;
 using MedicalSuppliesServices.Services.Repositories;
+using AutoMapper;
+using MedicalSuppliesMapper;
 
 namespace UserRolesNew
 {
@@ -24,9 +26,28 @@ namespace UserRolesNew
                 options.UseSqlServer(connectionString));
 
 
-
+            builder.Services.AddAutoMapper(typeof(Program));
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+
+
+            builder.Services.AddScoped(p =>
+            {
+                var configuration = new MapperConfiguration(conf => {
+                    conf.AddProfile(new MappingProfiles());
+                });
+
+                return configuration.CreateMapper();
+            });
+
+
+
+
+
+
+
+
 
             //builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
             //  .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -42,7 +63,7 @@ namespace UserRolesNew
             //.AddDefaultTokenProviders()
             //.AddSignInManager<SignInManager<ApplicationUser>>();
 
-            
+
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddDefaultUI()
@@ -69,6 +90,15 @@ namespace UserRolesNew
 
 
 
+            //configuration for automapper
+
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddMaps(typeof(Program).Assembly);
+            });
+
+            var mapper = mapperConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
 
 
 
@@ -106,23 +136,7 @@ namespace UserRolesNew
             app.UseAuthorization();
 
 
-            //the following is the newly added code to redirect to login page on start. All other methods did not get this result
-
-
-            //app.MapWhen(context => !context.Request.Path.StartsWithSegments("/Identity", StringComparison.OrdinalIgnoreCase) &&
-            //                        !context.Request.Path.StartsWithSegments("/Home/Login", StringComparison.OrdinalIgnoreCase) &&
-            //                        !context.Request.Path.StartsWithSegments("/Account/Login", StringComparison.OrdinalIgnoreCase),
-            //     appBuilder =>
-            //     {
-            //         appBuilder.Use(async (context, next) =>
-            //         {
-            //             context.Response.Redirect("/Identity/Account/Login");
-            //             await next.Invoke();
-            //         });
-            //     });
-
-
-            //end
+        
 
 
 

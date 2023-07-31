@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSuppliesServices", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSuppliesDataTest", "MedicalSuppliesDataTest\MedicalSuppliesDataTest.csproj", "{194FC1B5-50B8-47BB-8D22-DA7A0BDDA2A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSuppliesSearchAPI", "MedicalSuppliesSearchAPI\MedicalSuppliesSearchAPI.csproj", "{A246BA8D-5AF6-46FB-A3A1-0BD92315661B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSuppliesSearchAPI", "MedicalSuppliesSearchAPI\MedicalSuppliesSearchAPI.csproj", "{A246BA8D-5AF6-46FB-A3A1-0BD92315661B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

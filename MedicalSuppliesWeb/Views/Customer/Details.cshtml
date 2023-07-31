@@ -1,1 +1,171 @@
-﻿<h3> Customer Details</h3>
+﻿@model MedicalSuppliesWeb.ViewModels.Customer.CustomerProfileVm
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="~/css/shared-style.css" />
+
+</head>
+<body>
+    <div class="row">
+        <partial name="_LeftColumn" />
+        <div class="col-md-8 column">
+
+            <partial name="_SearchBox" />
+
+            @*DYNAMIC CONTENT BEGIN*@
+
+            <h3>Customer Details</h3>
+
+            <div class="container" style="padding-top: 30px">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card p-4">
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h2 class="text-center mb-4 flex-grow-1">@Model.FirstName @Model.LastName</h2>
+                                <div class="form-group ml-2 mb-4">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-controller="Customer" asp-action="Edit" asp-route-id="@Model.CustomerId" class="btn btn-sm btn-outline-dark">Edit</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Home/AccessDenied" class="btn btn-sm btn-outline-dark">Edit</a>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="customerId">Customer ID:</label>
+                                <input type="text" id="customerId" class="form-control" readonly value="@Model.CustomerId" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="customerFirstName"> First Name:</label>
+                                <input type="text" id="customerFirstName" class="form-control" readonly value="@Model.FirstName" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="customerLastName"> Last Name:</label>
+                                <input type="text" id="customerLastName" class="form-control" readonly value="@Model.LastName" />
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="dob">Date of Birth:</label>
+                                <input type="date" id="dob" name="dob" class="form-control" readonly value="@Model.DOB.ToString("yyyy-MM-dd")" />
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <label for="customerHeight">Height:</label>
+                                <input type="number" id="customerHeight" class="form-control" readonly value="@Model.Height" />
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="customerWeight">Weight:</label>
+                                <input type="number" id="customerWeight" class="form-control" readonly value="@Model.Weight" />
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <label for="gender">Gender:</label>
+                                <input type="text" id="gender" class="form-control" readonly value="@Model.Gender.GenderName" />
+                            </div>
+
+                            @foreach (var nr in Model.CustomerNumbers)
+                            {
+                                <div class="form-group mb-3">
+                                    <h4>Customer Number:</h4>
+
+                                    <div class="form-group mb-3">
+                                        <label for="number">Phone Number:</label>
+                                        <input type="text" id="number" class="form-control" readonly value="@nr.PhoneNumber" />
+                                    </div>
+
+                                </div>
+
+                            }
+
+
+                            @foreach (var address in Model.CustomerAddresses)
+                            {
+                                <div class="form-group mb-3">
+                                    <h4>Address:</h4>
+
+                                    <div class="form-group mb-3">
+                                        <label for="address">Address:</label>
+                                        <input type="text" id="address" class="form-control" readonly value="@address.Address" />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="city">City:</label>
+                                        <input type="text" id="city" class="form-control" readonly value="@address.City" />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="state">State:</label>
+                                        <input type="text" id="state" class="form-control" readonly value="@address.State.State" /> <!-- Adjust the 'State.StateName' to fit the actual property name in your 'State' entity -->
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="zip">Zip:</label>
+                                        <input type="text" id="zip" class="form-control" readonly value="@address.Zip" />
+                                    </div>
+                                </div>
+
+                            }
+
+
+                            @{
+                                var insuranceCount = 0; /*This initializes a new integer variable*/
+                            }
+
+                            @foreach (var insurance in Model.Insurances)
+                            {
+                                insuranceCount++;  @*This line of code increases the value of insuranceCount by 1 with each iteration of the loop. It's the same as writing insuranceCount = insuranceCount + 1;. If we start with insuranceCount = 0, after the first iteration it will be 1, after the second iteration it will be 2, and so on. This happens at the beginning of each loop iteration.*@
+
+                                <div class="form-group mb-3">
+                                    <h4>Insurance @insuranceCount:</h4>
+                                    <div class="form-group mb-3">
+                                        <label for="insuranceId">Insurance ID:</label>
+                                        <input type="text" id="insuranceId" class="form-control" readonly value="@insurance.InsuranceId" />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="policyNo">Policy Number:</label>
+                                        <input type="text" id="policyNo" class="form-control" readonly value="@insurance.PolicyNo" />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="insuranceType">Insurance Type:</label>
+                                        <input type="text" id="insuranceType" class="form-control" readonly value="@insurance.InsuranceType.Description" />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="effectiveDate">Effective Date:</label>
+                                        <input type="text" id="effectiveDate" class="form-control" readonly value="@insurance.DateEffective" />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="expireDate">Expire Date:</label>
+                                        <input type="text" id="expireDate" class="form-control" readonly value="@insurance.DateExpire" />
+                                    </div>
+                                </div>
+                            }
+
+
+                            <div class="form-group d-flex justify-content-center mt-3">
+
+                                <a href="/Customer/Index" class="btn btn-sm btn-outline-dark">Back to Customers</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @*/END/*@
+
+
+        </div>
+
+        <partial name="_RightColumn" />
+    </div>
+
+
+    <script src="~/js/DateTime.js"></script>
+</body>
+</html>
