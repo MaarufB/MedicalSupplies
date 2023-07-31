@@ -230,66 +230,13 @@ namespace MedicalSuppliesWeb.Controllers
 
         public IActionResult Details(int id)
         {
-
             var customer = _customerRepo.GetCustomerById(id);
             if (customer == null)
             {
-
                 return NotFound();
             }
 
-            #pragma warning disable CS8601
-            var customerViewModel = new CustomerProfileVm
-            {
-                CustomerId = customer.CustomerId,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                DOB = customer.DOB,
-                Height = customer.Height,
-                Weight = customer.Weight,
-                Gender = new CustomerGenderVm
-                {
-                    GenderId = customer.Gender.GenderId,
-                    GenderName = customer.Gender.GenderName
-                },
-
-                CustomerAddresses = customer.CustomerAddresses?.Select(address => new CustomerAddressVm
-                {
-                    CustomerAddressId = address.AddressId,
-                    Address = address.Address,
-                    City = address.City,
-                    State = new StateVm
-                    {
-                        Id = address.State.StateId,
-                        State = address.State.LongState
-                    },
-                    Zip = address.Zip
-                }).ToList(),
-
-                CustomerNumbers = customer.CustomerNumbers?.Select(number => new CustomerNumberVm
-                {
-                    CustomerNumberId = number.CustomerNumberId,
-                    PhoneNumber = number.PhoneNumber
-                }).ToList(),
-
-                Insurances = customer.Insurances?.Select(insurance => new CustomerInsuranceVm
-                {
-                    InsuranceId = insurance.InsuranceId,
-                    CustomerId = insurance.CustomerId,
-                    InsuranceTypeId = insurance.InsuranceTypeId,
-                    GroupId = insurance.GroupId,
-                    PolicyNo = insurance.PolicyNo,
-                    PrimaryInsurance = insurance.PrimaryInsurance,
-                    SecondaryInsurance = insurance.SecondaryInsurance,
-                    DateEffective = insurance.DateEffective,
-                    DateExpire = insurance.DateExpire,
-                    InsuranceType = new CustomerInsuranceTypeVm
-                    {
-                        InsuranceTypeId = insurance.InsuranceType.InsuranceTypeId,
-                        Description = insurance.InsuranceType.Description
-                    }
-                }).ToList()
-            };
+            var customerViewModel = _mapper.Map<CustomerProfileVm>(customer);
 
             return View(customerViewModel);
         }
