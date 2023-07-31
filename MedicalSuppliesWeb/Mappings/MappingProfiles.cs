@@ -9,7 +9,7 @@ namespace MedicalSuppliesMapper
     {
         public MappingProfiles()
         {
-            // Mapping for the Gender property
+            
             CreateMap<Gender, CustomerGenderVm>()
                 .ForMember(dest => dest.GenderId, opt => opt.MapFrom(src => src.GenderId))
                 .ForMember(dest => dest.GenderName, opt => opt.MapFrom(src => src.GenderName));
@@ -25,12 +25,12 @@ namespace MedicalSuppliesMapper
                 .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State))
                 .ForMember(dest => dest.Zip, opt => opt.MapFrom(src => src.Zip));
 
-            // Mapping for the InsuranceType property
+            
             CreateMap<InsuranceType, CustomerInsuranceTypeVm>()
                 .ForMember(dest => dest.InsuranceTypeId, opt => opt.MapFrom(src => src.InsuranceTypeId))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
-            // Mapping for the Insurance property
+            
             CreateMap<Insurance, CustomerInsuranceVm>()
                 .ForMember(dest => dest.InsuranceId, opt => opt.MapFrom(src => src.InsuranceId))
                 .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.CustomerId))
@@ -43,18 +43,37 @@ namespace MedicalSuppliesMapper
                 .ForMember(dest => dest.DateExpire, opt => opt.MapFrom(src => src.DateExpire))
                 .ForMember(dest => dest.InsuranceType, opt => opt.MapFrom(src => src.InsuranceType));
 
-            // Mapping for the CustomerNumber property
+            
             CreateMap<CustomerNumber, CustomerNumberVm>()
                 .ForMember(dest => dest.CustomerNumberId, opt => opt.MapFrom(src => src.CustomerNumberId))
                 .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber));
 
-            // Mapping for the CustomerAddresses collection
+
             CreateMap<Customer, CustomerProfileVm>()
-                .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender)) // Map Gender property
-                .ForMember(dest => dest.InsuranceDetails, opt => opt.MapFrom(src => src.Insurances.FirstOrDefault())) // Map first Insurance to InsuranceDetails
-                .ForMember(dest => dest.CustomerAddresses, opt => opt.MapFrom(src => src.CustomerAddresses)) // Map CustomerAddresses collection
-                .ForMember(dest => dest.CustomerNumbers, opt => opt.MapFrom(src => src.CustomerNumbers)) // Map CustomerNumbers collection
-                .ForMember(dest => dest.Insurances, opt => opt.MapFrom(src => src.Insurances)); // Map Insurances collection
+
+                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.CustomerId))
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
+                .ForMember(dest => dest.DOB, opt => opt.MapFrom(src => src.DOB))
+                .ForMember(dest => dest.Height, opt => opt.MapFrom(src => src.Height))
+                .ForMember(dest => dest.Weight, opt => opt.MapFrom(src => src.Weight))
+                .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender))
+                .ForMember(dest => dest.InsuranceDetails, opt => opt.MapFrom(src => src.Insurances.FirstOrDefault()))
+                .ForMember(dest => dest.CustomerAddresses, opt => opt.MapFrom(src => src.CustomerAddresses))
+                .ForMember(dest => dest.CustomerNumbers, opt => opt.MapFrom(src => src.CustomerNumbers))
+                .ForMember(dest => dest.Insurances, opt => opt.MapFrom(src => src.Insurances));
+
+
+                //.ForMember(dest => dest.Active, opt => opt.MapFrom(src => src.Active))
+
+
+
+
+
+
+
+
+
         }
     }
 }

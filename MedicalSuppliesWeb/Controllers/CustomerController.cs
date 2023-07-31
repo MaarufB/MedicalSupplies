@@ -22,59 +22,7 @@ namespace MedicalSuppliesWeb.Controllers
         public IActionResult Index()
         {
             var customers = _customerRepo.GetAllCustomers();
-
-            var customerProfiles = customers.Select(customer => new CustomerProfileVm
-            {
-                CustomerId = customer.CustomerId,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                DOB = customer.DOB,
-                Height = customer.Height,
-                Weight = customer.Weight,
-                Gender = new CustomerGenderVm
-                {
-                    GenderId = customer.Gender.GenderId,
-                    GenderName = customer.Gender.GenderName
-                },
-                CustomerAddresses = customer.CustomerAddresses.Select(address => new CustomerAddressVm
-                {
-                    CustomerAddressId = address.AddressId,
-                    Address = address.Address,
-                    City = address.City,
-
-                    State = new StateVm
-                    {
-                        Id = address.State.StateId,
-                        State = address.State.LongState
-
-                    },
-
-                    Zip = address.Zip
-                }).ToList(),
-                CustomerNumbers = customer.CustomerNumbers.Select(number => new CustomerNumberVm
-                {
-                    CustomerNumberId = number.CustomerNumberId,
-                    PhoneNumber = number.PhoneNumber
-                }).ToList(),
-                Insurances = customer.Insurances.Select(insurance => new CustomerInsuranceVm
-                {
-                    InsuranceId = insurance.InsuranceId,
-                    CustomerId = insurance.CustomerId,
-                    InsuranceTypeId = insurance.InsuranceTypeId,
-                    GroupId = insurance.GroupId,
-                    PolicyNo = insurance.PolicyNo,
-                    PrimaryInsurance = insurance.PrimaryInsurance,
-                    SecondaryInsurance = insurance.SecondaryInsurance,
-                    DateEffective = insurance.DateEffective,
-                    DateExpire = insurance.DateExpire,
-                    InsuranceType = new CustomerInsuranceTypeVm
-                    {
-                        InsuranceTypeId = insurance.InsuranceType.InsuranceTypeId,
-                        Description = insurance.InsuranceType.Description
-                    }
-                }).ToList()
-            }).ToList();
-
+            var customerProfiles = _mapper.Map<List<CustomerProfileVm>>(customers);
             return View(customerProfiles);
         }
 
@@ -186,14 +134,11 @@ namespace MedicalSuppliesWeb.Controllers
         public IActionResult CreateOrder(CustomerOrderVm viewModel)
         {
             if (ModelState.IsValid)
-            {
-                // Perform necessary operations to save the customer order
-                // You can access the submitted data through the viewModel parameter
-                // Redirect to a success page or perform any other desired action
+            {                
                 return RedirectToAction("OrderSubmitted");
             }
 
-            // If the model state is not valid, return to the create order view with the validation errors
+           
             return View(viewModel);
         }
 
@@ -211,14 +156,11 @@ namespace MedicalSuppliesWeb.Controllers
         public IActionResult CreateInvoice(CustomerInvoiceVm viewModel)
         {
             if (ModelState.IsValid)
-            {
-                // Perform necessary operations to save the customer order
-                // You can access the submitted data through the viewModel parameter
-                // Redirect to a success page or perform any other desired action
+            {                
                 return RedirectToAction("InvoiceSubmitted");
             }
 
-            // If the model state is not valid, return to the create order view with the validation errors
+            
             return View(viewModel);
         }
 
@@ -227,12 +169,11 @@ namespace MedicalSuppliesWeb.Controllers
         {
             var customer = _customerRepo.GetCustomerById(customerId);
             if (customer != null)
-            {
-                // Return the customer details in JSON format
+            {                
                 return Json(new { firstName = customer.FirstName, lastName = customer.LastName });
             }
 
-            // If customer is not found, return null in JSON format
+           
             return Json(null);
         }
 
@@ -362,12 +303,8 @@ namespace MedicalSuppliesWeb.Controllers
             if (customer == null)
             {
                 return NotFound();
-            }
-
-            // Use AutoMapper to map the Customer to CustomerProfileVm
-            var customerViewModel = _mapper.Map<CustomerProfileVm>(customer);
-
-            // Pass the ViewModel to the view for editing
+            }            
+            var customerViewModel = _mapper.Map<CustomerProfileVm>(customer);            
             return View(customerViewModel);
         }
 
@@ -384,10 +321,8 @@ namespace MedicalSuppliesWeb.Controllers
                 {
                     return NotFound();
                 }
-
-                // Use AutoMapper to update the customer properties with the edited values
+               
                 _mapper.Map(viewModel, customer);
-
                 _customerRepo.UpdateCustomer(customer);
 
                 return RedirectToAction("Details", new { id = viewModel.CustomerId });
