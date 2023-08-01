@@ -1,16 +1,8 @@
 ﻿@model MedicalSuppliesWeb.ViewModels.Customer.CustomerProfileVm
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <link rel="stylesheet" href="~/css/shared-style.css" />
-</head>
 
 
-
-<body>
-
+    <div asp-validation-summary="All"></div>
     <div class="row">
         <partial name="_LeftColumn" />
 
@@ -27,7 +19,7 @@
 
 
 
-            <h2 style="padding-left: 280px; padding-top: 80px; padding-bottom: 30px;">CREATE CUSTOMER</h2>
+            <h2 class="text-center">CREATE CUSTOMER</h2>
 
             <form method="post" asp-controller="Customer" asp-action="Create">
 
@@ -45,7 +37,9 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="customerFirstName">First Name:</label>
-                                    <input type="text" class="form-control" id="customerFirstName" name="FirstName" value="@Model.FirstName" />
+                                    
+                                    <input type="text" class="form-control" asp-for="FirstName" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -80,7 +74,7 @@
 
                                     </select>*@
 
-                                    <select class="form-control" id="gender" name="Gender.GenderId">
+                                    <select asp-for="Gender" class="form-control" id="gender" name="Gender.GenderId">
                                         <option value="">Select</option>
                                         <option value="1">Female</option>
                                         <option value="2">Male</option>
@@ -195,14 +189,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="dateEffective">Date Effective:</label>
-                                        <input type="date" class="form-control datepicker" id="dateEffective" name="InsuranceDetails.DateEffective" placeholder="Select date" />
+                                    <input type="date" class="form-control datepicker" id="dateEffective" name="Insurances[0].DateEffective" placeholder="Select date" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="dateExpire">Date Expire:</label>
-                                        <input type="date" class="form-control datepicker" id="dateExpire" name="InsuranceDetails.DateExpire" placeholder="Select date" />
+                                    <input type="date" class="form-control datepicker" id="dateExpire" name="Insurances[0].DateExpire" placeholder="Select date" />
                                     </div>
                                 </div>
 
@@ -210,13 +204,13 @@
                                     <div class="form-group">
                                         <label for="insuranceSelection">Insurance</label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="InsuranceDetails.PrimaryInsurance" id="primaryInsurance" value="primary" />
+                                            <input class="form-check-input" type="radio" name="Insurances[0].PrimaryInsurance" id="primaryInsurance" value="primary" />
                                             <label class="form-check-label" for="primaryInsurance">
                                                 Primary
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="InsuranceDetails.SecondaryInsurance" id="secondaryInsurance" value="secondary" />
+                                            <input class="form-check-input" type="radio" name="Insurances[0].SecondaryInsurance" id="secondaryInsurance" value="secondary" />
                                             <label class="form-check-label" for="secondaryInsurance">
                                                 Secondary
                                             </label>
@@ -263,19 +257,8 @@
     <script>
         var shippingAddressTextarea = document.getElementById("shippingAddress");
         var billingAddressTextarea = document.getElementById("billingAddress");
-        var sameAddressCheckbox = document.getElementById("sameAddressCheckbox");
 
-        sameAddressCheckbox.addEventListener("change", function () {
-            if (this.checked) {
-                billingAddressTextarea.value = shippingAddressTextarea.value;
-                billingAddressTextarea.disabled = true;
-                billingAddressTextarea.classList.add("text-muted");
-            } else {
-                billingAddressTextarea.value = "";
-                billingAddressTextarea.disabled = false;
-                billingAddressTextarea.classList.remove("text-muted");
-            }
-        });
+  
     </script>
 
     <script>
@@ -288,32 +271,32 @@
             newAddressField.classList.add("address");
 
             newAddressField.innerHTML = `
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="address">Address:</label>
-                                    <input type="text" class="form-control" name="CustomerAddresses[${addressIndex}].Address" />
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="city">City:</label>
-                                    <input type="text" class="form-control" name="CustomerAddresses[${addressIndex}].City" />
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="state">State:</label>
-                                    <input type="text" class="form-control" name="CustomerAddresses[${addressIndex}].State" />
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="zip">Zip:</label>
-                                    <input type="text" class="form-control" name="CustomerAddresses[${addressIndex}].Zip" />
-                                </div>
-                            </div>
-                        </div>`;
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="address">Address:</label>
+                                            <input type="text" class="form-control" name="CustomerAddresses[${addressIndex}].Address" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="city">City:</label>
+                                            <input type="text" class="form-control" name="CustomerAddresses[${addressIndex}].City" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="state">State:</label>
+                                            <input type="text" class="form-control" name="CustomerAddresses[${addressIndex}].State" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="zip">Zip:</label>
+                                            <input type="text" class="form-control" name="CustomerAddresses[${addressIndex}].Zip" />
+                                        </div>
+                                    </div>
+                                </div>`;
 
             addressContainer.appendChild(newAddressField);
             addressIndex++;
@@ -333,11 +316,14 @@
         var formattedDate = year + '-' + month + '-' + day;
 
         // Set the default value of the orderDate input field
-        document.getElementById('invoiceDate').value = formattedDate;
+
     </script>
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Bootstrap Datepicker JS -->
@@ -357,70 +343,67 @@
             newInsuranceField.classList.add("insurance");
 
             newInsuranceField.innerHTML = `
-                        <!-- Row 1 -->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="insuranceType">Type:</label>
-                                    <input type="text" class="form-control" name="Insurances[${insuranceIndex}].Type" />
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="policyNo">Policy No:</label>
-                                    <input type="text" class="form-control" name="Insurances[${insuranceIndex}].PolicyNo" />
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="groupId">GroupId:</label>
-                                    <input type="text" class="form-control" name="Insurances[${insuranceIndex}].GroupId" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Row 2 -->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="dateEffective">Date Effective:</label>
-                                    <input type="text" class="form-control datepicker" name="Insurances[${insuranceIndex}].DateEffective" placeholder="Select date" />
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="dateExpire">Date Expire:</label>
-                                    <input type="text" class="form-control datepicker" name="Insurances[${insuranceIndex}].DateExpire" placeholder="Select date" />
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="insuranceSelection">Insurance</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Insurances[${insuranceIndex}].Selection" id="primaryInsurance_${insuranceIndex}" value="primary" />
-                                        <label class="form-check-label" for="primaryInsurance_${insuranceIndex}">
-                                            Primary
-                                        </label>
+                                <!-- Row 1 -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="insuranceType">Type:</label>
+                                            <input type="text" class="form-control" name="Insurances[${insuranceIndex}].Type" />
+                                        </div>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Insurances[${insuranceIndex}].Selection" id="secondaryInsurance_${insuranceIndex}" value="secondary" />
-                                        <label class="form-check-label" for="secondaryInsurance_${insuranceIndex}">
-                                            Secondary
-                                        </label>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="policyNo">Policy No:</label>
+                                            <input type="text" class="form-control" name="Insurances[${insuranceIndex}].PolicyNo" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="groupId">GroupId:</label>
+                                            <input type="text" class="form-control" name="Insurances[${insuranceIndex}].GroupId" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>`;
+
+                                <!-- Row 2 -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="dateEffective">Date Effective:</label>
+                                            <input type="text" class="form-control datepicker" name="Insurances[${insuranceIndex}].DateEffective" placeholder="Select date" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="dateExpire">Date Expire:</label>
+                                            <input type="text" class="form-control datepicker" name="Insurances[${insuranceIndex}].DateExpire" placeholder="Select date" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="insuranceSelection">Insurance</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="Insurances[${insuranceIndex}].Selection" id="primaryInsurance_${insuranceIndex}" value="primary" />
+                                                <label class="form-check-label" for="primaryInsurance_${insuranceIndex}">
+                                                    Primary
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="Insurances[${insuranceIndex}].Selection" id="secondaryInsurance_${insuranceIndex}" value="secondary" />
+                                                <label class="form-check-label" for="secondaryInsurance_${insuranceIndex}">
+                                                    Secondary
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
 
             insuranceContainer.appendChild(newInsuranceField);
             insuranceIndex++;
         });
     </script>
-
-</body>
-</html>
 

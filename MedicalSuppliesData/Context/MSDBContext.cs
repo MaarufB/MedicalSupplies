@@ -58,7 +58,7 @@ namespace MedicalSuppliesModels.Context
 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=Stardust\\MSSQLSERVER01;Initial Catalog=RolesTest02;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-HCA52EN;Initial Catalog=MedSup;Trusted_Connection=True;MultipleActiveResultSets=True;");
             }
         }
 

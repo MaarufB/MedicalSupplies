@@ -41,67 +41,71 @@ namespace MedicalSuppliesWeb.Controllers
             if (ModelState.IsValid)
             {
 
-                var customer = new Customer
-                {
-                    FirstName = viewModel.FirstName,
-                    LastName = viewModel.LastName,
-                    DOB = viewModel.DOB,
-                    Height = viewModel.Height,
-                    Weight = viewModel.Weight,
+                var customer = _mapper.Map<Customer>(viewModel);
+                    
+                    
+                //    new Customer
+                //{
+                //    FirstName = viewModel.FirstName,
+                //    LastName = viewModel.LastName,
+                //    DOB = viewModel.DOB,
+                //    Height = viewModel.Height,
+                //    Weight = viewModel.Weight,
 
-                    Gender = new Gender
-                    {
-                        GenderId = viewModel.Gender.GenderId,
-                        GenderName = viewModel.Gender.GenderName
-                    }
+                //    Gender = new Gender
+                //    {
+                //        GenderId = viewModel.Gender.GenderId,
+                //        GenderName = viewModel.Gender.GenderName
+                //    }
 
-                };
+                //};
 
                 //customer.GenderId = viewModel.Gender.GenderId;
 
 
                 _customerRepo.AddCustomer(customer);
+              
 
-                foreach (var addressVm in viewModel.CustomerAddresses)
-                {
-                    var stateId = _customerRepo.GetStateIdByName(addressVm.State.State);
-                    var address = new CustomerAddress
-                    {
-                        Address = addressVm.Address,
-                        City = addressVm.City,
-                        StateId = stateId,
-                        Zip = addressVm.Zip,
-                        CustomerId = customer.CustomerId // this is needed to set the foreign key link to the customer table
-                    };
+                //foreach (var addressVm in viewModel.CustomerAddresses)
+                //{
+                //    var stateId = _customerRepo.GetStateIdByName(addressVm.State.State);
+                //    var address = new CustomerAddress
+                //    {
+                //        Address = addressVm.Address,
+                //        City = addressVm.City,
+                //        StateId = stateId, 
+                //        Zip = addressVm.Zip,
+                //        CustomerId = customer.CustomerId // this is needed to set the foreign key link to the customer table
+                //    };
 
-                    _customerRepo.AddCustomerAddress(address);
-                }
+                //    _customerRepo.AddCustomerAddress(address);
+                //}
 
-                foreach (var numberVm in viewModel.CustomerNumbers)
-                {
-                    var number = new CustomerNumber
-                    {
-                        PhoneNumber = numberVm.PhoneNumber,
-                        CustomerId = customer.CustomerId // for foreign key
-                    };
-                    _customerRepo.AddCustomerNumber(number);
-                }
+                //foreach (var numberVm in viewModel.CustomerNumbers)
+                //{
+                //    var number = new CustomerNumber
+                //    {
+                //        PhoneNumber = numberVm.PhoneNumber,
+                //        CustomerId = customer.CustomerId // for foreign key
+                //    };
+                //    _customerRepo.AddCustomerNumber(number);
+                //}
 
-                foreach (var insuranceVm in viewModel.Insurances)
-                {
-                    var insurance = new Insurance
-                    {
-                        CustomerId = customer.CustomerId, // for foreign key
-                        InsuranceTypeId = insuranceVm.InsuranceTypeId,
-                        GroupId = insuranceVm.GroupId,
-                        PolicyNo = insuranceVm.PolicyNo,
-                        PrimaryInsurance = insuranceVm.PrimaryInsurance,
-                        SecondaryInsurance = insuranceVm.SecondaryInsurance,
-                        DateEffective = insuranceVm.DateEffective,
-                        DateExpire = insuranceVm.DateExpire
-                    };
-                    _customerRepo.AddCustomerInsurance(insurance);
-                }
+                //foreach (var insuranceVm in viewModel.Insurances)
+                //{
+                //    var insurance = new Insurance
+                //    {
+                //        CustomerId = customer.CustomerId, // for foreign key
+                //        InsuranceTypeId = insuranceVm.InsuranceTypeId,
+                //        GroupId = insuranceVm.GroupId,
+                //        PolicyNo = insuranceVm.PolicyNo,
+                //        PrimaryInsurance = insuranceVm.PrimaryInsurance,
+                //        SecondaryInsurance = insuranceVm.SecondaryInsurance,
+                //        DateEffective = insuranceVm.DateEffective,
+                //        DateExpire = insuranceVm.DateExpire
+                //    };
+                //    _customerRepo.AddCustomerInsurance(insurance);
+                //}
                 return RedirectToAction("Index");
             }
             if (!ModelState.IsValid)
