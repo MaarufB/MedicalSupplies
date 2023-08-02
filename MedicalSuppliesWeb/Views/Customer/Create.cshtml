@@ -36,8 +36,7 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="customerFirstName">First Name:</label>
-                                    
+                                    <label for="customerFirstName">First Name:</label>                                    
                                     <input type="text" class="form-control" asp-for="FirstName" />
                                     <span asp-validation-for="FirstName" class="text-danger"></span>
                                 </div>
@@ -46,7 +45,9 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="customerLastName">Last Name:</label>
-                                    <input type="text" class="form-control" id="customerLastName" name="LastName" value="@Model.LastName" />
+                                    @*<input type="text" class="form-control" id="customerLastName" name="LastName" value="@Model.LastName" />*@
+                                    <input type="text" class="form-control" asp-for="LastName"/>
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -54,7 +55,9 @@
 
                                 <div class="form-group">
                                     <label for="dateOfBirth">DOB:</label>
-                                    <input type="date" class="form-control datepicker" id="dateOfBirth" name="DOB" placeholder="Select date">
+                                    @*<input type="date" class="form-control datepicker" id="dateOfBirth" name="DOB" placeholder="Select date">*@
+                                    <input type="date" class="form-control " asp-for="DOB" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                    <span asp-validation-for="DOB" class="text-danger"></span>
 
                                 </div>
 
@@ -62,19 +65,13 @@
                         </div>
 
                         <div class="row pb-5">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
-                                    @*<select class="form-control" id="gender" name="Gender">
+                                    
 
-                                    <option value="">Select</option>
-                                    <option value="Female" @(Model.Gender?.GenderName == "Female" ? "selected" : "")>Female</option>
-                                    <option value="Male" @(Model.Gender?.GenderName == "Male" ? "selected" : "")>Male</option>
-                                    <option value="Other" @(Model.Gender?.GenderName == "Other" ? "selected" : "")>Other</option>
-
-                                    </select>*@
-
-                                    <select asp-for="Gender" class="form-control" id="gender" name="Gender.GenderId">
+                                 @*   <select asp-for="Gender" class="form-control" id="gender" name="Gender.GenderId">*@
+                                    <select asp-for="Gender" class="form-control">
                                         <option value="">Select</option>
                                         <option value="1">Female</option>
                                         <option value="2">Male</option>
@@ -84,36 +81,53 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="height">Height:</label>
 
-                                    <input type="text" class="form-control" id="height" name="Height" value="@Model.Height" />
+                                    @*<input type="text" class="form-control" id="height" name="Height" value="@Model.Height" />*@
+                                    <input type="text" class="form-control" asp-for="Height"/>
+                                    <span asp-validation-for="Height" class="text-danger"></span>
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="weight">Weight:</label>
-                                    <input type="number" class="form-control" id="weight" name="Weight" value="@Model.Weight" />
+                                    <input type="text" class="form-control" asp-for="Weight" />
+                                    <span asp-validation-for="Weight" class="text-danger"></span>
                                 </div>
-                            </div>
-
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="contact">Contact:</label>
-                                    <input type="text" class="form-control" id="contact" name="Contact" value="@Model.CustomerNumbers" />
-                                </div>
-                            </div>
+                            </div>                         
 
 
 
                         </div>
+
+
+                        <div class="row pb-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="contact">Contact:</label>
+                                        <input type="text" class="form-control" id="contact" name="Contact" value="@Model.CustomerNumbers" />
+                                    </div>
+                                </div>
+
+                        </div>
+
+                        <div style="display: flex; justify-content: flex-end;">
+                            <button type="button" id="add-contact" class="btn btn-outline-dark btn-sm">+</button>
+                        </div>
+
+
                     </div>
                 </div>
 
-                <div class="card px-3 py-4" style="margin-top: -2px;">
+
+
+
+
+
+                @*<div class="card px-3 py-4" style="margin-top: -2px;">
                     <div class="card-body">
                         <h5 class="card-title" style="text-align:center">Address</h5>
                         <div id="address-container">
@@ -151,7 +165,98 @@
                             <button type="button" id="add-address" class="btn btn-outline-dark btn-sm">+</button>
                         </div>
                     </div>
+                </div>*@
+
+
+            
+            
+
+            <div class="card px-3 py-4" style="margin-top: -2px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align:center">Address</h5>
+                    <div id="address-container">
+                        @if (Model.CustomerAddresses.Count == 0)
+                        {
+                           
+                            <div class="address">
+                                <div class="row pb-5">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="CustomerAddresses[0].Address">Address:</label>
+                                            @*<input type="text" class="form-control" asp-for="CustomerAddresses[0].Address" />*@
+                                            <input type="text" class="form-control" id="address" name="CustomerAddresses[0].Address" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="CustomerAddresses[0].City">City:</label>
+                                            <input type="text" class="form-control" asp-for="CustomerAddresses[0].City" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="CustomerAddresses[0].State">State:</label>
+                                            <input type="text" class="form-control" asp-for="CustomerAddresses[0].State" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="CustomerAddresses[0].Zip">Zip:</label>
+                                            <input type="text" class="form-control" asp-for="CustomerAddresses[0].Zip" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                           
+                            @for (int i = 0; i < Model.CustomerAddresses.Count; i++)
+                            {
+                                <div class="address">
+                                    <div class="row pb-5">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="CustomerAddresses[i].Address">Address:</label>
+                                                <input type="text" class="form-control" asp-for="CustomerAddresses[i].Address" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label asp-for="CustomerAddresses[i].City">City:</label>
+                                                <input type="text" class="form-control" asp-for="CustomerAddresses[i].City" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label asp-for="CustomerAddresses[i].State">State:</label>
+                                                <input type="text" class="form-control" asp-for="CustomerAddresses[i].State" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label asp-for="CustomerAddresses[i].Zip">Zip:</label>
+                                                <input type="text" class="form-control" asp-for="CustomerAddresses[i].Zip" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button type="button" id="add-address" class="btn btn-outline-dark btn-sm">+</button>
+                    </div>
                 </div>
+            </div>
+
+            <!-- ... rest of the view ... -->
+
+
+
+
+
+
 
                 <div class="card px-3 py-4" style="margin-top: -2px;">
                     <div class="card-body">
@@ -264,7 +369,8 @@
     <script>
         var addressContainer = document.getElementById("address-container");
         var addAddressButton = document.getElementById("add-address");
-        var addressIndex = 1;
+        //var addressIndex = 1;
+        var addressIndex = @Model.CustomerAddresses.Count;
 
         addAddressButton.addEventListener("click", function () {
             var newAddressField = document.createElement("div");
@@ -305,19 +411,7 @@
 
 
 
-    <script>
-        // Get the current date
-        var currentDate = new Date();
-
-        // Format the date as yyyy-mm-dd
-        var year = currentDate.getFullYear();
-        var month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        var day = String(currentDate.getDate()).padStart(2, '0');
-        var formattedDate = year + '-' + month + '-' + day;
-
-        // Set the default value of the orderDate input field
-
-    </script>
+   
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

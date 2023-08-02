@@ -4,6 +4,12 @@ namespace MedicalSuppliesWeb.ViewModels.Customer
 {
     public class CustomerProfileVm
     {
+        public CustomerProfileVm()
+        {
+            CustomerAddresses = new List<CustomerAddressVm>();
+            CustomerNumbers = new List<CustomerNumberVm>();
+            Insurances = new List<CustomerInsuranceVm>();
+        }
         public int CustomerId { get; set; }
 
         [Required(ErrorMessage = "First Name is required")]
@@ -24,10 +30,10 @@ namespace MedicalSuppliesWeb.ViewModels.Customer
 
         public CustomerInsuranceVm InsuranceDetails { get; set; } = new CustomerInsuranceVm();
 
-        public ICollection<CustomerAddressVm> CustomerAddresses { get; set; }
+        public List<CustomerAddressVm>? CustomerAddresses { get; set; }
 
-        public ICollection<CustomerNumberVm> CustomerNumbers { get; set; }
+        public List<CustomerNumberVm> CustomerNumbers { get; set; }
 
-        public ICollection<CustomerInsuranceVm> Insurances { get; set; }
+        public List<CustomerInsuranceVm> Insurances { get; set; }
     }
 }
